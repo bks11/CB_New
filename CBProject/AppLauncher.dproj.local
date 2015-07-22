@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.06.16 16:33:59.369.pas,C:\Users\k.zaichenko\Documents\RAD Studio\Projects\Unit1.pas=D:\CBProject\Unit1.pas</Transaction>
+    <Transaction>2015.06.16 16:33:59.369.dfm,C:\Users\k.zaichenko\Documents\RAD Studio\Projects\Unit1.dfm=D:\CBProject\Unit1.dfm</Transaction>
+    <Transaction>2015.06.16 16:34:00.562.pas,C:\Users\k.zaichenko\Documents\RAD Studio\Projects\Unit2.pas=D:\CBProject\Unit2.pas</Transaction>
+    <Transaction>2015.06.16 16:34:01.532.dproj,C:\Users\k.zaichenko\Documents\RAD Studio\Projects\Project1.dproj=D:\CBProject\Project1.dproj</Transaction>
+    <Transaction>2015.06.19 14:35:43.367.pas,D:\Projects\CB\CBProject\Unit1.pas=D:\Projects\CB\CBProject\Main.pas</Transaction>
+    <Transaction>2015.06.19 14:35:43.367.dfm,D:\Projects\CB\CBProject\Unit1.dfm=D:\Projects\CB\CBProject\Main.dfm</Transaction>
+    <Transaction>2015.06.19 14:36:23.258.pas,D:\Projects\CB\CBProject\Unit2.pas=D:\Projects\CB\CBProject\uUtilites.pas</Transaction>
+    <Transaction>2015.06.19 14:36:35.197.pas,D:\Projects\CB\CBProject\Main.pas=D:\Projects\CB\CBProject\uMain.pas</Transaction>
+    <Transaction>2015.06.19 14:36:35.197.dfm,D:\Projects\CB\CBProject\Main.dfm=D:\Projects\CB\CBProject\uMain.dfm</Transaction>
+    <Transaction>2015.06.19 14:37:39.237.dproj,D:\Projects\CB\CBProject\Project1.dproj=D:\Projects\CB\CBProject\AppLauncher.dproj</Transaction>
+    <Transaction>2015.06.26 11:03:25.168.pas,D:\Projects\CB\CBProject\Unit1.pas=D:\Projects\CB\CBProject\uData.pas</Transaction>
+    <Transaction>2015.06.26 11:03:25.168.dfm,D:\Projects\CB\CBProject\Unit1.dfm=D:\Projects\CB\CBProject\uData.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

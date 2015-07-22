@@ -1,0 +1,30 @@
+unit Unit2;
+
+interface
+
+Type
+
+ Object311P = Object
+  Path : record
+   InP:String;
+   OutP:String;
+   InK:String;
+   OutK:String;
+   InArh:String;
+   OutArh:String;
+   InPak:String;
+   OutPak:String;
+   InCB:String;
+   OutCB:String;
+  End;
+  Procedure LoadPath; {Загрузить пути к папкам}
+ End;
+
+implementation
+
+Procedure Object311P.LoadPath;
+Begin
+
+End;
+
+end.

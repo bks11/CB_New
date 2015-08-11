@@ -1,0 +1,45 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'PGTest'
+  ClientHeight = 367
+  ClientWidth = 575
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ADConnection1: TADConnection
+    Params.Strings = (
+      'Database=DB1'
+      'User_Name=postgres'
+      'Password=postgres'
+      'CharacterSet=WIN1251'
+      'Server=localhost'
+      'DriverID=PG')
+    Connected = True
+    LoginPrompt = False
+    Left = 216
+    Top = 120
+  end
+  object ADGUIxWaitCursor1: TADGUIxWaitCursor
+    Left = 256
+    Top = 120
+  end
+  object ADPhysPgDriverLink1: TADPhysPgDriverLink
+    Left = 288
+    Top = 120
+  end
+  object ADTable1: TADTable
+    Active = True
+    Connection = ADConnection1
+    UpdateOptions.UpdateTableName = 'tbl1'
+    TableName = 'tbl1'
+    Left = 328
+    Top = 120
+  end
+end

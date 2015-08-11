@@ -1,0 +1,78 @@
+unit Main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, StdCtrls;
+
+type
+  TMachineType = (mtUnknown, mt32Bit, mt64Bit, mtOther);
+
+type
+  TfmMain = class(TForm)
+    btnCheck: TButton;
+    edFilePath: TEdit;
+    lbFile: TLabel;
+    btnPath: TSpeedButton;
+    lbResult: TLabel;
+    dlgOpen: TOpenDialog;
+    procedure btnPathClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function  GetLibMachineType(const AFileName: string): TMachineType;
+  end;
+
+var
+  fmMain: TfmMain;
+
+implementation
+
+{$R *.dfm}
+
+{ TfmMain }
+
+procedure TfmMain.btnPathClick(Sender: TObject);
+begin
+  if dlgOpen.Execute then begin
+    edFilePath.Text := dlgOpen.FileName;
+  end;
+end;
+
+function TfmMain.GetLibMachineType(const AFileName: string): TMachineType;
+var
+  oFS: TFileStream;
+  iPeOffset: Integer;
+  iPeHead: LongWord;
+  iMachineType: Word;
+begin
+  Result := mtUnknown;
+    try
+      oFS := TFileStream.Create(AFileName, fmOpenRead or fmShareDenyNone);
+      try
+        oFS.Seek($3C, soFromBeginning);
+        oFS.Read(iPeOffset, SizeOf(iPeOffset));
+        oFS.Seek(iPeOffset, soFromBeginning);
+        oFS.Read(iPeHead, SizeOf(iPeHead));
+        if iPeHead <> $00004550 then Exit;
+        oFS.Read(iMachineType, SizeOf(iMachineType));
+        case iMachineType of
+        $8664, // AMD64
+        $0200: // IA64
+        Result := mt64Bit;
+        $014C: // I386
+        Result := mt32Bit;
+      else
+        Result := mtOther;
+      end;
+    finally
+      oFS.Free;
+    end;
+  except
+    // none
+  end;
+end;
+
+end.

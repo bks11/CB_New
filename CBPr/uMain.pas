@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Tabs, DockTabSet, StdCtrls, CheckLst, ExtCtrls, ComCtrls, Buttons,
-  WideStrings, FMTBcd, DB, SqlExpr, uRep311;
+  WideStrings, FMTBcd, DB, SqlExpr, uRep311, Data, Grids, DBGrids;
 
 type
   TUser = Object
@@ -30,6 +30,7 @@ type
     ComboBox1: TComboBox;
     SQLConnection1: TSQLConnection;
     SQLQuery1: TSQLQuery;
+    DBGrid1: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure TabSheet3Show(Sender: TObject);
   private

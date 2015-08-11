@@ -29,18 +29,10 @@ object fmMain: TfmMain
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = #1042#1077#1088#1073#1072
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
     object TabSheet2: TTabSheet
       Caption = #1050#1088#1091#1090#1080#1083#1082#1072
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
     object TabSheet3: TTabSheet
       Caption = '311'
@@ -96,6 +88,19 @@ object fmMain: TfmMain
           ItemHeight = 13
           TabOrder = 4
         end
+      end
+      object DBGrid1: TDBGrid
+        Left = 528
+        Top = 80
+        Width = 320
+        Height = 120
+        DataSource = dmData.DataSource1
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
       end
     end
   end

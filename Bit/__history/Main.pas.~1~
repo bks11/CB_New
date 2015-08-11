@@ -1,0 +1,29 @@
+unit Main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Buttons, StdCtrls;
+
+type
+  TfmMain = class(TForm)
+    btnCheck: TButton;
+    edFilePath: TEdit;
+    lbFile: TLabel;
+    btnPath: TSpeedButton;
+    lbResult: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmMain: TfmMain;
+
+implementation
+
+{$R *.dfm}
+
+end.

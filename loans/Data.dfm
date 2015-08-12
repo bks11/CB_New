@@ -1,8 +1,8 @@
 object DMData: TDMData
   OldCreateOrder = False
-  Height = 276
-  Width = 350
-  object ADConnection1: TADConnection
+  Height = 789
+  Width = 1033
+  object conCredittDB: TADConnection
     Params.Strings = (
       'Database=CREDIT_DB'
       'User_Name=postgres'
@@ -10,23 +10,39 @@ object DMData: TDMData
       'Server=10.3.0.219'
       'DriverID=PG')
     Connected = True
+    LoginPrompt = False
+    Left = 32
+    Top = 8
   end
   object ADGUIxWaitCursor1: TADGUIxWaitCursor
-    Left = 64
+    Left = 258
+    Top = 8
   end
-  object QueryAny: TADQuery
+  object qrAny: TADQuery
     Active = True
-    Connection = ADConnection1
+    Connection = conCredittDB
     SQL.Strings = (
       'Select "ID_LOAN", "AGREEMENT_NUM" from "TLOAN"')
-    Top = 32
-  end
-  object DataSource1: TDataSource
-    DataSet = QueryAny
     Left = 32
-    Top = 32
+    Top = 80
+    object qrAnyID_LOAN: TLargeintField
+      FieldName = 'ID_LOAN'
+      Origin = '"ID_LOAN"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qrAnyAGREEMENT_NUM: TStringField
+      FieldName = 'AGREEMENT_NUM'
+      Origin = '"AGREEMENT_NUM"'
+      Size = 75
+    end
+  end
+  object dsAny: TDataSource
+    DataSet = qrAny
+    Left = 73
+    Top = 80
   end
   object ADPhysPgDriverLink1: TADPhysPgDriverLink
-    Left = 32
+    Left = 137
+    Top = 8
   end
 end

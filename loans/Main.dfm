@@ -20,8 +20,11 @@ object Form1: TForm1
     Width = 249
     Height = 625
     DataField = 'AGREEMENT_NUM'
-    DataSource = DMData.DataSource1
+    DataSource = DMData.dsAny
     ItemHeight = 13
+    Items.Strings = (
+      'gg'
+      'ggg')
     TabOrder = 0
   end
 end

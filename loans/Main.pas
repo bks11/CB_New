@@ -32,8 +32,8 @@ End;
 
 procedure TForm1.FormActivate(Sender: TObject);
 begin
- DMData.QueryAny.Active:=true;
- DMData.DataSource1.Enabled:=true;
+ DMData.qrAny.Active:=true;
+ //DMData.DataSource1.Enabled:=true;
 end;
 
 end.

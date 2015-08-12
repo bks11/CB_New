@@ -6,15 +6,17 @@ uses
   SysUtils, Classes, uADStanIntf, uADStanOption, uADStanDef, uADPhysIntf,
   uADGUIxIntf, uADDatSManager, uADStanError, uADStanParam, uADDAptIntf, DB,
   uADCompDataSet, uADCompClient, uADGUIxFormsWait, uADPhysManager, uADPhysIB,
-  uADPhysPG;
+  uADPhysPG, uADStanPool, uADStanAsync, uADDAptManager;
 
 type
   TDMData = class(TDataModule)
-    ADConnection1: TADConnection;
+    conCredittDB: TADConnection;
     ADGUIxWaitCursor1: TADGUIxWaitCursor;
-    QueryAny: TADQuery;
-    DataSource1: TDataSource;
+    qrAny: TADQuery;
+    dsAny: TDataSource;
     ADPhysPgDriverLink1: TADPhysPgDriverLink;
+    qrAnyID_LOAN: TLargeintField;
+    qrAnyAGREEMENT_NUM: TStringField;
   private
     { Private declarations }
   public

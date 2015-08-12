@@ -58,7 +58,27 @@ object Form1: TForm1
   end
   object DataSource1: TDataSource
     DataSet = ADTable1
-    Left = 368
-    Top = 120
+    Left = 152
+    Top = 232
+  end
+  object ADConnection2: TADConnection
+    Params.Strings = (
+      'Database=vsdesk'
+      'User_Name=mysqladm'
+      'Password=Simf0000'
+      'Server=10.3.0.231'
+      'MonitorBy=Custom'
+      'DriverID=MySQL')
+    Left = 40
+    Top = 224
+  end
+  object ADPhysMySQLDriverLink1: TADPhysMySQLDriverLink
+    Left = 72
+    Top = 224
+  end
+  object ADQuery1: TADQuery
+    Connection = ADConnection2
+    Left = 112
+    Top = 224
   end
 end

@@ -2,51 +2,63 @@ object dmData: TdmData
   OldCreateOrder = False
   Height = 362
   Width = 534
-  object ZConnection1: TZConnection
-    ControlsCodePage = cGET_ACP
-    AutoEncodeStrings = False
-    HostName = '10.3.0.231'
-    Port = 3306
-    Database = 
-      'C:\Program Files (x86)\MySQL\Samples and Examples 5.6\Sample Dat' +
-      'abases\World\world-schema.sql'
-    User = 'mysqladm'
-    Password = 'Simf0000'
-    LibraryLocation = 'D:\Projects\CB\libmysql.dll'
-    Left = 120
-    Top = 64
-  end
-  object ADConnection1: TADConnection
-    ConnectionName = 'CBConnection'
-    Params.Strings = (
-      'Server=10.3.0.231'
-      'User_Name=mysqladm'
-      'Password=Simf0000'
-      'Database=CB'
-      'DriverID=MySQL')
-    Connected = True
-    Left = 200
-    Top = 136
-  end
-  object ADPhysMySQLDriverLink1: TADPhysMySQLDriverLink
-    Left = 312
-    Top = 232
-  end
-  object ADTable1: TADTable
-    Active = True
-    Connection = ADConnection1
-    UpdateOptions.UpdateTableName = 'CB.Path_311'
-    TableName = 'CB.Path_311'
-    Left = 320
-    Top = 144
-  end
-  object DataSource1: TDataSource
-    DataSet = ADTable1
-    Left = 384
-    Top = 152
+  object ADPhysPgDriverLink1: TADPhysPgDriverLink
+    Left = 8
+    Top = 8
   end
   object ADGUIxWaitCursor1: TADGUIxWaitCursor
-    Left = 448
-    Top = 240
+    Left = 40
+    Top = 8
+  end
+  object ADConnection1: TADConnection
+    Params.Strings = (
+      'Database=CB_DB'
+      'User_Name=postgres'
+      'Password=postgres'
+      'Server=10.3.0.219'
+      'DriverID=PG')
+    Left = 72
+    Top = 8
+  end
+  object ADQueryLoadDostup: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'SELECT '
+      '  "USER_REPORTS"."ID_REPORT", '
+      '  "USERS"."ID_USER"'
+      'FROM '
+      '  public."USERS", '
+      '  public."USER_REPORTS"'
+      'WHERE '
+      '  "USER_REPORTS"."ID_USER" = "USERS"."ID_USER" and '
+      ' "USERS"."USER_LOGIN"=:USER_LOGIN;')
+    Left = 8
+    Top = 56
+    ParamData = <
+      item
+        Name = 'USER_LOGIN'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object ADQuery311PLoadPath: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'SELECT '
+      '  "REPORT_PATH"."REPORT_PATH", '
+      '  "REPORT_PATH"."NOTE"'
+      'FROM '
+      '  public."REPORT_PATH"'
+      'Where "REPORT_PATH"."ID_REPORT"=:ID_REPORT;')
+    Left = 496
+    Top = 8
+    ParamData = <
+      item
+        Name = 'ID_REPORT'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end

@@ -3,19 +3,18 @@ unit Data;
 interface
 
 uses
-  SysUtils, Classes, ZAbstractConnection, ZConnection, uADStanIntf, uADStanOption, uADStanError,
+  SysUtils, Classes, uADStanIntf, uADStanOption, uADStanError,
   uADGUIxIntf, uADPhysIntf, uADStanDef, uADStanPool, uADPhysManager, uADStanParam, uADDatSManager,
   uADDAptIntf, uADStanAsync, uADDAptManager, DB, uADCompDataSet, uADCompClient, uADPhysMySQL,
-  uADGUIxFormsWait;
+  uADGUIxFormsWait, uADPhysPG;
 
 type
   TdmData = class(TDataModule)
-    ZConnection1: TZConnection;
-    ADConnection1: TADConnection;
-    ADPhysMySQLDriverLink1: TADPhysMySQLDriverLink;
-    ADTable1: TADTable;
-    DataSource1: TDataSource;
+    ADPhysPgDriverLink1: TADPhysPgDriverLink;
     ADGUIxWaitCursor1: TADGUIxWaitCursor;
+    ADConnection1: TADConnection;
+    ADQueryLoadDostup: TADQuery;
+    ADQuery311PLoadPath: TADQuery;
   private
     { Private declarations }
   public

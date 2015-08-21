@@ -34,11 +34,11 @@
     <DelphiCompile Include="ARMCB.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
+    <DCCReference Include="Arhivator.pas" />
     <DCCReference Include="Data.pas">
       <Form>dmData</Form>
       <DesignClass>TDataModule</DesignClass>
     </DCCReference>
-    <DCCReference Include="uCBReport.pas" />
     <DCCReference Include="uMain.pas">
       <Form>fmMain</Form>
     </DCCReference>

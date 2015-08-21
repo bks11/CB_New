@@ -22,22 +22,22 @@ Uses
 Procedure TMainPortfelInfo.MainLoanPortfelLoadData;
 {Загрузка данных}
 Var
- SummRUR:Int64; {643}
- SummUSD:Int64; {840}
- SummEUR:Int64; {978}
- SummUAH:Int64; {980}
- SummZRUR:Int64; {643}
- SummZUSD:Int64; {840}
- SummZEUR:Int64; {978}
- SummZUAH:Int64; {980}
- SummTRUR:Int64; {643}
- SummTUSD:Int64; {840}
- SummTEUR:Int64; {978}
- SummTUAH:Int64; {980}
- SummPRUR:Int64; {643}
- SummPUSD:Int64; {840}
- SummPEUR:Int64; {978}
- SummPUAH:Int64; {980}
+ SummRUR:Real; {643}
+ SummUSD:Real; {840}
+ SummEUR:Real; {978}
+ SummUAH:Real; {980}
+ SummZRUR:Real; {643}
+ SummZUSD:Real; {840}
+ SummZEUR:Real; {978}
+ SummZUAH:Real; {980}
+ SummTRUR:Real; {643}
+ SummTUSD:Real; {840}
+ SummTEUR:Real; {978}
+ SummTUAH:Real; {980}
+ SummPRUR:Real; {643}
+ SummPUSD:Real; {840}
+ SummPEUR:Real; {978}
+ SummPUAH:Real; {980}
 Begin
   SummRUR:=0; {643}
   SummUSD:=0; {840}
@@ -55,57 +55,62 @@ Begin
   SummPUSD:=0; {840}
   SummPEUR:=0; {978}
   SummPUAH:=0; {980}
-  MainForm.MainLoansList.DataSource.DataSet.First;
-  while NOT MainForm.MainLoansList.DataSource.DataSet.Eof do begin
-   if MainForm.MainLoansList.DataSource.DataSet.FieldByName('LOAN_CURRENCY').AsInteger=643  then
+
+  DMData.qrLoanInfo.First;
+  while NOT DMData.qrLoanInfo.Eof do begin
+   if DMData.qrLoanInfo.FieldByName('LOAN_CURRENCY').AsInteger=643  then
    Begin
-    SummRUR:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('LOAN_SUMM').AsInteger;
-    SummZRUR:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('TOTAL_CREDIT_SUMM').AsInteger;
-    SummTRUR:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('DEBT_OUT_OF_DATE').AsInteger;
-    SummPRUR:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('PERCENT_OUT_OF_DATE').AsInteger;
+    SummRUR  := SummRUR  + DMData.qrLoanInfo.FieldByName('LOAN_SUMM').AsFloat;
+    SummZRUR := SummZRUR + DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsFloat;
+    SummTRUR := SummTRUR + DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsFloat;
+    SummPRUR := SummPRUR + DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsFloat;
    End;
-   if MainForm.MainLoansList.DataSource.DataSet.FieldByName('LOAN_CURRENCY').AsInteger=840  then
+   if DMData.qrLoanInfo.FieldByName('LOAN_CURRENCY').AsInteger=840  then
    Begin
-    SummUSD:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('LOAN_SUMM').AsInteger;
-    SummZUSD:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('TOTAL_CREDIT_SUMM').AsInteger;
-    SummTUSD:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('DEBT_OUT_OF_DATE').AsInteger;
-    SummPUSD:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('PERCENT_OUT_OF_DATE').AsInteger;
+    SummUSD  := SummUSD  + DMData.qrLoanInfo.FieldByName('LOAN_SUMM').AsFloat;
+    SummZUSD := SummZUSD + DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsFloat;
+    SummTUSD := SummTUSD + DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsFloat;
+    SummPUSD := SummPUSD + DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsFloat;
    End;
-   if MainForm.MainLoansList.DataSource.DataSet.FieldByName('LOAN_CURRENCY').AsInteger=978  then
+   if DMData.qrLoanInfo.FieldByName('LOAN_CURRENCY').AsInteger=978  then
    Begin
-    SummEUR:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('LOAN_SUMM').AsInteger;
-    SummZEUR:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('TOTAL_CREDIT_SUMM').AsInteger;
-    SummTEUR:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('DEBT_OUT_OF_DATE').AsInteger;
-    SummPEUR:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('PERCENT_OUT_OF_DATE').AsInteger;
+    SummEUR  := SummEUR  + DMData.qrLoanInfo.FieldByName('LOAN_SUMM').AsFloat;
+    SummZEUR := SummZEUR + DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsFloat;
+    SummTEUR := SummTEUR + DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsFloat;
+    SummPEUR := SummPEUR + DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsFloat;
    End;
-   if MainForm.MainLoansList.DataSource.DataSet.FieldByName('LOAN_CURRENCY').AsInteger=980  then
+   if DMData.qrLoanInfo.FieldByName('LOAN_CURRENCY').AsInteger=980  then
    Begin
-    SummUAH:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('LOAN_SUMM').AsInteger;
-    SummZUAH:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('TOTAL_CREDIT_SUMM').AsInteger;
-    SummTUAH:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('DEBT_OUT_OF_DATE').AsInteger;
-    SummPUAH:=SummRUR+MainForm.MainLoansList.DataSource.DataSet.FieldByName('PERCENT_OUT_OF_DATE').AsInteger;
+    SummUAH  := SummUAH  + DMData.qrLoanInfo.FieldByName('LOAN_SUMM').AsFloat;
+    SummZUAH := SummZUAH + DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsFloat;
+    SummTUAH := SummTUAH + DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsFloat;
+    SummPUAH := SummPUAH + DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsFloat;
    End;
    MainForm.MainLoansList.DataSource.DataSet.Next;
-  end;
-  MainForm.MainInfoPortfelSumRUR.Caption:='В RUR - '+inttostr(SummRUR);
-  MainForm.MainInfoPortfelSumUSD.Caption:='В USD - '+inttostr(SummUSD);
-  MainForm.MainInfoPortfelSumEUR.Caption:='В EUR - '+inttostr(SummEUR);
-  MainForm.MainInfoPortfelSumUAH.Caption:='В UAH - '+inttostr(SummUAH);
+  end;//while
 
-  MainForm.MainInfoPortfelSumZRUR.Caption:='В RUR - '+inttostr(SummZRUR);
-  MainForm.MainInfoPortfelSumZUSD.Caption:='В USD - '+inttostr(SummZUSD);
-  MainForm.MainInfoPortfelSumZEUR.Caption:='В EUR - '+inttostr(SummZEUR);
-  MainForm.MainInfoPortfelSumZUAH.Caption:='В UAH - '+inttostr(SummZUAH);
+  DMData.qrLoanInfo.First;
 
-  MainForm.MainInfoPortfelSumTRUR.Caption:='В RUR - '+inttostr(SummTRUR);
-  MainForm.MainInfoPortfelSumTUSD.Caption:='В USD - '+inttostr(SummTUSD);
-  MainForm.MainInfoPortfelSumTEUR.Caption:='В EUR - '+inttostr(SummTEUR);
-  MainForm.MainInfoPortfelSumTUAH.Caption:='В UAH - '+inttostr(SummTUAH);
+  MainForm.MainInfoPortfelSumRUR.Caption:='В RUR - ' + FloatToStrF(SummRUR,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumUSD.Caption:='В USD - ' + FloatToStrF(SummUSD,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumEUR.Caption:='В EUR - ' + FloatToStrF(SummEUR,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumUAH.Caption:='В UAH - ' + FloatToStrF(SummUAH,ffGeneral,8,2);
 
-  MainForm.MainInfoPortfelSumPRUR.Caption:='В RUR - '+inttostr(SummPRUR);
-  MainForm.MainInfoPortfelSumPUSD.Caption:='В USD - '+inttostr(SummPUSD);
-  MainForm.MainInfoPortfelSumPEUR.Caption:='В EUR - '+inttostr(SummPEUR);
-  MainForm.MainInfoPortfelSumPUAH.Caption:='В UAH - '+inttostr(SummPUAH);
+  MainForm.MainInfoPortfelSumZRUR.Caption:='В RUR - ' + FloatToStrF(SummZRUR,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumZUSD.Caption:='В USD - ' + FloatToStrF(SummZUSD,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumZEUR.Caption:='В EUR - ' + FloatToStrF(SummZEUR,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumZUAH.Caption:='В UAH - ' + FloatToStrF(SummZUAH,ffGeneral,8,2);
+
+  MainForm.MainInfoPortfelSumTRUR.Caption:='В RUR - ' + FloatToStrF(SummTRUR,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumTUSD.Caption:='В USD - ' + FloatToStrF(SummTUSD,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumTEUR.Caption:='В EUR - ' + FloatToStrF(SummTEUR,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumTUAH.Caption:='В UAH - ' + FloatToStrF(SummTUAH,ffGeneral,8,2);
+
+  MainForm.MainInfoPortfelSumPRUR.Caption:='В RUR - ' + FloatToStrF(SummPRUR,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumPUSD.Caption:='В USD - ' + FloatToStrF(SummPUSD,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumPEUR.Caption:='В EUR - ' + FloatToStrF(SummPEUR,ffGeneral,8,2);
+  MainForm.MainInfoPortfelSumPUAH.Caption:='В UAH - ' + FloatToStrF(SummPUAH,ffGeneral,8,2);
+
 
 End;
 

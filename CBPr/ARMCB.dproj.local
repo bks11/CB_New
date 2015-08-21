@@ -11,5 +11,9 @@
     <Transaction>2015.06.23 15:11:09.928.pas,D:\Projects\CB\CBPr\Unit3.pas=D:\Projects\CB\CBPr\Data.pas</Transaction>
     <Transaction>2015.06.23 15:11:09.928.dfm,D:\Projects\CB\CBPr\Unit3.dfm=D:\Projects\CB\CBPr\Data.dfm</Transaction>
     <Transaction>2015.06.29 14:02:38.597.pas,D:\Projects\CB\CBPr\Unit1.pas=D:\Projects\CB\CBPr\uCBReport.pas</Transaction>
+    <Transaction>2015.08.18 16:32:49.684.pas,S:\CBPr\uCBReport.pas=</Transaction>
+    <Transaction>2015.08.18 16:33:16.226.pas,S:\CBPr\Data.pas=</Transaction>
+    <Transaction>2015.08.18 16:33:16.230.dfm,S:\CBPr\Data.dfm=</Transaction>
+    <Transaction>2015.08.19 16:50:55.939.pas,S:\CBPr\Unit1.pas=S:\CBPr\Arhivator.pas</Transaction>
   </Transactions>
 </BorlandProject>

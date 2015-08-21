@@ -5,14 +5,16 @@ interface
 uses
   SysUtils, Classes, uADStanIntf, uADStanOption, uADStanError, uADGUIxIntf, uADPhysIntf, uADStanDef,
   uADStanPool, uADPhysManager, uADStanParam, uADDatSManager, uADDAptIntf, uADStanAsync,
-  uADDAptManager, DB, uADCompDataSet, uADCompClient, uADPhysMySQL, uADGUIxFormsWait;
+  uADDAptManager, DB, uADCompDataSet, uADCompClient, uADPhysMySQL, uADGUIxFormsWait,
+  uADPhysPG;
 
 type
   TdmData = class(TDataModule)
-    drvMySqlLink: TADPhysMySQLDriverLink;
-    conCB: TADConnection;
-    qrGetPath: TADQuery;
+    ADConnection1: TADConnection;
     ADGUIxWaitCursor1: TADGUIxWaitCursor;
+    ADPhysPgDriverLink1: TADPhysPgDriverLink;
+    ADQueryLoadVersion: TADQuery;
+    ADQueryLoadPath: TADQuery;
   private
     { Private declarations }
   public

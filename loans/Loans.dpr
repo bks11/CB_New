@@ -8,7 +8,8 @@ uses
   MainPortfelInfo in 'MainPortfelInfo.pas',
   Adminka in 'Adminka.pas',
   Dosudebka in 'Dosudebka.pas',
-  Login in 'Login.pas' {fmLogin};
+  Login in 'Login.pas' {fmLogin},
+  Organaizer in 'Organaizer.pas';
 
 {$R *.res}
 

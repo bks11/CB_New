@@ -2,6 +2,18 @@ unit DataModule;
 
 interface
 
+{SELECT 
+  "TLOAN".*, lnr."LASTNAME" ||'  '||lnr."FIRSTNAME" ||'  '|| lnr."MIDDLENAME"
+FROM 
+  public."TUSERLOANS", 
+  public."TLOAN",
+  "TLOANINFO",
+  "TLOANER" lnr
+WHERE
+  "TUSERLOANS"."ID_LOAN" = "TLOAN"."ID_LOAN" and "TUSERLOANS"."ID_USER"=1 and
+  "TLOANINFO"."ID_LOAN"="TLOAN"."ID_LOAN" and "TLOANINFO"."ID_LOANER"="TLOANER"."ID_LOANER" and "TLOANER"."IS_GUARANTOR"=False;}
+
+
 uses
   SysUtils, Classes, uADStanIntf, uADStanOption, uADStanDef, uADPhysIntf,
   uADGUIxIntf, uADDatSManager, uADStanError, uADStanParam, uADDAptIntf, DB,
@@ -9,30 +21,19 @@ uses
   uADPhysPG, uADStanPool, uADStanAsync, uADDAptManager;
 
 type
+  TDatasetVoidMethod = procedure() of object;
+  TDatasetApplyUpdateMethod = function(MaxErrors :integer): integer of object;
+
+
+type
   TDMData = class(TDataModule)
     conCredittDB: TADConnection;
     ADGUIxWaitCursor1: TADGUIxWaitCursor;
     qrAny: TADQuery;
     ADPhysPgDriverLink1: TADPhysPgDriverLink;
-    qrAnyID_LOAN: TLargeintField;
-    qrAnyAGREEMENT_NUM: TStringField;
     dsqAny: TDataSource;
     qrLoanInfo: TADQuery;
     dsqLoanInfo: TDataSource;
-    qrLoanInfoID_LOAN: TLargeintField;
-    qrLoanInfoAGREEMENT_NUM: TStringField;
-    qrLoanInfoISSUE_DATE: TDateField;
-    qrLoanInfoLOAN_SUMM: TCurrencyField;
-    qrLoanInfoLOAN_CURRENCY: TStringField;
-    qrLoanInfoEND_DATE: TDateField;
-    qrLoanInfoTOTAL_CREDIT_SUMM: TCurrencyField;
-    qrLoanInfoTOTAL_CREDIT_SUMM_EQ: TCurrencyField;
-    qrLoanInfoDEBT_OUT_OF_DATE: TCurrencyField;
-    qrLoanInfoDEBT_OUT_OF_DATE_EQ: TCurrencyField;
-    qrLoanInfoPERCENT_OUT_OF_DATE: TCurrencyField;
-    qrLoanInfoPERCENT_OUT_OF_DATE_EQ: TCurrencyField;
-    qrLoanInfoCOMMISSION_AMOUNT: TCurrencyField;
-    qrLoanInfoFIRST_CREDITOR: TStringField;
     qrLoanerInfoByLoans: TADQuery;
     QRAdminUsersLVSL: TADQuery;
     TableUsers: TADTable;
@@ -46,10 +47,46 @@ type
     QRDosudebkaList: TADQuery;
     DataSourceDosudebkaList: TDataSource;
     QRDosudebkaListAdd: TADQuery;
+    QRDosudebkaListDel: TADQuery;
+    QRDosudebkaListEdit: TADQuery;
+    qrLogin: TADQuery;
+    qrchengepass: TADQuery;
+    QRAdminUsersLVSLDG: TADQuery;
+    QRAdminUsersLVSLDGAdd: TADQuery;
+    QRAdminUsersLVSLDGDel: TADQuery;
+    QRAdminUsersLVSLDGGetId: TADQuery;
+    qrMainOrganaizer: TADQuery;
+    DSMainOrganaizer: TDataSource;
+    qrLoanInfofio: TADWideMemoField;
+    qrLoanInfoID_LOAN: TLargeintField;
+    qrLoanInfoAGREEMENT_NUM: TWideStringField;
+    qrLoanInfoISSUE_DATE: TDateField;
+    qrLoanInfoLOAN_SUMM: TCurrencyField;
+    qrLoanInfoLOAN_CURRENCY: TWideStringField;
+    qrLoanInfoEND_DATE: TDateField;
+    qrLoanInfoTOTAL_CREDIT_SUMM: TCurrencyField;
+    qrLoanInfoTOTAL_CREDIT_SUMM_EQ: TCurrencyField;
+    qrLoanInfoDEBT_OUT_OF_DATE: TCurrencyField;
+    qrLoanInfoDEBT_OUT_OF_DATE_EQ: TCurrencyField;
+    qrLoanInfoPERCENT_OUT_OF_DATE: TCurrencyField;
+    qrLoanInfoPERCENT_OUT_OF_DATE_EQ: TCurrencyField;
+    qrLoanInfoCOMMISSION_AMOUNT: TCurrencyField;
+    qrLoanInfoFIRST_CREDITOR: TWideStringField;
+    DataSourceLoanerInfoByLoans: TDataSource;
+    qrOrganaizerFul: TADQuery;
+    DataSourceOrganaizerFul: TDataSource;
+    qrOrganaizerComplit: TADQuery;
+    qrAdminsCursesLoad: TADQuery;
+    qrAdminCursAdd: TADQuery;
+    qrAdminQursEdit: TADQuery;
   private
+
     { Private declarations }
   public
     { Public declarations }
+    function SafeExecuteDatasetApplyUpdateMethod(method: TDatasetApplyUpdateMethod;
+      MaxErrors: integer): boolean;
+    function SafeExecuteDatasetVoidMethod(method: TDatasetVoidMethod): boolean;
     //Procedure MainRefreshLoansList();{Обновить из базы кредитный лист}
     //function GetLoanList():TStringList;
   end;
@@ -87,6 +124,61 @@ Uses
 // End;
 // qrAny.Active:=false;
 //End;
+
+
+function TDMData.SafeExecuteDatasetApplyUpdateMethod(method :TDatasetApplyUpdateMethod; MaxErrors: integer): boolean;
+var
+  isQuerySuccessful: boolean;
+  attempCount: integer;
+begin
+  isQuerySuccessful := false;
+  attempCount := 0;
+
+  while ((not isQuerySuccessful) AND (attempCount < 1)) do
+  begin
+	  try
+      method(MaxErrors);
+	  except
+	    attempCount := attempCount + 1;
+	    continue;
+  	end;
+	  isQuerySuccessful := true;
+  end;
+
+  if(not isQuerySuccessful) then
+  begin
+    //MessageDlg('Connect to server failed.', mtWarning, [mbOK], 0);
+  end;
+
+  Result := isQuerySuccessful;
+end;
+
+function TDMData.SafeExecuteDatasetVoidMethod(method :TDatasetVoidMethod): boolean;
+var
+  isQuerySuccessful: boolean;
+  attempCount: integer;
+begin
+  isQuerySuccessful := false;
+  attempCount := 0;
+
+  while ((not isQuerySuccessful) AND (attempCount < 1)) do
+  begin
+	  try
+      method();
+	  except
+	    attempCount := attempCount + 1;
+	    continue;
+  	end;
+	  isQuerySuccessful := true;
+  end;
+
+  if(not isQuerySuccessful) then
+  begin
+    //MessageDlg('Connect to server failed.', mtWarning, [mbOK], 0);
+  end;
+
+  Result := isQuerySuccessful;
+end;
 
 {$R *.dfm}
 

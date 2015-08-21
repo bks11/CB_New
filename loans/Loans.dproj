@@ -43,5 +43,6 @@
     </DCCReference>
     <DCCReference Include="MainLoanInfo.pas" />
     <DCCReference Include="MainPortfelInfo.pas" />
+    <DCCReference Include="Organaizer.pas" />
   </ItemGroup>
 </Project>

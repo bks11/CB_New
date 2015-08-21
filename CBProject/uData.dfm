@@ -2,36 +2,57 @@ object dmData: TdmData
   OldCreateOrder = False
   Height = 386
   Width = 573
-  object drvMySqlLink: TADPhysMySQLDriverLink
-    Left = 24
-    Top = 8
-  end
-  object conCB: TADConnection
+  object ADConnection1: TADConnection
     Params.Strings = (
-      'Server=10.3.0.231'
-      'User_Name=mysqladm'
-      'Database=CB'
-      'DriverID=MySQL'
-      'Password=Simf0000')
-    LoginPrompt = False
-    Left = 88
+      'Database=CB_DB'
+      'User_Name=postgres'
+      'Password=postgres'
+      'Server=10.3.0.219'
+      'DriverID=PG')
+    Connected = True
+    Left = 128
     Top = 8
-  end
-  object qrGetPath: TADQuery
-    Connection = conCB
-    SQL.Strings = (
-      'select * from Path_311 where Id=:pathId')
-    Left = 24
-    Top = 96
-    ParamData = <
-      item
-        Name = 'PATHID'
-        DataType = ftInteger
-        ParamType = ptInput
-      end>
   end
   object ADGUIxWaitCursor1: TADGUIxWaitCursor
+    Left = 192
+    Top = 8
+  end
+  object ADPhysPgDriverLink1: TADPhysPgDriverLink
     Left = 160
-    Top = 16
+    Top = 8
+  end
+  object ADQueryLoadVersion: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'SELECT "VERSION_INFO"'
+      '  FROM "VERSION_INFO";')
+    Left = 128
+    Top = 56
+  end
+  object ADQueryLoadPath: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'SELECT '
+      '  "REPORT_PATH"."REPORT_PATH", "REPORT_PATH"."NOTE"'
+      'FROM '
+      '  public."REPORT_PATH", '
+      '  public."USER_REPORTS", '
+      '  public."USERS"'
+      'WHERE '
+      '  "USER_REPORTS"."ID_REPORT" = "REPORT_PATH"."ID_REPORT" AND'
+      '  "USERS"."ID_USER" = "USER_REPORTS"."ID_USER" and'
+      '  "USERS"."USER_LOGIN" = :USER_LOGIN'
+      
+        'Order by "REPORT_PATH"."ID_REPORT" , "REPORT_PATH"."ID_REPORT_PA' +
+        'TH";')
+    Left = 128
+    Top = 104
+    ParamData = <
+      item
+        Name = 'USER_LOGIN'
+        DataType = ftString
+        ParamType = ptInput
+        Value = 'k.zaichenko'
+      end>
   end
 end

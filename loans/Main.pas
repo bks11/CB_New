@@ -129,6 +129,10 @@ type
     mnuFieldsSwitch: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
+    pnlLeft: TPanel;
+    Splitter1: TSplitter;
+    pnlShowPayd: TPanel;
+    chbPaid: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure MainLoansListCellClick(Column: TColumn);
     procedure DBGridLoansLVSLCellClick(Column: TColumn);
@@ -153,6 +157,7 @@ type
     procedure ButtonAdmCursSaveClick(Sender: TObject);
     procedure N1Click(Sender: TObject);
     procedure N2Click(Sender: TObject);
+    procedure chbPaidClick(Sender: TObject);
   private
     FUser_Name: String;
     FDriverId: String;
@@ -161,6 +166,9 @@ type
     FServer: String;
     FPort: string;
     FIsLoginSuccessful: Boolean;
+    FEURRate: Real;
+    FUSDRate: Real;
+    FUAHRate: Real;
     procedure SetDataBase(const Value: String);
     procedure SetDriverId(const Value: String);
     procedure SetPassword(const Value: String);
@@ -168,6 +176,12 @@ type
     procedure SetUser_Name(const Value: String);
     procedure SetPort(const Value: string);
     procedure SetIsLoginSuccessful(const Value: Boolean);
+    procedure SetEURRate(const Value: Real);
+    procedure SetUAHRate(const Value: Real);
+    procedure SetUSDRate(const Value: Real);
+    procedure LoginPO;
+    procedure RefreshLoansList(IS_PAID: Boolean);
+    procedure ClearLabelMainForm;
     { Private declarations }
     property DataBase: String read FDataBase write SetDataBase;
     property User_Name : String read FUser_Name write SetUser_Name;
@@ -176,8 +190,16 @@ type
     property DriverId : String read FDriverId write SetDriverId;
     property Port: string read FPort write SetPort;
     property IsLoginSuccessful : Boolean read FIsLoginSuccessful write SetIsLoginSuccessful;
+
+
+
+    function SetRate():integer;
+
   public
     { Public declarations }
+    property USDRate : Real read FUSDRate write SetUSDRate;
+    property EURRate : Real read FEURRate write SetEURRate;
+    property UAHRate : Real read FUAHRate write SetUAHRate;
   end;
 
 var
@@ -250,6 +272,11 @@ begin
   FDriverId := Value;
 end;
 
+procedure TMainForm.SetEURRate(const Value: Real);
+begin
+  FEURRate := Value;
+end;
+
 procedure TMainForm.SetIsLoginSuccessful(const Value: Boolean);
 begin
   FIsLoginSuccessful := Value;
@@ -265,9 +292,40 @@ begin
   FPort := Value;
 end;
 
+function TMainForm.SetRate: integer;
+begin
+  with DMData do begin
+    qrGetCurrency.Active :=  False;
+    qrGetCurrency.ParamByName('CURR_CODE').Value := '980';
+    SafeExecuteDatasetVoidMethod(qrGetCurrency.Open);
+    UAHRate := qrGetCurrency.FieldByName('CURR_RATE').AsFloat;
+
+    qrGetCurrency.Active :=  False;
+    qrGetCurrency.ParamByName('CURR_CODE').Value := '978';
+    SafeExecuteDatasetVoidMethod(qrGetCurrency.Open);
+    EURRate := qrGetCurrency.FieldByName('CURR_RATE').AsFloat;
+
+    qrGetCurrency.Active :=  False;
+    qrGetCurrency.ParamByName('CURR_CODE').Value := '840';
+    SafeExecuteDatasetVoidMethod(qrGetCurrency.Open);
+    USDRate := qrGetCurrency.FieldByName('CURR_RATE').AsFloat;
+
+  end; //with
+end;
+
 procedure TMainForm.SetServer(const Value: String);
 begin
   FServer := Value;
+end;
+
+procedure TMainForm.SetUAHRate(const Value: Real);
+begin
+  FUAHRate := Value;
+end;
+
+procedure TMainForm.SetUSDRate(const Value: Real);
+begin
+  FUSDRate := Value;
 end;
 
 procedure TMainForm.SetUser_Name(const Value: String);
@@ -295,6 +353,11 @@ begin
  Organaizer.Complited;
 end;
 
+procedure TMainForm.chbPaidClick(Sender: TObject);
+begin
+   RefreshLoansList(chbPaid.Checked);
+end;
+
 procedure TMainForm.CheckBoxOrganaizerComplClick(Sender: TObject);
 begin
  Organaizer.ChengeComplited;
@@ -305,10 +368,19 @@ begin
  Adminka.ADDBaseLoansList;
 end;
 
-procedure RefreshLoansList;
+procedure TMainForm.RefreshLoansList(IS_PAID: Boolean);
 Begin
+ MainForm.SetRate();
+
  DMData.qrLoanInfo.Active := False;
  DMData.qrLoanInfo.Params.ParamByName('ID_USER').AsInteger := LoginUsers.ID;
+ if (IS_PAID) then  begin
+    DMData.qrLoanInfo.Params.ParamByName('PAID1').AsBoolean := True;
+    DMData.qrLoanInfo.Params.ParamByName('PAID2').AsBoolean := False;
+ end else begin
+    DMData.qrLoanInfo.Params.ParamByName('PAID1').AsBoolean := False;
+    DMData.qrLoanInfo.Params.ParamByName('PAID2').AsBoolean := False;
+ end;
  DMData.SafeExecuteDatasetVoidMethod(DMData.qrLoanInfo.Open);
  DMData.qrLoanInfo.First;
 
@@ -319,48 +391,53 @@ Begin
  MainBagInfo.MainLoanPortfelLoadData;
  Adminka.LoadLoansList;
  RefreshOrganaizer;
+
 End;
 
-procedure ClearLabelMainForm;
+procedure TMainForm.ClearLabelMainForm;
 Begin
- MainForm.MainInfoPortfelSumRUR.Caption:='';
- MainForm.MainInfoPortfelSumUSD.Caption:='';
- MainForm.MainInfoPortfelSumEUR.Caption:='';
- MainForm.MainInfoPortfelSumUAH.Caption:='';
- MainForm.MainInfoPortfelSumZRUR.Caption:='';
- MainForm.MainInfoPortfelSumZUSD.Caption:='';
- MainForm.MainInfoPortfelSumZEUR.Caption:='';
- MainForm.MainInfoPortfelSumZUAH.Caption:='';
- MainForm.MainInfoPortfelSumTRUR.Caption:='';
- MainForm.MainInfoPortfelSumTUSD.Caption:='';
- MainForm.MainInfoPortfelSumTEUR.Caption:='';
- MainForm.MainInfoPortfelSumTUAH.Caption:='';
- MainForm.MainInfoPortfelSumPRUR.Caption:='';
- MainForm.MainInfoPortfelSumPUSD.Caption:='';
- MainForm.MainInfoPortfelSumPEUR.Caption:='';
- MainForm.MainInfoPortfelSumPUAH.Caption:='';
- MainForm.LoansInfoFIOLoaner.Caption:='';
- MainForm.LoansInfoINNLoader.Caption:='';
- MainForm.LoansInfoPasNumoader.Caption:='';
- MainForm.LoansInfoPasDat.Caption:='';
- MainForm.LoansInfoAdres1Loader.Caption:='';
- MainForm.LoansInfoAdres2Loader.Caption:='';
- MainForm.LoansInfoFoneLoader.Caption:='';
- MainForm.LoansInfoDateLoans.Caption:='';
- MainForm.LoansInfoSumValLoans.Caption:='';
- MainForm.LoansInfoValLoans.Caption:='';
- MainForm.LoansInfoDateEndLoans.Caption:='';
- MainForm.LoansInfoDebtLoans.Caption:='';
- MainForm.LoansInfoDebtNacValLoans.Caption:='';
- MainForm.LoansInfoDEBTOUTOFDATE.Caption:='';
- MainForm.LoansInfoDEBTOUTOFDATEEQ.Caption:='';
- MainForm.LoansInfoPERCENTOUTOFDATE.Caption:='';
- MainForm.LoansInfoPERCENTOUTOFDATEEQ.Caption:='';
- MainForm.LoansInfoCOMMISSIONAMOUNT.Caption:='';
- MainForm.LoansInfoPoruchitel.Caption:='';
+     MainInfoPortfelSumRUR.Caption:='';
+     MainInfoPortfelSumUSD.Caption:='';
+     MainInfoPortfelSumEUR.Caption:='';
+     MainInfoPortfelSumUAH.Caption:='';
+     MainInfoPortfelSumZRUR.Caption:='';
+     MainInfoPortfelSumZUSD.Caption:='';
+     MainInfoPortfelSumZEUR.Caption:='';
+     MainInfoPortfelSumZUAH.Caption:='';
+     MainInfoPortfelSumTRUR.Caption:='';
+     MainInfoPortfelSumTUSD.Caption:='';
+     MainInfoPortfelSumTEUR.Caption:='';
+     MainInfoPortfelSumTUAH.Caption:='';
+     MainInfoPortfelSumPRUR.Caption:='';
+     MainInfoPortfelSumPUSD.Caption:='';
+     MainInfoPortfelSumPEUR.Caption:='';
+     MainInfoPortfelSumPUAH.Caption:='';
+     LoansInfoFIOLoaner.Caption:='';
+     LoansInfoINNLoader.Caption:='';
+     LoansInfoPasNumoader.Caption:='';
+     LoansInfoPasDat.Caption:='';
+     LoansInfoAdres1Loader.Caption:='';
+     LoansInfoAdres2Loader.Caption:='';
+     LoansInfoFoneLoader.Caption:='';
+     LoansInfoDateLoans.Caption:='';
+     LoansInfoSumValLoans.Caption:='';
+     LoansInfoValLoans.Caption:='';
+     LoansInfoDateEndLoans.Caption:='';
+     LoansInfoDebtLoans.Caption:='';
+     LoansInfoDebtNacValLoans.Caption:='';
+     LoansInfoDEBTOUTOFDATE.Caption:='';
+     LoansInfoDEBTOUTOFDATEEQ.Caption:='';
+     LoansInfoPERCENTOUTOFDATE.Caption:='';
+     LoansInfoPERCENTOUTOFDATEEQ.Caption:='';
+     LoansInfoCOMMISSIONAMOUNT.Caption:='';
+     LoansInfoPoruchitel.Caption:='';
+     MainInfoSumLoansEcv.Caption := '';
+     MainInfoSumZadEcv.Caption := '';
+     MainInfoSumprosEcv.Caption := '';
+     MainInfoSumProcEcv.Caption := '';
 End;
 
-procedure LoginPO;
+procedure TMainForm.LoginPO;
 var
  sLogin : String;
  sPassword : String;
@@ -380,7 +457,7 @@ Begin
    Begin
     LoginUsers.Name:=DMData.qrLogin.FieldByName('FIRSTNAME').AsString;
     LoginUsers.ID:=DMData.qrLogin.FieldByName('ID_USER').AsInteger;
-    RefreshLoansList;
+    RefreshLoansList(chbPaid.Checked);
     MainLoanInfo.MainLoanInfoLoadData();
     MainForm.btnLogin.Caption:='Выход';
     MainForm.IsLoginSuccessful := True;
@@ -395,7 +472,7 @@ Begin
  Begin
   LoginUsers.Name:='';
   LoginUsers.ID:=0;
-  RefreshLoansList;
+  RefreshLoansList(chbPaid.Checked);
   MainForm.btnLogin.Caption:='Вход';
   MainForm.btnChengePas.Enabled:=False;
   MainForm.IsLoginSuccessful := False;
@@ -473,6 +550,7 @@ begin
   IsLoginSuccessful := False;
   btnLogin.Caption := 'Вход';
   btnChengePas.Enabled:=False;
+  chbPaid.Checked := False;
   ClearLabelMainForm;
   MainPageControl.ActivePageIndex := 0;
 

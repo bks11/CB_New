@@ -14,16 +14,27 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object MainPageControl: TPageControl
-    Left = 235
+  object Splitter1: TSplitter
+    Left = 225
     Top = 0
-    Width = 846
+    Height = 610
+    ExplicitLeft = 274
+    ExplicitTop = 120
+    ExplicitHeight = 100
+  end
+  object MainPageControl: TPageControl
+    Left = 228
+    Top = 0
+    Width = 853
     Height = 610
     ActivePage = AllInfo
     Align = alClient
     TabOrder = 0
+    ExplicitLeft = 356
+    ExplicitWidth = 725
     object AllInfo: TTabSheet
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1087#1086#1088#1090#1092#1077#1083#1102
+      ExplicitWidth = 838
       object lbKredSumHeader: TLabel
         Left = 16
         Top = 5
@@ -32,21 +43,21 @@ object MainForm: TMainForm
         Caption = #1057#1091#1084#1084#1072' '#1082#1088#1077#1076#1080#1090#1086#1074' '
       end
       object lbDebtSumHeader: TLabel
-        Left = 210
+        Left = 223
         Top = 5
         Width = 113
         Height = 13
         Caption = #1057#1091#1084#1084#1072' '#1079#1072#1076#1086#1083#1078#1077#1085#1085#1086#1089#1090#1080
       end
       object lbOutDateSumHeader: TLabel
-        Left = 404
+        Left = 430
         Top = 5
         Width = 87
         Height = 13
         Caption = #1057#1091#1084#1084#1072' '#1087#1088#1086#1089#1088#1086#1095#1082#1080
       end
       object lbPercentSumHeader: TLabel
-        Left = 598
+        Left = 637
         Top = 5
         Width = 101
         Height = 13
@@ -55,7 +66,7 @@ object MainForm: TMainForm
       object pnlKredSum: TPanel
         Left = 16
         Top = 24
-        Width = 185
+        Width = 205
         Height = 145
         BorderStyle = bsSingle
         TabOrder = 0
@@ -96,9 +107,9 @@ object MainForm: TMainForm
         end
       end
       object pnlDebtSum: TPanel
-        Left = 210
+        Left = 221
         Top = 24
-        Width = 185
+        Width = 205
         Height = 145
         BorderStyle = bsSingle
         TabOrder = 1
@@ -139,9 +150,9 @@ object MainForm: TMainForm
         end
       end
       object pnlOutDateSum: TPanel
-        Left = 404
+        Left = 426
         Top = 24
-        Width = 185
+        Width = 205
         Height = 145
         BorderStyle = bsSingle
         TabOrder = 2
@@ -182,9 +193,9 @@ object MainForm: TMainForm
         end
       end
       object pnlPercentSum: TPanel
-        Left = 598
+        Left = 631
         Top = 24
-        Width = 185
+        Width = 205
         Height = 145
         BorderStyle = bsSingle
         TabOrder = 3
@@ -228,6 +239,7 @@ object MainForm: TMainForm
     object LoansInfo: TTabSheet
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1088#1077#1076#1080#1090#1091
       ImageIndex = 1
+      ExplicitWidth = 838
       object lbDebtInfoHeader: TLabel
         Left = 16
         Top = 3
@@ -596,6 +608,7 @@ object MainForm: TMainForm
     object Dosudebka: TTabSheet
       Caption = #1044#1086#1089#1091#1076#1077#1073#1085#1099#1077' '#1084#1077#1088#1086#1087#1088#1080#1103#1090#1080#1103
       ImageIndex = 2
+      ExplicitWidth = 838
       object lbBeforeJudPeriodHeader: TLabel
         Left = 8
         Top = 0
@@ -606,7 +619,7 @@ object MainForm: TMainForm
       object lbAddNewActionHeader: TLabel
         Left = 0
         Top = 363
-        Width = 838
+        Width = 845
         Height = 13
         Align = alTop
         Caption = #1044#1086#1073#1072#1074#1083#1077#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1076#1077#1081#1089#1090#1074#1080#1103
@@ -615,15 +628,16 @@ object MainForm: TMainForm
       object pnlBefoJudPeriod: TPanel
         Left = 0
         Top = 0
-        Width = 838
+        Width = 845
         Height = 363
         Align = alTop
         BorderStyle = bsSingle
         TabOrder = 0
+        ExplicitWidth = 838
         object DBGridDosudebkaList: TDBGrid
           Left = 1
           Top = 1
-          Width = 832
+          Width = 839
           Height = 357
           Align = alClient
           DataSource = DMData.DataSourceDosudebkaList
@@ -672,11 +686,12 @@ object MainForm: TMainForm
       object pnlAddNewJudAction: TPanel
         Left = 0
         Top = 376
-        Width = 838
+        Width = 845
         Height = 206
         Align = alClient
         BorderStyle = bsSingle
         TabOrder = 1
+        ExplicitWidth = 838
         object lbFullDescriptHeader: TLabel
           Left = 16
           Top = 16
@@ -706,7 +721,7 @@ object MainForm: TMainForm
           Top = 35
           Width = 191
           Height = 182
-          Date = 42229.971398831020000000
+          Date = 42229.578261608800000000
           TabOrder = 1
         end
         object ButtonDosudebkaAdd: TButton
@@ -743,6 +758,7 @@ object MainForm: TMainForm
     object Admins: TTabSheet
       Caption = #1040#1076#1084#1080#1085#1080#1089#1090#1088#1080#1088#1086#1074#1072#1085#1080#1077' '#1089#1080#1089#1090#1077#1084#1099
       ImageIndex = 3
+      ExplicitWidth = 838
       object EditBDSvazi: TPageControl
         Left = 3
         Top = 3
@@ -1084,7 +1100,7 @@ object MainForm: TMainForm
             Top = 3
             Width = 191
             Height = 182
-            Date = 42229.971398946760000000
+            Date = 42229.578261701390000000
             TabOrder = 0
             OnClick = MonthCalendarAdmCursesClick
           end
@@ -1442,6 +1458,7 @@ object MainForm: TMainForm
     object TabSheet1: TTabSheet
       Caption = #1054#1088#1075#1072#1085#1072#1081#1079#1077#1088
       ImageIndex = 4
+      ExplicitWidth = 838
       object DBGridOrganaizerFul: TDBGrid
         Left = 3
         Top = 191
@@ -1490,7 +1507,7 @@ object MainForm: TMainForm
         Top = 3
         Width = 191
         Height = 182
-        Date = 42229.971399027770000000
+        Date = 42229.578261770830000000
         TabOrder = 1
       end
       object ButtonOrganaizerComplit: TButton
@@ -1512,104 +1529,6 @@ object MainForm: TMainForm
         OnClick = CheckBoxOrganaizerComplClick
       end
     end
-  end
-  object MainLoansList: TDBGrid
-    Left = 0
-    Top = 0
-    Width = 235
-    Height = 610
-    Align = alLeft
-    DataSource = DMData.dsqLoanInfo
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-    PopupMenu = mnuFieldsSwitch
-    ReadOnly = True
-    TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    OnCellClick = MainLoansListCellClick
-    OnDrawColumnCell = MainLoansListDrawColumnCell
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'fio'
-        Width = 220
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ID_LOAN'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'AGREEMENT_NUM'
-        Title.Caption = #1050#1088#1077#1076#1080#1090
-        Width = -1
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'ISSUE_DATE'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'LOAN_SUMM'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'LOAN_CURRENCY'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'END_DATE'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'TOTAL_CREDIT_SUMM'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'TOTAL_CREDIT_SUMM_EQ'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'DEBT_OUT_OF_DATE'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'DEBT_OUT_OF_DATE_EQ'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'PERCENT_OUT_OF_DATE'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'PERCENT_OUT_OF_DATE_EQ'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'COMMISSION_AMOUNT'
-        Visible = False
-      end
-      item
-        Expanded = False
-        FieldName = 'FIRST_CREDITOR'
-        Visible = False
-      end>
   end
   object sbInfo: TStatusBar
     Left = 0
@@ -1634,7 +1553,7 @@ object MainForm: TMainForm
     Height = 113
     Align = alBottom
     Caption = 'pnlBottom'
-    TabOrder = 3
+    TabOrder = 2
     object lbLogin: TLabel
       Left = 743
       Top = 35
@@ -1715,6 +1634,129 @@ object MainForm: TMainForm
       Caption = #1057#1084#1077#1085#1080#1090#1100
       TabOrder = 4
       OnClick = btnChengePasClick
+    end
+  end
+  object pnlLeft: TPanel
+    Left = 0
+    Top = 0
+    Width = 225
+    Height = 610
+    Align = alLeft
+    TabOrder = 3
+    object MainLoansList: TDBGrid
+      Left = 1
+      Top = 33
+      Width = 223
+      Height = 576
+      Align = alClient
+      DataSource = DMData.dsqLoanInfo
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      PopupMenu = mnuFieldsSwitch
+      ReadOnly = True
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      OnCellClick = MainLoansListCellClick
+      OnDrawColumnCell = MainLoansListDrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'fio'
+          Width = 220
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ID_LOAN'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'AGREEMENT_NUM'
+          Title.Caption = #1050#1088#1077#1076#1080#1090
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'ISSUE_DATE'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'LOAN_SUMM'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'LOAN_CURRENCY'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'END_DATE'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'TOTAL_CREDIT_SUMM'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'TOTAL_CREDIT_SUMM_EQ'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'DEBT_OUT_OF_DATE'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'DEBT_OUT_OF_DATE_EQ'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'PERCENT_OUT_OF_DATE'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'PERCENT_OUT_OF_DATE_EQ'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'COMMISSION_AMOUNT'
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'FIRST_CREDITOR'
+          Visible = False
+        end>
+    end
+    object pnlShowPayd: TPanel
+      Left = 1
+      Top = 1
+      Width = 223
+      Height = 32
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 1
+      object chbPaid: TCheckBox
+        Left = 7
+        Top = 4
+        Width = 97
+        Height = 17
+        Caption = #1057' '#1087#1086#1075#1072#1096#1077#1085#1085#1099#1084#1080'.'
+        TabOrder = 0
+        OnClick = chbPaidClick
+      end
     end
   end
   object mnuFieldsSwitch: TPopupMenu

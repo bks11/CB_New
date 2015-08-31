@@ -52,7 +52,8 @@ object DMData: TDMData
       #9'"TUSERLOANS" ul on l."ID_LOAN" = ul."ID_LOAN"'
       'inner join '
       #9'"TUSERS" u on ul."ID_USER" = u."ID_USER"'
-      'where u."ID_USER"=:ID_USER and lnr."IS_GUARANTOR"=False;')
+      'where u."ID_USER"=:ID_USER and lnr."IS_GUARANTOR"=False AND '
+      '("IS_PAID" = :PAID1 OR "IS_PAID" = :PAID2);')
     Left = 39
     Top = 161
     ParamData = <
@@ -61,6 +62,18 @@ object DMData: TDMData
         DataType = ftInteger
         ParamType = ptInput
         Value = 1
+      end
+      item
+        Name = 'PAID1'
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PAID2'
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
       end>
     object qrLoanInfofio: TADWideMemoField
       DisplayLabel = #1060#1048#1054
@@ -548,7 +561,7 @@ object DMData: TDMData
   end
   object DSMainOrganaizer: TDataSource
     DataSet = qrMainOrganaizer
-    Left = 96
+    Left = 126
     Top = 360
   end
   object DataSourceLoanerInfoByLoans: TDataSource
@@ -682,5 +695,27 @@ object DMData: TDMData
         ParamType = ptInput
         Value = '840'
       end>
+  end
+  object qrGetCurrency: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'SELECT "ID_CURRENCY", "CURR_RATE", "CURR_DATE", "CURR_CODE"'
+      
+        '  FROM "TCURRENCY" WHERE "CURR_CODE" = :CURR_CODE ORDER BY "CURR' +
+        '_DATE"  DESC LIMIT 1;')
+    Left = 38
+    Top = 450
+    ParamData = <
+      item
+        Name = 'CURR_CODE'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsqGetCurrency: TDataSource
+    DataSet = qrGetCurrency
+    Left = 130
+    Top = 450
   end
 end

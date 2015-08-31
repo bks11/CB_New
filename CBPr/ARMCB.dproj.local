@@ -15,5 +15,19 @@
     <Transaction>2015.08.18 16:33:16.226.pas,S:\CBPr\Data.pas=</Transaction>
     <Transaction>2015.08.18 16:33:16.230.dfm,S:\CBPr\Data.dfm=</Transaction>
     <Transaction>2015.08.19 16:50:55.939.pas,S:\CBPr\Unit1.pas=S:\CBPr\Arhivator.pas</Transaction>
+    <Transaction>2015.08.25 12:36:09.653.pas,S:\CBPr\Unit1.pas=S:\CBPr\CriptoModule.pas</Transaction>
+    <Transaction>2015.08.25 12:41:30.808.pas,S:\CBPr\Cripto.pas=</Transaction>
+    <Transaction>2015.08.25 12:43:03.638.pas,S:\CBPr\Cripto.pas=</Transaction>
+    <Transaction>2015.08.25 12:43:03.643.dfm,S:\CBPr\Cripto.dfm=</Transaction>
+    <Transaction>2015.08.25 13:40:31.746.pas,S:\CBPr\Unit1.pas=S:\CBPr\Verba.pas</Transaction>
+    <Transaction>2015.08.25 16:31:51.949.pas,S:\CBPr\Unit1.pas=S:\CBPr\CriptoMudule.pas</Transaction>
+    <Transaction>2015.08.25 16:32:18.449.pas,S:\CBPr\Cripto.pas=</Transaction>
+    <Transaction>2015.08.25 16:32:18.453.dfm,S:\CBPr\Cripto.dfm=</Transaction>
+    <Transaction>2015.08.25 16:36:11.675.pas,S:\CBPr\Unit1.pas=S:\CBPr\Cripto.pas</Transaction>
+    <Transaction>2015.08.25 16:36:11.675.dfm,S:\CBPr\Unit1.dfm=S:\CBPr\Cripto.dfm</Transaction>
+    <Transaction>2015.08.25 16:36:57.327.pas,S:\CBPr\CriptoMudule.pas=</Transaction>
+    <Transaction>2015.08.25 16:38:27.331.pas,S:\CBPr\Cripto.pas=</Transaction>
+    <Transaction>2015.08.25 16:38:27.336.dfm,S:\CBPr\Cripto.dfm=</Transaction>
+    <Transaction>2015.08.26 14:28:25.023.pas,S:\CBPr\Unit1.pas=S:\CBPr\krutilka.pas</Transaction>
   </Transactions>
 </BorlandProject>

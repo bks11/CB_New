@@ -35,13 +35,16 @@
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
     <DCCReference Include="Arhivator.pas" />
+    <DCCReference Include="CriptoMudule.pas" />
     <DCCReference Include="Data.pas">
       <Form>dmData</Form>
       <DesignClass>TDataModule</DesignClass>
     </DCCReference>
+    <DCCReference Include="krutilka.pas" />
     <DCCReference Include="uMain.pas">
       <Form>fmMain</Form>
     </DCCReference>
     <DCCReference Include="uRep311.pas" />
+    <DCCReference Include="Verba.pas" />
   </ItemGroup>
 </Project>

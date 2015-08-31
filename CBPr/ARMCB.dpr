@@ -5,7 +5,10 @@ uses
   uMain in 'uMain.pas' {fmMain},
   uRep311 in 'uRep311.pas',
   Data in 'Data.pas' {dmData: TDataModule},
-  Arhivator in 'Arhivator.pas';
+  Arhivator in 'Arhivator.pas',
+  Verba in 'Verba.pas',
+  CriptoMudule in 'CriptoMudule.pas',
+  krutilka in 'krutilka.pas';
 
 {$R *.res}
 

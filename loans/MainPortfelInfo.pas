@@ -38,6 +38,12 @@ Var
  SummPUSD:Real; {840}
  SummPEUR:Real; {978}
  SummPUAH:Real; {980}
+
+ EqvLoan : Real;
+ EqvZad  : Real;
+ EqvProsroch : Real;
+ EqvPercent : Real;
+
 Begin
   SummRUR:=0; {643}
   SummUSD:=0; {840}
@@ -91,25 +97,38 @@ Begin
 
   DMData.qrLoanInfo.First;
 
+  //пЮЯВЕР ЩЙБХБЮКЕМРЮ
+
+  EqvLoan := SummRUR + SummUSD*MainForm.USDRate + SummEUR*MainForm.EURRate + SummUAH*MainForm.UAHRate;
+  EqvZad  := SummZRUR + SummZUSD*MainForm.USDRate + SummZEUR*MainForm.EURRate + SummZUAH*MainForm.UAHRate;
+  EqvProsroch := SummTRUR + SummTUSD*MainForm.USDRate + SummTEUR*MainForm.EURRate + SummTUAH*MainForm.UAHRate;
+  EqvPercent :=  SummPRUR + SummPUSD*MainForm.USDRate + SummPEUR*MainForm.EURRate + SummPUAH*MainForm.UAHRate;
+
+
   MainForm.MainInfoPortfelSumRUR.Caption:='б RUR - ' + FloatToStrF(SummRUR,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumUSD.Caption:='б USD - ' + FloatToStrF(SummUSD,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumEUR.Caption:='б EUR - ' + FloatToStrF(SummEUR,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumUAH.Caption:='б UAH - ' + FloatToStrF(SummUAH,ffGeneral,8,2);
+  MainForm.MainInfoSumLoansEcv.Caption := 'ясллю б щйбхбюкемре - '+ FloatToStrF(EqvLoan,ffGeneral,8,2);
+
 
   MainForm.MainInfoPortfelSumZRUR.Caption:='б RUR - ' + FloatToStrF(SummZRUR,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumZUSD.Caption:='б USD - ' + FloatToStrF(SummZUSD,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumZEUR.Caption:='б EUR - ' + FloatToStrF(SummZEUR,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumZUAH.Caption:='б UAH - ' + FloatToStrF(SummZUAH,ffGeneral,8,2);
+  MainForm.MainInfoSumZadEcv.Caption := 'ясллю б щйбхбюкемре - '+ FloatToStrF(EqvZad,ffGeneral,8,2);
 
   MainForm.MainInfoPortfelSumTRUR.Caption:='б RUR - ' + FloatToStrF(SummTRUR,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumTUSD.Caption:='б USD - ' + FloatToStrF(SummTUSD,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumTEUR.Caption:='б EUR - ' + FloatToStrF(SummTEUR,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumTUAH.Caption:='б UAH - ' + FloatToStrF(SummTUAH,ffGeneral,8,2);
+  MainForm.MainInfoSumprosEcv.Caption := 'ясллю б щйбхбюкемре - '+ FloatToStrF(EqvProsroch,ffGeneral,8,2);
 
   MainForm.MainInfoPortfelSumPRUR.Caption:='б RUR - ' + FloatToStrF(SummPRUR,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumPUSD.Caption:='б USD - ' + FloatToStrF(SummPUSD,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumPEUR.Caption:='б EUR - ' + FloatToStrF(SummPEUR,ffGeneral,8,2);
   MainForm.MainInfoPortfelSumPUAH.Caption:='б UAH - ' + FloatToStrF(SummPUAH,ffGeneral,8,2);
+  MainForm.MainInfoSumProcEcv.Caption := 'ясллю б щйбхбюкемре - '+ FloatToStrF(EqvPercent,ffGeneral,8,2);
 
 
 End;

@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = #1062#1041
-  ClientHeight = 600
+  ClientHeight = 767
   ClientWidth = 972
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -30,10 +30,334 @@ object fmMain: TfmMain
     TabOrder = 0
     object TabSheetVerba: TTabSheet
       Caption = #1042#1077#1088#1073#1072
+      object PageControlVerba: TPageControl
+        Left = 3
+        Top = 3
+        Width = 942
+        Height = 550
+        ActivePage = TabSheet6
+        TabOrder = 0
+        object TabSheetVerba311: TTabSheet
+          Caption = '311 '#1055#1086#1076#1087#1080#1089#1100
+          object Panel9: TPanel
+            Left = 3
+            Top = 3
+            Width = 502
+            Height = 516
+            BorderStyle = bsSingle
+            TabOrder = 0
+            object CheckListBoxVerba311Sign: TCheckListBox
+              Left = 8
+              Top = 32
+              Width = 481
+              Height = 473
+              ItemHeight = 13
+              TabOrder = 0
+            end
+            object ButtonVerba311Sign: TButton
+              Left = 8
+              Top = 1
+              Width = 75
+              Height = 25
+              Caption = #1055#1086#1076#1087#1080#1089#1072#1090#1100
+              TabOrder = 1
+              OnClick = ButtonVerba311SignClick
+            end
+            object ButtonVerba311SignRefr: TButton
+              Left = 89
+              Top = 1
+              Width = 75
+              Height = 25
+              Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+              TabOrder = 2
+              OnClick = ButtonVerba311SignRefrClick
+            end
+            object CheckBoxVerba311SignChAll: TCheckBox
+              Left = 170
+              Top = 9
+              Width = 97
+              Height = 17
+              Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
+              TabOrder = 3
+            end
+          end
+          object Memo2: TMemo
+            Left = 511
+            Top = 3
+            Width = 420
+            Height = 516
+            ReadOnly = True
+            TabOrder = 1
+          end
+        end
+        object TabSheet2: TTabSheet
+          Caption = '311 '#1050#1088#1080#1087#1090#1086#1074#1072#1085#1080#1077
+          ImageIndex = 1
+          object Panel10: TPanel
+            Left = 3
+            Top = 3
+            Width = 502
+            Height = 516
+            BorderStyle = bsSingle
+            Caption = 'Panel2'
+            TabOrder = 0
+            object CheckListBoxVerba311Cript: TCheckListBox
+              Left = 8
+              Top = 32
+              Width = 481
+              Height = 473
+              ItemHeight = 13
+              TabOrder = 0
+            end
+            object ButtonVerba311Cript: TButton
+              Left = 8
+              Top = 1
+              Width = 75
+              Height = 25
+              Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
+              TabOrder = 1
+              OnClick = ButtonVerba311CriptClick
+            end
+            object CheckBoxVerba311CriptChAll: TCheckBox
+              Left = 170
+              Top = 9
+              Width = 97
+              Height = 17
+              Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
+              TabOrder = 2
+              OnClick = CheckBoxVerba311CriptChAllClick
+            end
+            object ButtonVerba311CrptRefr: TButton
+              Left = 89
+              Top = 1
+              Width = 75
+              Height = 25
+              Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+              TabOrder = 3
+              OnClick = ButtonVerba311CrptRefrClick
+            end
+          end
+        end
+        object TabSheet5: TTabSheet
+          Caption = #1051#1080#1096#1085#1077#1077
+          ImageIndex = 2
+          object Panel11: TPanel
+            Left = 3
+            Top = 3
+            Width = 502
+            Height = 516
+            BorderStyle = bsSingle
+            Caption = 'Panel2'
+            TabOrder = 0
+            object CheckListBox5: TCheckListBox
+              Left = 8
+              Top = 32
+              Width = 481
+              Height = 473
+              ItemHeight = 13
+              TabOrder = 0
+            end
+            object Button12: TButton
+              Left = 8
+              Top = 1
+              Width = 75
+              Height = 25
+              Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
+              TabOrder = 1
+              OnClick = Button311InCriptSendClick
+            end
+            object CheckBox5: TCheckBox
+              Left = 170
+              Top = 9
+              Width = 97
+              Height = 17
+              Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
+              TabOrder = 2
+              OnClick = CheckBox311InSignCheckAllClick
+            end
+            object Button13: TButton
+              Left = 89
+              Top = 1
+              Width = 75
+              Height = 25
+              Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+              TabOrder = 3
+              OnClick = Button311InSignRefreshClick
+            end
+          end
+        end
+        object TabSheet6: TTabSheet
+          Caption = #1051#1080#1096#1085#1077#1077
+          ImageIndex = 3
+          object Panel12: TPanel
+            Left = 3
+            Top = 3
+            Width = 502
+            Height = 516
+            BorderStyle = bsSingle
+            Caption = 'Panel2'
+            TabOrder = 0
+            object CheckListBox6: TCheckListBox
+              Left = 8
+              Top = 32
+              Width = 481
+              Height = 473
+              ItemHeight = 13
+              TabOrder = 0
+            end
+            object Button14: TButton
+              Left = 8
+              Top = 1
+              Width = 75
+              Height = 25
+              Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
+              TabOrder = 1
+            end
+            object CheckBox6: TCheckBox
+              Left = 170
+              Top = 9
+              Width = 97
+              Height = 17
+              Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
+              TabOrder = 2
+              OnClick = CheckBox311InSignCheckAllClick
+            end
+            object Button15: TButton
+              Left = 89
+              Top = 1
+              Width = 75
+              Height = 25
+              Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+              TabOrder = 3
+              OnClick = Button311InArhRefreshClick
+            end
+          end
+        end
+      end
     end
     object TabSheetKKrutilka: TTabSheet
       Caption = #1050#1088#1091#1090#1080#1083#1082#1072
       ImageIndex = 1
+      object PageControlKrutilka: TPageControl
+        Left = 3
+        Top = 3
+        Width = 942
+        Height = 550
+        ActivePage = TabSheet9
+        TabOrder = 0
+        object TabSheetKrutil311: TTabSheet
+          Caption = '311'
+          object ProgressBarKrut311: TProgressBar
+            Left = 3
+            Top = 502
+            Width = 238
+            Height = 17
+            TabOrder = 0
+          end
+          object CheckListBoxKrut311Action: TCheckListBox
+            Left = 3
+            Top = 32
+            Width = 238
+            Height = 465
+            ItemHeight = 13
+            TabOrder = 1
+          end
+          object ButtonKrut311Pusk: TButton
+            Left = 3
+            Top = 3
+            Width = 75
+            Height = 25
+            Caption = #1055#1091#1089#1082
+            TabOrder = 2
+            OnClick = ButtonKrut311PuskClick
+          end
+        end
+        object TabSheetkruthron: TTabSheet
+          Caption = #1061#1088#1072#1085#1080#1083#1080#1097#1077
+          ImageIndex = 1
+          object ButtonkrutHronPusk: TButton
+            Left = 3
+            Top = 3
+            Width = 75
+            Height = 25
+            Caption = #1055#1091#1089#1082
+            TabOrder = 0
+            OnClick = ButtonkrutHronPuskClick
+          end
+          object CheckListBoxKrutHron: TCheckListBox
+            Left = 3
+            Top = 34
+            Width = 238
+            Height = 465
+            ItemHeight = 13
+            TabOrder = 1
+          end
+          object ProgressBarKrutHron: TProgressBar
+            Left = 3
+            Top = 502
+            Width = 238
+            Height = 17
+            TabOrder = 2
+          end
+        end
+        object TabSheetKrutVerba: TTabSheet
+          Caption = #1042#1077#1088#1073#1072
+          ImageIndex = 2
+          object ButtonKrutVerbaStart: TButton
+            Left = 3
+            Top = 3
+            Width = 75
+            Height = 25
+            Caption = #1055#1091#1089#1082
+            TabOrder = 0
+            OnClick = ButtonKrutVerbaStartClick
+          end
+          object CheckListBoxKrutVerba: TCheckListBox
+            Left = 3
+            Top = 34
+            Width = 238
+            Height = 465
+            ItemHeight = 13
+            TabOrder = 1
+          end
+          object ProgressBarKrutVerba: TProgressBar
+            Left = 3
+            Top = 502
+            Width = 238
+            Height = 17
+            TabOrder = 2
+          end
+        end
+        object TabSheet9: TTabSheet
+          Caption = #1040#1088#1093#1080#1074#1080#1088#1086#1074#1072#1085#1080#1077
+          ImageIndex = 3
+          ExplicitLeft = 0
+          object ButtonKrutArhivStart: TButton
+            Left = 3
+            Top = 3
+            Width = 75
+            Height = 25
+            Caption = #1055#1091#1089#1082
+            TabOrder = 0
+            OnClick = ButtonKrutArhivStartClick
+          end
+          object CheckListBoxKrutArhiv: TCheckListBox
+            Left = 3
+            Top = 34
+            Width = 238
+            Height = 465
+            ItemHeight = 13
+            TabOrder = 1
+          end
+          object ProgressBarKrutArhiv: TProgressBar
+            Left = 3
+            Top = 502
+            Width = 238
+            Height = 17
+            TabOrder = 2
+          end
+        end
+      end
     end
     object TabSheet311P: TTabSheet
       Caption = '311'
@@ -111,21 +435,13 @@ object fmMain: TfmMain
             BorderStyle = bsSingle
             Caption = 'Panel2'
             TabOrder = 0
-            object CheckListBox311InKa: TCheckListBox
-              Left = 8
-              Top = 32
-              Width = 481
-              Height = 473
-              ItemHeight = 13
-              TabOrder = 0
-            end
             object Button311InKaOut: TButton
               Left = 8
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
-              TabOrder = 1
+              TabOrder = 0
               OnClick = Button311InKaOutClick
             end
             object CheckBox311InKACheckAll: TCheckBox
@@ -134,7 +450,7 @@ object fmMain: TfmMain
               Width = 97
               Height = 17
               Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
-              TabOrder = 2
+              TabOrder = 1
               OnClick = CheckBox311InKACheckAllClick
             end
             object Button1: TButton
@@ -143,8 +459,16 @@ object fmMain: TfmMain
               Width = 75
               Height = 25
               Caption = #1054#1073#1085#1086#1074#1080#1090#1100
-              TabOrder = 3
+              TabOrder = 2
               OnClick = Button1Click
+            end
+            object CheckListBox311InKa: TCheckListBox
+              Left = 8
+              Top = 32
+              Width = 481
+              Height = 473
+              ItemHeight = 13
+              TabOrder = 3
             end
           end
         end
@@ -167,14 +491,14 @@ object fmMain: TfmMain
               ItemHeight = 13
               TabOrder = 0
             end
-            object Button2: TButton
+            object Button311InCriptSend: TButton
               Left = 8
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
               TabOrder = 1
-              OnClick = Button2Click
+              OnClick = Button311InCriptSendClick
             end
             object CheckBox311InSignCheckAll: TCheckBox
               Left = 170
@@ -197,7 +521,7 @@ object fmMain: TfmMain
           end
         end
         object TabSheet311Arh: TTabSheet
-          Caption = #1040#1088#1093#1080#1074#1080#1088#1086#1074#1072#1085#1080#1077
+          Caption = #1040#1088#1093#1080#1074#1080#1088#1086#1074#1072#1090#1100
           ImageIndex = 3
           object Panel4: TPanel
             Left = 3
@@ -215,13 +539,14 @@ object fmMain: TfmMain
               ItemHeight = 13
               TabOrder = 0
             end
-            object Button3: TButton
+            object Button311InArhOut: TButton
               Left = 8
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
               TabOrder = 1
+              OnClick = Button311InArhOutClick
             end
             object CheckBox311InArhCheckAll: TCheckBox
               Left = 170
@@ -230,7 +555,7 @@ object fmMain: TfmMain
               Height = 17
               Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
               TabOrder = 2
-              OnClick = CheckBox311InSignCheckAllClick
+              OnClick = CheckBox311InArhCheckAllClick
             end
             object Button311InArhRefresh: TButton
               Left = 89
@@ -248,15 +573,15 @@ object fmMain: TfmMain
     object TabSheetArhiv: TTabSheet
       Caption = #1040#1088#1093#1080#1074#1072#1090#1086#1088
       ImageIndex = 3
-      object PageControlArhiv: TPageControl
+      object TabSheetArhivator: TPageControl
         Left = 3
         Top = 3
         Width = 942
         Height = 550
-        ActivePage = TabSheetArhiv311P
+        ActivePage = TabSheetArhiv311PA
         TabOrder = 0
-        object TabSheetArhiv311P: TTabSheet
-          Caption = '311'
+        object TabSheetArhiv311PA: TTabSheet
+          Caption = '311A'
           object Panel5: TPanel
             Left = 3
             Top = 3
@@ -273,14 +598,14 @@ object fmMain: TfmMain
               TabOrder = 0
               OnClick = CheckListBox311SformClick
             end
-            object Button4: TButton
+            object ButtonArh311ABild: TButton
               Left = 8
               Top = 1
               Width = 75
               Height = 25
               Caption = #1047#1072#1087#1072#1082#1086#1074#1072#1090#1100
               TabOrder = 1
-              OnClick = Button311SformProverkaClick
+              OnClick = ButtonArh311ABildClick
             end
             object ButtonArhiv311Refresh: TButton
               Left = 89
@@ -310,8 +635,8 @@ object fmMain: TfmMain
             TabOrder = 1
           end
         end
-        object TabSheet2: TTabSheet
-          Caption = #1053#1072' '#1087#1086#1076#1087#1080#1089#1100
+        object TabSheetArhiv311PB: TTabSheet
+          Caption = '311B'
           ImageIndex = 1
           object Panel6: TPanel
             Left = 3
@@ -321,7 +646,7 @@ object fmMain: TfmMain
             BorderStyle = bsSingle
             Caption = 'Panel2'
             TabOrder = 0
-            object CheckListBox2: TCheckListBox
+            object CheckListBoxArhiv311B: TCheckListBox
               Left = 8
               Top = 32
               Width = 481
@@ -329,37 +654,37 @@ object fmMain: TfmMain
               ItemHeight = 13
               TabOrder = 0
             end
-            object Button6: TButton
+            object ButtonArh311BBild: TButton
               Left = 8
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
               TabOrder = 1
-              OnClick = Button311InKaOutClick
+              OnClick = ButtonArh311BBildClick
             end
-            object CheckBox2: TCheckBox
+            object CheckBoxArhiv311CheckAllB: TCheckBox
               Left = 170
               Top = 9
               Width = 97
               Height = 17
               Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
               TabOrder = 2
-              OnClick = CheckBox311InKACheckAllClick
+              OnClick = CheckBoxArhiv311CheckAllBClick
             end
-            object Button7: TButton
+            object ButtonArhiv311RefreshB: TButton
               Left = 89
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1073#1085#1086#1074#1080#1090#1100
               TabOrder = 3
-              OnClick = Button1Click
+              OnClick = ButtonArhiv311RefreshBClick
             end
           end
         end
         object TabSheet3: TTabSheet
-          Caption = #1053#1072' '#1082#1088#1080#1087#1090#1086#1074#1072#1085#1080#1077
+          Caption = #1051#1080#1096#1085#1077#1077
           ImageIndex = 2
           object Panel7: TPanel
             Left = 3
@@ -384,7 +709,7 @@ object fmMain: TfmMain
               Height = 25
               Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
               TabOrder = 1
-              OnClick = Button2Click
+              OnClick = Button311InCriptSendClick
             end
             object CheckBox3: TCheckBox
               Left = 170
@@ -407,7 +732,7 @@ object fmMain: TfmMain
           end
         end
         object TabSheet4: TTabSheet
-          Caption = #1040#1088#1093#1080#1074#1080#1088#1086#1074#1072#1085#1080#1077
+          Caption = #1051#1080#1096#1085#1077#1077
           ImageIndex = 3
           object Panel8: TPanel
             Left = 3
@@ -455,5 +780,13 @@ object fmMain: TfmMain
         end
       end
     end
+  end
+  object ListBoxActivLog: TListBox
+    Left = 8
+    Top = 598
+    Width = 956
+    Height = 161
+    ItemHeight = 13
+    TabOrder = 1
   end
 end

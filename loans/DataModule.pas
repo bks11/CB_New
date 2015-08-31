@@ -79,6 +79,8 @@ type
     qrAdminsCursesLoad: TADQuery;
     qrAdminCursAdd: TADQuery;
     qrAdminQursEdit: TADQuery;
+    qrGetCurrency: TADQuery;
+    dsqGetCurrency: TDataSource;
   private
 
     { Private declarations }

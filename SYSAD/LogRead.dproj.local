@@ -4,5 +4,7 @@
     <Transaction>2015.08.21 12:15:08.894.pas,C:\Users\k.borovikov\Documents\RAD Studio\Projects\Unit1.pas=D:\Projects\CB\SYSAD\Main.pas</Transaction>
     <Transaction>2015.08.21 12:15:08.894.dfm,C:\Users\k.borovikov\Documents\RAD Studio\Projects\Unit1.dfm=D:\Projects\CB\SYSAD\Main.dfm</Transaction>
     <Transaction>2015.08.21 12:15:15.801.dproj,C:\Users\k.borovikov\Documents\RAD Studio\Projects\Project1.dproj=D:\Projects\CB\SYSAD\LogRead.dproj</Transaction>
+    <Transaction>2015.08.25 11:03:59.878.pas,D:\Projects\CB\SYSAD\Unit1.pas=D:\Projects\CB\SYSAD\Data.pas</Transaction>
+    <Transaction>2015.08.25 11:03:59.878.dfm,D:\Projects\CB\SYSAD\Unit1.dfm=D:\Projects\CB\SYSAD\Data.dfm</Transaction>
   </Transactions>
 </BorlandProject>

@@ -48,6 +48,20 @@ Type
 
 implementation
 
+{Select Count(ARCH_NAME) AS Col
+FROM (SELECT DISTINCT "ARCH_NAME"
+FROM "REP311"
+where
+"DATE_SEND" = current_date and
+"ARCH_NAME" Like :Shema
+Union
+SELECT DISTINCT "ARCH_NAME"
+FROM "REP3251"
+where
+"DATE_SEND" = current_date and
+"ARCH_NAME" Like :Shema) As ARCH_NAME}
+
+
 Uses
  uMain;
 
@@ -120,15 +134,15 @@ End;
 Procedure Object311P.RefreshCheckListInArh;
 Begin
  fmMain.CheckListBox311InArh.Items.Clear;
- dmData.ADQuery311GetArh.Active:=False;
- dmData.ADQuery311GetArh.Active:=True;
- dmData.ADQuery311GetArh.First;
- while NOT dmData.ADQuery311GetArh.Eof do
+ dmData.qr311GetArh.Active:=False;
+ dmData.qr311GetArh.Active:=True;
+ dmData.qr311GetArh.First;
+ while NOT dmData.qr311GetArh.Eof do
  begin
-  fmMain.CheckListBox311InArh.Items.Add(dmData.ADQuery311GetArh.FieldByName('FILENAME').AsString);
-  dmData.ADQuery311GetArh.Next;
+  fmMain.CheckListBox311InArh.Items.Add(dmData.qr311GetArh.FieldByName('FILENAME').AsString);
+  dmData.qr311GetArh.Next;
  end;
- dmData.ADQuery311GetArh.Active:=False;
+ dmData.qr311GetArh.Active:=False;
 End;
 
 Procedure Object311P.GetName311(FilName:String);{Получить имя фаила}
@@ -156,10 +170,10 @@ Begin
    if fmMain.CheckListBox311InArh.Checked[fmMain.CheckListBox311InArh.ItemIndex]=True then
    Begin
     {Пошли на подпись}
-    {ADQuerySendSign} {:ID_USER_SIGN} {:FILENAME}
-    dmData.ADQuerySendArh.ParamByName('ID_USER_CRYPT').Value:=UsersLogin.ID;
-    dmData.ADQuerySendArh.ParamByName('FILENAME').Value:=fmMain.CheckListBox311InArh.Items[fmMain.CheckListBox311InArh.ItemIndex];
-    dmData.ADQuerySendArh.ExecSQL;
+    {qrSendSign} {:ID_USER_SIGN} {:FILENAME}
+    dmData.qrSendArh.ParamByName('ID_USER_CRYPT').Value:=UsersLogin.ID;
+    dmData.qrSendArh.ParamByName('FILENAME').Value:=fmMain.CheckListBox311InArh.Items[fmMain.CheckListBox311InArh.ItemIndex];
+    dmData.qrSendArh.ExecSQL;
     fmMain.CheckListBox311InArh.ItemIndex:=fmMain.CheckListBox311InArh.ItemIndex+1;
    End;
   End;
@@ -179,10 +193,10 @@ Begin
    if fmMain.CheckListBox311InSign.Checked[fmMain.CheckListBox311InSign.ItemIndex]=True then
    Begin
     {Пошли на подпись}
-    {ADQuerySendSign} {:ID_USER_SIGN} {:FILENAME}
-    dmData.ADQuerySendKript.ParamByName('ID_USER_CRYPT').Value:=UsersLogin.ID;
-    dmData.ADQuerySendKript.ParamByName('FILENAME').Value:=fmMain.CheckListBox311InSign.Items[fmMain.CheckListBox311InSign.ItemIndex];
-    dmData.ADQuerySendKript.ExecSQL;
+    {qrSendSign} {:ID_USER_SIGN} {:FILENAME}
+    dmData.qrSendKript.ParamByName('ID_USER_CRYPT').Value:=UsersLogin.ID;
+    dmData.qrSendKript.ParamByName('FILENAME').Value:=fmMain.CheckListBox311InSign.Items[fmMain.CheckListBox311InSign.ItemIndex];
+    dmData.qrSendKript.ExecSQL;
     fmMain.CheckListBox311InSign.ItemIndex:=fmMain.CheckListBox311InSign.ItemIndex+1;
    End;
   End;
@@ -218,10 +232,10 @@ Begin
    if fmMain.CheckListBox311InKa.Checked[fmMain.CheckListBox311InKa.ItemIndex]=True then
    Begin
     {Пошли на подпись}
-    {ADQuerySendSign} {:ID_USER_SIGN} {:FILENAME}
-    dmData.ADQuerySendSign.ParamByName('ID_USER_SIGN').Value:=UsersLogin.ID;
-    dmData.ADQuerySendSign.ParamByName('FILENAME').Value:=fmMain.CheckListBox311InKa.Items[fmMain.CheckListBox311InKa.ItemIndex];
-    dmData.ADQuerySendSign.ExecSQL;
+    {qrSendSign} {:ID_USER_SIGN} {:FILENAME}
+    dmData.qrSendSign.ParamByName('ID_USER_SIGN').Value:=UsersLogin.ID;
+    dmData.qrSendSign.ParamByName('FILENAME').Value:=fmMain.CheckListBox311InKa.Items[fmMain.CheckListBox311InKa.ItemIndex];
+    dmData.qrSendSign.ExecSQL;
     fmMain.CheckListBox311InKa.ItemIndex:=fmMain.CheckListBox311InKa.ItemIndex+1;
    End;
   End;
@@ -296,14 +310,14 @@ Begin
     if IfError=False then
     Begin
      GetName311(fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex]);
-     dmData.ADQuery311ProvOutFile.Active:=False;
-     dmData.ADQuery311ProvOutFile.ParamByName('FILENAME').Value :=Client311.Name;
-     dmData.ADQuery311ProvOutFile.Active:=True;
-     dmData.ADQuery311ProvOutFile.First;
-     while NOT dmData.ADQuery311ProvOutFile.Eof do
+     dmData.qr311ProvOutFile.Active:=False;
+     dmData.qr311ProvOutFile.ParamByName('FILENAME').Value :=Client311.Name;
+     dmData.qr311ProvOutFile.Active:=True;
+     dmData.qr311ProvOutFile.First;
+     while NOT dmData.qr311ProvOutFile.Eof do
      begin
       IfError:=True;
-      dmData.ADQuery311ProvOutFile.Next;
+      dmData.qr311ProvOutFile.Next;
      end;
      if IfError=True then {Если ошибка то уведомить об этом}
      Begin
@@ -316,15 +330,15 @@ Begin
      client311.Path:=Path.Sformirovanie+'\'+fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex];
      client311.FilName:=fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex];
      GetParam311;
-     dmData.ADQuery311LoadData.ParamByName('FILENAME').Value := Client311.Name;
-     dmData.ADQuery311LoadData.ParamByName('ID_USER').Value:=UsersLogin.ID;
-     dmData.ADQuery311LoadData.ParamByName('CLIENT_NAME').Value:=Client311.FIO;
-     dmData.ADQuery311LoadData.ParamByName('ACC_NUM').Value:=Client311.Acc;
+     dmData.qr311LoadData.ParamByName('FILENAME').Value := Client311.Name;
+     dmData.qr311LoadData.ParamByName('ID_USER').Value:=UsersLogin.ID;
+     dmData.qr311LoadData.ParamByName('CLIENT_NAME').Value:=Client311.FIO;
+     dmData.qr311LoadData.ParamByName('ACC_NUM').Value:=Client311.Acc;
      {Определить схему по которой будет уходить}
-     dmData.ADQuery311LoadData.ParamByName('SCHEME').Value:='2';
-     if (Client311.Name[43]='1')or(Client311.Name[43]='2')or(Client311.Name[43]='6')or(Client311.Name[43]='0') then dmData.ADQuery311LoadData.ParamByName('SCHEME').Value:='1';
-     {dmData.ADQuery311LoadData.ParamByName('DATE_SEND').Value:=Now;}
-     dmData.ADQuery311LoadData.ExecSQL;
+     dmData.qr311LoadData.ParamByName('SCHEME').Value:='2';
+     if (Client311.Name[43]='1')or(Client311.Name[43]='2')or(Client311.Name[43]='6')or(Client311.Name[43]='0') then dmData.qr311LoadData.ParamByName('SCHEME').Value:='1';
+     {dmData.qr311LoadData.ParamByName('DATE_SEND').Value:=Now;}
+     dmData.qr311LoadData.ExecSQL;
      {Пошли на подпись}
      MoveFile(PChar(Path.Sformirovanie+'\'+fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex]),PChar(Path.InKa+'\'+fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex]));
      fmMain.CheckListBox311Sform.ItemIndex:=fmMain.CheckListBox311Sform.ItemIndex+1;
@@ -339,19 +353,19 @@ Procedure Object311P.LoadPath;
 Begin
  if UsersLogin.Dostup.P311=True then
  Begin
-  dmData.ADQuery311PLoadPath.Active:=False;
-  dmData.ADQuery311PLoadPath.ParamByName('ID_REPORT').Value :=2;
-  dmData.ADQuery311PLoadPath.Active:=True;
-  dmData.ADQuery311PLoadPath.First;
-  while NOT dmData.ADQuery311PLoadPath.Eof do
+  dmData.qr311PLoadPath.Active:=False;
+  dmData.qr311PLoadPath.ParamByName('ID_REPORT').Value :=2;
+  dmData.qr311PLoadPath.Active:=True;
+  dmData.qr311PLoadPath.First;
+  while NOT dmData.qr311PLoadPath.Eof do
   begin
-   If dmData.ADQuery311PLoadPath.FieldByName('NOTE').AsString='Сформированные' then Path.Sformirovanie:=dmData.ADQuery311PLoadPath.FieldByName('REPORT_PATH').AsString;
-   If dmData.ADQuery311PLoadPath.FieldByName('NOTE').AsString='На ключевание' then Path.InKa:=dmData.ADQuery311PLoadPath.FieldByName('REPORT_PATH').AsString;
-   dmData.ADQuery311PLoadPath.Next;
+   If dmData.qr311PLoadPath.FieldByName('NOTE').AsString='Сформированные' then Path.Sformirovanie:=dmData.qr311PLoadPath.FieldByName('REPORT_PATH').AsString;
+   If dmData.qr311PLoadPath.FieldByName('NOTE').AsString='На ключевание' then Path.InKa:=dmData.qr311PLoadPath.FieldByName('REPORT_PATH').AsString;
+   dmData.qr311PLoadPath.Next;
    {Архивировать}
   end;
  End;
- dmData.ADQuery311PLoadPath.Active:=False;
+ dmData.qr311PLoadPath.Active:=False;
 
 End;
 
@@ -377,29 +391,29 @@ End;
 Procedure Object311P.RefreshCheckListInSign;
 Begin
  fmMain.CheckListBox311InSign.Items.Clear;
- dmData.ADQuery311GetCript.Active:=False;
- dmData.ADQuery311GetCript.Active:=True;
- dmData.ADQuery311GetCript.First;
- while NOT dmData.ADQuery311GetCript.Eof do
+ dmData.qr311GetCript.Active:=False;
+ dmData.qr311GetCript.Active:=True;
+ dmData.qr311GetCript.First;
+ while NOT dmData.qr311GetCript.Eof do
  begin
-  fmMain.CheckListBox311InSign.Items.Add(dmData.ADQuery311GetCript.FieldByName('FILENAME').AsString);
-  dmData.ADQuery311GetCript.Next;
+  fmMain.CheckListBox311InSign.Items.Add(dmData.qr311GetCript.FieldByName('FILENAME').AsString);
+  dmData.qr311GetCript.Next;
  end;
- dmData.ADQuery311GetCript.Active:=False;
+ dmData.qr311GetCript.Active:=False;
 End;
 
 Procedure Object311P.RefreshCheckListInKa;
 Begin
  fmMain.CheckListBox311InKa.Items.Clear;
- dmData.ADQuery311GetSign.Active:=False;
- dmData.ADQuery311GetSign.Active:=True;
- dmData.ADQuery311GetSign.First;
- while NOT dmData.ADQuery311GetSign.Eof do
+ dmData.qr311GetSign.Active:=False;
+ dmData.qr311GetSign.Active:=True;
+ dmData.qr311GetSign.First;
+ while NOT dmData.qr311GetSign.Eof do
  begin
-  fmMain.CheckListBox311InKa.Items.Add(dmData.ADQuery311GetSign.FieldByName('FILENAME').AsString);
-  dmData.ADQuery311GetSign.Next;
+  fmMain.CheckListBox311InKa.Items.Add(dmData.qr311GetSign.FieldByName('FILENAME').AsString);
+  dmData.qr311GetSign.Next;
  end;
- dmData.ADQuery311GetSign.Active:=False;
+ dmData.qr311GetSign.Active:=False;
 End;
 
 Procedure Object311P.LoadSozdanFile;
@@ -407,21 +421,24 @@ Var
  SerchFile:TSearchRec;
  FindRes:Integer;
 Begin
- fmMain.Memo311SformEdit.Lines.Clear;
- FindRes:=Findfirst(Path.Sformirovanie+'\SBC*.xml',faAnyFile,SerchFile);
- While FindRes=0 do
+ if fmMain.CheckListBox311Sform.Items.Count>0 then
  Begin
-  If (SerchFile.Name<>'.') and (SerchFile.Name<>'..') then
+  fmMain.Memo311SformEdit.Lines.Clear;
+  FindRes:=Findfirst(Path.Sformirovanie+'\SBC*.xml',faAnyFile,SerchFile);
+  While FindRes=0 do
   Begin
-   If fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex]=SerchFile.Name then
+   If (SerchFile.Name<>'.') and (SerchFile.Name<>'..') then
    Begin
-    fmMain.Memo311SformEdit.Lines.LoadFromFile(Path.Sformirovanie+'\'+SerchFile.Name);
-    Break;
+    If fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex]=SerchFile.Name then
+    Begin
+     fmMain.Memo311SformEdit.Lines.LoadFromFile(Path.Sformirovanie+'\'+SerchFile.Name);
+     Break;
+    End;
    End;
+   FindRes:=FindNext(SerchFile);
   End;
-  FindRes:=FindNext(SerchFile);
+  FindClose(SerchFile);
  End;
- FindClose(SerchFile);
 End;
 
 end.

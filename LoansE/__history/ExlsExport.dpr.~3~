@@ -1,0 +1,16 @@
+program ExlsExport;
+
+uses
+  Forms,
+  Main in 'Main.pas' {fmMain},
+  Excel_TLB in 'Excel_TLB.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfmMain, fmMain);
+  Application.Run;
+end.
+

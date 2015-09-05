@@ -40,7 +40,7 @@ type
     Panel2: TPanel;
     Button311InKaOut: TButton;
     CheckBox311InKACheckAll: TCheckBox;
-    Button1: TButton;
+    Button311InPodbRefresh: TButton;
     TabSheetInSign: TTabSheet;
     Panel3: TPanel;
     CheckListBox311InSign: TCheckListBox;
@@ -68,12 +68,12 @@ type
     ButtonArh311BBild: TButton;
     CheckBoxArhiv311CheckAllB: TCheckBox;
     ButtonArhiv311RefreshB: TButton;
-    TabSheet3: TTabSheet;
+    TabSheetArhMail: TTabSheet;
     Panel7: TPanel;
-    CheckListBox3: TCheckListBox;
-    Button8: TButton;
-    CheckBox3: TCheckBox;
-    Button9: TButton;
+    CheckListBoxArhivMail: TCheckListBox;
+    ButtonArhMailBild: TButton;
+    CheckBoxArhMailCheckAll: TCheckBox;
+    ButtonArhMailRefresh: TButton;
     TabSheet4: TTabSheet;
     Panel8: TPanel;
     CheckListBox4: TCheckListBox;
@@ -95,12 +95,12 @@ type
     ButtonVerba311Cript: TButton;
     CheckBoxVerba311CriptChAll: TCheckBox;
     ButtonVerba311CrptRefr: TButton;
-    TabSheet5: TTabSheet;
+    TabSheetVerbaSignArh: TTabSheet;
     Panel11: TPanel;
-    CheckListBox5: TCheckListBox;
-    Button12: TButton;
-    CheckBox5: TCheckBox;
-    Button13: TButton;
+    CheckListBoxVerbaMailSign: TCheckListBox;
+    ButtonVerbaMailSign: TButton;
+    CheckBoxVerbaMailSignChAll: TCheckBox;
+    ButtonVerba311SignRefresh: TButton;
     TabSheet6: TTabSheet;
     Panel12: TPanel;
     CheckListBox6: TCheckListBox;
@@ -125,12 +125,22 @@ type
     ButtonKrutArhivStart: TButton;
     CheckListBoxKrutArhiv: TCheckListBox;
     ProgressBarKrutArhiv: TProgressBar;
+    TrayIcon1: TTrayIcon;
+    Timer1: TTimer;
+    CheckBox311SformAuto: TCheckBox;
+    CheckBox311InPodpAuto: TCheckBox;
+    CheckBox311InKriptAuto: TCheckBox;
+    CheckBox311ArhAuto: TCheckBox;
+    CheckBoxKrut311Auto: TCheckBox;
+    CheckBoxKrutXronauto: TCheckBox;
+    CheckBoxKrutVerbaAuto: TCheckBox;
+    CheckBoxKrutArhAuto: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure Button311RefreshClick(Sender: TObject);
     procedure CheckListBox311SformClick(Sender: TObject);
     procedure Button311SformProverkaClick(Sender: TObject);
     procedure CheckBox311SformirovAllCheckClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure Button311InPodbRefreshClick(Sender: TObject);
     procedure CheckBox311InKACheckAllClick(Sender: TObject);
     procedure CheckBox311InSignCheckAllClick(Sender: TObject);
     procedure Button311InSignRefreshClick(Sender: TObject);
@@ -154,6 +164,13 @@ type
     procedure CheckBox311InArhCheckAllClick(Sender: TObject);
     procedure Button311InArhOutClick(Sender: TObject);
     procedure ButtonKrutArhivStartClick(Sender: TObject);
+    procedure ButtonVerba311SignRefreshClick(Sender: TObject);
+    procedure CheckBoxVerbaMailSignChAllClick(Sender: TObject);
+    procedure ButtonVerbaMailSignClick(Sender: TObject);
+    procedure ButtonArhMailRefreshClick(Sender: TObject);
+    procedure CheckBoxArhMailCheckAllClick(Sender: TObject);
+    procedure ButtonArhMailBildClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -241,7 +258,7 @@ Begin
  End;
 End;
 
-procedure TfmMain.Button1Click(Sender: TObject);
+procedure TfmMain.Button311InPodbRefreshClick(Sender: TObject);
 begin
  P311.RefreshCheckListInKa;
 end;
@@ -301,6 +318,16 @@ begin
  Arhivator.RefreshCheckList311;
 end;
 
+procedure TfmMain.ButtonArhMailBildClick(Sender: TObject);
+begin
+ Arhivator.BildCab;
+end;
+
+procedure TfmMain.ButtonArhMailRefreshClick(Sender: TObject);
+begin
+ Arhivator.RefreshCheckListMail;
+end;
+
 procedure TfmMain.ButtonKrut311PuskClick(Sender: TObject);
 begin
  Krutilka.Pusk311;
@@ -341,6 +368,16 @@ begin
  Verba.RefreshCheckList311S;
 end;
 
+procedure TfmMain.ButtonVerba311SignRefreshClick(Sender: TObject);
+begin
+ Verba.RefreshCheckListMailSign;
+end;
+
+procedure TfmMain.ButtonVerbaMailSignClick(Sender: TObject);
+begin
+ Verba.MailSign;
+end;
+
 procedure TfmMain.CheckBox311InArhCheckAllClick(Sender: TObject);
 begin
  P311.CheckAllInArh;
@@ -371,9 +408,19 @@ begin
  Arhivator.CheckAll311;
 end;
 
+procedure TfmMain.CheckBoxArhMailCheckAllClick(Sender: TObject);
+begin
+ Arhivator.CheckAllMail;
+end;
+
 procedure TfmMain.CheckBoxVerba311CriptChAllClick(Sender: TObject);
 begin
  Verba.CheckAll311Cript;
+end;
+
+procedure TfmMain.CheckBoxVerbaMailSignChAllClick(Sender: TObject);
+begin
+ Verba.CheckAllMailSign;
 end;
 
 procedure TfmMain.CheckListBox311SformClick(Sender: TObject);
@@ -386,6 +433,64 @@ begin
  UsersLogin.LoadLogin;
  {Verba.VInitAsrKey;}
 
+end;
+
+procedure TfmMain.Timer1Timer(Sender: TObject);
+begin
+ Timer1.Enabled:=False;
+ if UsersLogin.Dostup.P311 then
+ Begin
+  if CheckBox311SformAuto.Checked then
+  Begin
+   CheckBox311SformirovAllCheck.Checked:=True;
+   P311.RefreshCheckListSform;
+   P311.CheckAll;
+   P311.Proverka;
+  End;
+  if CheckBox311InPodpAuto.Checked then
+  Begin
+   CheckBox311InKACheckAll.Checked:=True;
+   P311.RefreshCheckListInKa;
+   P311.CheckAllInKa;
+   P311.OtpravkaKa;
+  End;
+  if CheckBox311InKriptAuto.Checked then
+  Begin
+   CheckBox311InSignCheckAll.Checked:=True;
+   P311.RefreshCheckListInSign;
+   P311.CheckAllInSign;
+   P311.OtpravkaSign;
+  End;
+  if CheckBox311ArhAuto.Checked then
+  Begin
+   CheckBox311InArhCheckAll.Checked:=True;
+   P311.RefreshCheckListInArh;
+   P311.CheckAllInArh;
+   P311.OtpravkaArh;
+  End;
+
+ End;
+ if UsersLogin.Dostup.Krutilka then
+ Begin
+  if CheckBoxKrut311Auto.Checked then
+  Begin
+   Krutilka.Pusk311;
+  End;
+  if CheckBoxKrutXronauto.Checked then
+  Begin
+   Krutilka.PuskHron;
+  End;
+  if CheckBoxKrutVerbaAuto.Checked then
+  Begin
+   Krutilka.PuskVerba;
+  End;
+  if CheckBoxKrutArhAuto.Checked then
+  Begin
+   Krutilka.PuskArhiv;
+  End;
+
+ End;
+ Timer1.Enabled:=True;
 end;
 
 end.

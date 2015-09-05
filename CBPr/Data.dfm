@@ -1,7 +1,7 @@
 object dmData: TdmData
   OldCreateOrder = False
-  Height = 671
-  Width = 761
+  Height = 699
+  Width = 768
   object ADPhysPgDriverLink1: TADPhysPgDriverLink
     Left = 8
     Top = 8
@@ -18,6 +18,7 @@ object dmData: TdmData
       'Server=10.3.0.219'
       'DriverID=PG')
     Connected = True
+    LoginPrompt = False
     Left = 72
     Top = 8
   end
@@ -43,7 +44,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQuery311PLoadPath: TADQuery
+  object qr311PLoadPath: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT '
@@ -62,7 +63,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQuery311ProvOutFile: TADQuery
+  object qr311ProvOutFile: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "ID_REP311"'
@@ -78,18 +79,19 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQuery311LoadData: TADQuery
+  object qr311LoadData: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'INSERT INTO "REP311"('
       
         '"FILENAME","CLIENT_NAME", "ACC_NUM", "ID_USER", "DATE_SEND", "IS' +
         '_SIGN", "IS_CRYPT", "CB_GET", "PENS_ANSWER", "NAL_ANSWER", "SOC_' +
-        'ANSWER", "ID_USER_SIGN", "ID_USER_CRYPT", "SCHEME", "ARCH_NAME")'
+        'ANSWER", "ID_USER_SIGN", "ID_USER_CRYPT", "SCHEME", "ID_ARCHIVE"' +
+        ', "ID_USER_ARCH_CMD")'
       
         'VALUES (:FILENAME,:CLIENT_NAME,:ACC_NUM,:ID_USER, current_timest' +
-        'amp, False, False, False, False, False, False, 0, 0, :SCHEME, '#39' ' +
-        #39');')
+        'amp, False, False, False, False, False, False, 0, 0, :SCHEME, 0,' +
+        ' 0);')
     Left = 496
     Top = 104
     ParamData = <
@@ -124,21 +126,24 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryLoadArhCounFromDate: TADQuery
+  object qrLoadArhCounFromDate: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
-      'Select Count(ARCH_NAME) AS Col'
-      'FROM (SELECT DISTINCT "ARCH_NAME"'
-      'FROM "REP311"'
+      'SELECT Count (DISTINCT "ARCHIVE_INFO"."ARC_NAME") AS Col'
+      'FROM "REP311", "ARCHIVE_INFO"'
       'where'
-      '"DATE_SEND" = current_date and'
-      '"ARCH_NAME" Like :Shema'
-      'Union'
-      'SELECT DISTINCT "ARCH_NAME"'
-      'FROM "REP3251"'
-      'where'
-      '"DATE_SEND" = current_date and'
-      '"ARCH_NAME" Like :Shema) As ARCH_NAME')
+      
+        'date_part('#39'year'#39',"REP311"."DATE_SEND") = date_part('#39'year'#39',curren' +
+        't_date) and'
+      
+        'date_part('#39'month'#39',"REP311"."DATE_SEND") = date_part('#39'month'#39',curr' +
+        'ent_date) and'
+      
+        'date_part('#39'day'#39',"REP311"."DATE_SEND") = date_part('#39'day'#39',current_' +
+        'date) and'
+      '"REP311"."ID_ARCHIVE"="ARCHIVE_INFO"."ID_ARCHIVE" and'
+      '"ARCHIVE_INFO"."ARC_NAME" Like :Shema'
+      '')
     Left = 496
     Top = 152
     ParamData = <
@@ -149,18 +154,18 @@ object dmData: TdmData
         Value = 'A%'
       end>
   end
-  object ADQuery311InDbArhName: TADQuery
+  object qr311InDbArhName: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'UPDATE "REP311"'
-      'SET "ARCH_NAME"=:ARCH_NAME '
+      'SET "ID_ARCHIVE"=:ID_ARCHIVE '
       'WHERE "FILENAME"=:FILENAME;')
     Left = 496
     Top = 200
     ParamData = <
       item
-        Name = 'ARCH_NAME'
-        DataType = ftString
+        Name = 'ID_ARCHIVE'
+        DataType = ftInteger
         ParamType = ptInput
         Value = Null
       end
@@ -171,7 +176,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryKrutLoadPath: TADQuery
+  object qrKrutLoadPath: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       
@@ -179,7 +184,7 @@ object dmData: TdmData
         'TASK_NAME"'
       '  FROM "AUTOMAT_PATH"'
       '  where "ID_REPORT"=:ID_REPORT;')
-    Left = 392
+    Left = 320
     Top = 8
     ParamData = <
       item
@@ -189,7 +194,7 @@ object dmData: TdmData
         Value = 2
       end>
   end
-  object ADQuery311GetSign: TADQuery
+  object qr311GetSign: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -205,7 +210,7 @@ object dmData: TdmData
     Left = 496
     Top = 256
   end
-  object ADQuerySendSign: TADQuery
+  object qrSendSign: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'UPDATE "REP311"'
@@ -228,7 +233,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryHronKrutSign311: TADQuery
+  object qrHronKrutSign311: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -242,10 +247,10 @@ object dmData: TdmData
         ' and'
       'date_part('#39'day'#39',"DATE_SEND") = date_part('#39'day'#39',current_date) and'
       '"IS_SIGN"=False;')
-    Left = 568
+    Left = 632
     Top = 8
   end
-  object ADQueryKrutVerba311SignUpd: TADQuery
+  object qrKrutVerba311SignUpd: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'UPDATE "REP311"'
@@ -256,7 +261,7 @@ object dmData: TdmData
       '"ID_USER_SIGN"<>0 and'
       '"IS_SIGN"=False '
       'limit 50) As TempT')
-    Left = 392
+    Left = 320
     Top = 56
     ParamData = <
       item
@@ -266,7 +271,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryKrutVerba311SignLoad: TADQuery
+  object qrKrutVerba311SignLoad: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -282,7 +287,7 @@ object dmData: TdmData
       'date_part('#39'day'#39',"DATE_SEND") = date_part('#39'day'#39',current_date) and'
       '"IS_SIGN"=False and'
       '"ID_USER_RS" = :ID_USER_RS;')
-    Left = 392
+    Left = 320
     Top = 104
     ParamData = <
       item
@@ -292,14 +297,14 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryKrutVerba311SignComplit: TADQuery
+  object qrKrutVerba311SignComplit: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'UPDATE "REP311"'
       '   SET "IS_SIGN"=True'
       ' WHERE '
       ' "FILENAME"=:FILENAME;')
-    Left = 392
+    Left = 320
     Top = 152
     ParamData = <
       item
@@ -309,7 +314,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQuery311GetCript: TADQuery
+  object qr311GetCript: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -325,7 +330,7 @@ object dmData: TdmData
     Left = 496
     Top = 352
   end
-  object ADQuerySendKript: TADQuery
+  object qrSendKript: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'UPDATE "REP311"'
@@ -348,7 +353,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryHronKrutCript311: TADQuery
+  object qrHronKrutCript311: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -362,10 +367,10 @@ object dmData: TdmData
         ' and'
       'date_part('#39'day'#39',"DATE_SEND") = date_part('#39'day'#39',current_date) and'
       '"IS_CRYPT"=False;')
-    Left = 568
+    Left = 632
     Top = 56
   end
-  object ADQueryKrutVerba311CriptUpd: TADQuery
+  object qrKrutVerba311CriptUpd: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'UPDATE "REP311"'
@@ -376,7 +381,7 @@ object dmData: TdmData
       '"ID_USER_CRYPT"<>0 and'
       '"IS_CRYPT"=False '
       'limit 50) As TempT')
-    Left = 392
+    Left = 320
     Top = 200
     ParamData = <
       item
@@ -386,7 +391,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryKrutVerba311CriptLoad: TADQuery
+  object qrKrutVerba311CriptLoad: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -402,7 +407,7 @@ object dmData: TdmData
       'date_part('#39'day'#39',"DATE_SEND") = date_part('#39'day'#39',current_date) and'
       '"IS_CRYPT"=False and'
       '"ID_USER_RC" = :ID_USER_RC;')
-    Left = 392
+    Left = 320
     Top = 248
     ParamData = <
       item
@@ -412,7 +417,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryKrutHronArh311: TADQuery
+  object qrKrutHronArh311: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -425,9 +430,9 @@ object dmData: TdmData
         'date_part('#39'month'#39',"DATE_SEND") = date_part('#39'month'#39',current_date)' +
         ' and'
       'date_part('#39'day'#39',"DATE_SEND") = date_part('#39'day'#39',current_date) and'
-      '"ARCH_NAME"='#39' '#39' and'
+      '"ID_ARCHIVE"=0 and'
       '"SCHEME"=:SCHEME;')
-    Left = 568
+    Left = 632
     Top = 104
     ParamData = <
       item
@@ -437,7 +442,7 @@ object dmData: TdmData
         Value = '1'
       end>
   end
-  object ADQuery311GetArh: TADQuery
+  object qr311GetArh: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -453,7 +458,7 @@ object dmData: TdmData
     Left = 496
     Top = 448
   end
-  object ADQuerySendArh: TADQuery
+  object qrSendArh: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'UPDATE "REP311"'
@@ -465,14 +470,18 @@ object dmData: TdmData
     ParamData = <
       item
         Name = 'ID_USER_CRYPT'
+        DataType = ftInteger
         ParamType = ptInput
+        Value = 1
       end
       item
         Name = 'FILENAME'
+        DataType = ftString
         ParamType = ptInput
+        Value = '013510110_910220150515_249000031500088041_200'
       end>
   end
-  object ADQueryKrutVerba311ArhUpd: TADQuery
+  object qrKrutVerba311ArhUpd: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'UPDATE "REP311"'
@@ -481,10 +490,10 @@ object dmData: TdmData
       '(Select * From "REP311"'
       'WHERE '
       '"ID_USER_ARCH_CMD"<>0 and'
-      '"ARCH_NAME"='#39' '#39' and'
+      '"ID_ARCHIVE"=0 and'
       '"SCHEME" = :SCHEME'
       'limit 500) As TempT')
-    Left = 392
+    Left = 320
     Top = 296
     ParamData = <
       item
@@ -500,7 +509,7 @@ object dmData: TdmData
         Value = Null
       end>
   end
-  object ADQueryKrutVerba311ArhLoad: TADQuery
+  object qrKrutVerba311ArhLoad: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT "FILENAME"'
@@ -514,10 +523,10 @@ object dmData: TdmData
         'date_part('#39'month'#39',"DATE_SEND") = date_part('#39'month'#39',current_date)' +
         ' and'
       'date_part('#39'day'#39',"DATE_SEND") = date_part('#39'day'#39',current_date) and'
-      '"ARCH_NAME"='#39' '#39' and'
+      '"ID_ARCHIVE"=0 and'
       '"SCHEME"=:SCHEME and'
       '"ID_USER_RA" = :ID_USER_RA;')
-    Left = 392
+    Left = 320
     Top = 344
     ParamData = <
       item
@@ -529,6 +538,141 @@ object dmData: TdmData
       item
         Name = 'ID_USER_RA'
         DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object qrLoadArhFromDate: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'INSERT INTO "ARCHIVE_INFO"('
+      '"ARC_NAME", "ARC_RS", "PACKET_NAME", "PACKET_CREATE")'
+      'VALUES (:ARC_NAME, 0, '#39' '#39', 0);'
+      '')
+    Left = 496
+    Top = 544
+    ParamData = <
+      item
+        Name = 'ARC_NAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = ''
+      end>
+  end
+  object qrLoadArhId: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'Select "ID_ARCHIVE" '
+      'From "ARCHIVE_INFO" '
+      'Where "ARC_NAME"=:ARC_NAME')
+    Left = 496
+    Top = 592
+    ParamData = <
+      item
+        Name = 'ARC_NAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object qrVerbaMailSignUpd: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'UPDATE "ARCHIVE_INFO"'
+      '   SET "ARC_RS"=:ARC_RS'
+      ' WHERE "ARC_RS"=0;')
+    Left = 320
+    Top = 392
+    ParamData = <
+      item
+        Name = 'ARC_RS'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object qrKrutHromMailSign: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'SELECT  "ARC_NAME"'
+      '  FROM "ARCHIVE_INFO"'
+      '  Where "ARC_RS">0 and'
+      '  "PACKET_NAME"='#39' '#39';')
+    Left = 632
+    Top = 152
+  end
+  object qrArhMailUp: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'UPDATE "ARCHIVE_INFO"'
+      '   SET "PACKET_CREATE"=:PACKET_CREATE'
+      ' WHERE "PACKET_CREATE"=0;')
+    Left = 320
+    Top = 440
+    ParamData = <
+      item
+        Name = 'PACKET_CREATE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object qrKrutHromMailCreate: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'SELECT  "ARC_NAME"'
+      '  FROM "ARCHIVE_INFO"'
+      '  Where "PACKET_CREATE">0 and'
+      '  "PACKET_NAME"='#39' '#39';')
+    Left = 632
+    Top = 200
+  end
+  object qrArhMailGetCount: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'SELECT Count (DISTINCT "ARCHIVE_INFO"."PACKET_NAME") AS Col'
+      'FROM "REP311", "ARCHIVE_INFO"'
+      'where'
+      
+        'date_part('#39'year'#39',"REP311"."DATE_SEND") = date_part('#39'year'#39',curren' +
+        't_date) and'
+      
+        'date_part('#39'month'#39',"REP311"."DATE_SEND") = date_part('#39'month'#39',curr' +
+        'ent_date) and'
+      
+        'date_part('#39'day'#39',"REP311"."DATE_SEND") = date_part('#39'day'#39',current_' +
+        'date) and'
+      '"REP311"."ID_ARCHIVE"="ARCHIVE_INFO"."ID_ARCHIVE" and'
+      '"ARCHIVE_INFO"."PACKET_NAME" Like :Packet')
+    Left = 168
+    Top = 8
+    ParamData = <
+      item
+        Name = 'PACKET'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object qrArhMailSetPak: TADQuery
+    Connection = ADConnection1
+    SQL.Strings = (
+      'UPDATE "ARCHIVE_INFO"'
+      '   SET "PACKET_NAME"=:PACKET_NAME'
+      ' WHERE "ARC_NAME"=:ARC_NAME and'
+      ' "PACKET_NAME"='#39' '#39';')
+    Left = 170
+    Top = 56
+    ParamData = <
+      item
+        Name = 'PACKET_NAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ARC_NAME'
+        DataType = ftString
         ParamType = ptInput
         Value = Null
       end>

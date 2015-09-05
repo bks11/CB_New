@@ -20,7 +20,7 @@ object fmMain: TfmMain
     Top = 8
     Width = 956
     Height = 584
-    ActivePage = TabSheetArhiv
+    ActivePage = TabSheet311P
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -35,7 +35,7 @@ object fmMain: TfmMain
         Top = 3
         Width = 942
         Height = 550
-        ActivePage = TabSheet6
+        ActivePage = TabSheetVerbaSignArh
         TabOrder = 0
         object TabSheetVerba311: TTabSheet
           Caption = '311 '#1055#1086#1076#1087#1080#1089#1100
@@ -138,8 +138,8 @@ object fmMain: TfmMain
             end
           end
         end
-        object TabSheet5: TTabSheet
-          Caption = #1051#1080#1096#1085#1077#1077
+        object TabSheetVerbaSignArh: TTabSheet
+          Caption = #1055#1086#1076#1087#1080#1089#1100' '#1072#1088#1093#1080#1074#1086#1074
           ImageIndex = 2
           object Panel11: TPanel
             Left = 3
@@ -149,7 +149,7 @@ object fmMain: TfmMain
             BorderStyle = bsSingle
             Caption = 'Panel2'
             TabOrder = 0
-            object CheckListBox5: TCheckListBox
+            object CheckListBoxVerbaMailSign: TCheckListBox
               Left = 8
               Top = 32
               Width = 481
@@ -157,32 +157,32 @@ object fmMain: TfmMain
               ItemHeight = 13
               TabOrder = 0
             end
-            object Button12: TButton
+            object ButtonVerbaMailSign: TButton
               Left = 8
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
               TabOrder = 1
-              OnClick = Button311InCriptSendClick
+              OnClick = ButtonVerbaMailSignClick
             end
-            object CheckBox5: TCheckBox
+            object CheckBoxVerbaMailSignChAll: TCheckBox
               Left = 170
               Top = 9
               Width = 97
               Height = 17
               Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
               TabOrder = 2
-              OnClick = CheckBox311InSignCheckAllClick
+              OnClick = CheckBoxVerbaMailSignChAllClick
             end
-            object Button13: TButton
+            object ButtonVerba311SignRefresh: TButton
               Left = 89
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1073#1085#1086#1074#1080#1090#1100
               TabOrder = 3
-              OnClick = Button311InSignRefreshClick
+              OnClick = ButtonVerba311SignRefreshClick
             end
           end
         end
@@ -271,6 +271,14 @@ object fmMain: TfmMain
             TabOrder = 2
             OnClick = ButtonKrut311PuskClick
           end
+          object CheckBoxKrut311Auto: TCheckBox
+            Left = 193
+            Top = 9
+            Width = 48
+            Height = 17
+            Caption = #1040#1074#1090#1086
+            TabOrder = 3
+          end
         end
         object TabSheetkruthron: TTabSheet
           Caption = #1061#1088#1072#1085#1080#1083#1080#1097#1077
@@ -298,6 +306,14 @@ object fmMain: TfmMain
             Width = 238
             Height = 17
             TabOrder = 2
+          end
+          object CheckBoxKrutXronauto: TCheckBox
+            Left = 193
+            Top = 9
+            Width = 48
+            Height = 17
+            Caption = #1040#1074#1090#1086
+            TabOrder = 3
           end
         end
         object TabSheetKrutVerba: TTabSheet
@@ -327,11 +343,18 @@ object fmMain: TfmMain
             Height = 17
             TabOrder = 2
           end
+          object CheckBoxKrutVerbaAuto: TCheckBox
+            Left = 193
+            Top = 9
+            Width = 48
+            Height = 17
+            Caption = #1040#1074#1090#1086
+            TabOrder = 3
+          end
         end
         object TabSheet9: TTabSheet
           Caption = #1040#1088#1093#1080#1074#1080#1088#1086#1074#1072#1085#1080#1077
           ImageIndex = 3
-          ExplicitLeft = 0
           object ButtonKrutArhivStart: TButton
             Left = 3
             Top = 3
@@ -355,6 +378,14 @@ object fmMain: TfmMain
             Width = 238
             Height = 17
             TabOrder = 2
+          end
+          object CheckBoxKrutArhAuto: TCheckBox
+            Left = 193
+            Top = 9
+            Width = 48
+            Height = 17
+            Caption = #1040#1074#1090#1086
+            TabOrder = 3
           end
         end
       end
@@ -414,6 +445,14 @@ object fmMain: TfmMain
               TabOrder = 3
               OnClick = CheckBox311SformirovAllCheckClick
             end
+            object CheckBox311SformAuto: TCheckBox
+              Left = 445
+              Top = 9
+              Width = 97
+              Height = 17
+              Caption = #1040#1074#1090#1086
+              TabOrder = 4
+            end
           end
           object Memo311SformEdit: TMemo
             Left = 511
@@ -453,14 +492,14 @@ object fmMain: TfmMain
               TabOrder = 1
               OnClick = CheckBox311InKACheckAllClick
             end
-            object Button1: TButton
+            object Button311InPodbRefresh: TButton
               Left = 89
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1073#1085#1086#1074#1080#1090#1100
               TabOrder = 2
-              OnClick = Button1Click
+              OnClick = Button311InPodbRefreshClick
             end
             object CheckListBox311InKa: TCheckListBox
               Left = 8
@@ -469,6 +508,14 @@ object fmMain: TfmMain
               Height = 473
               ItemHeight = 13
               TabOrder = 3
+            end
+            object CheckBox311InPodpAuto: TCheckBox
+              Left = 441
+              Top = 9
+              Width = 48
+              Height = 17
+              Caption = #1040#1074#1090#1086
+              TabOrder = 4
             end
           end
         end
@@ -518,6 +565,14 @@ object fmMain: TfmMain
               TabOrder = 3
               OnClick = Button311InSignRefreshClick
             end
+            object CheckBox311InKriptAuto: TCheckBox
+              Left = 441
+              Top = 9
+              Width = 48
+              Height = 17
+              Caption = #1040#1074#1090#1086
+              TabOrder = 4
+            end
           end
         end
         object TabSheet311Arh: TTabSheet
@@ -566,6 +621,14 @@ object fmMain: TfmMain
               TabOrder = 3
               OnClick = Button311InArhRefreshClick
             end
+            object CheckBox311ArhAuto: TCheckBox
+              Left = 441
+              Top = 9
+              Width = 48
+              Height = 17
+              Caption = #1040#1074#1090#1086
+              TabOrder = 4
+            end
           end
         end
       end
@@ -578,7 +641,7 @@ object fmMain: TfmMain
         Top = 3
         Width = 942
         Height = 550
-        ActivePage = TabSheetArhiv311PA
+        ActivePage = TabSheetArhMail
         TabOrder = 0
         object TabSheetArhiv311PA: TTabSheet
           Caption = '311A'
@@ -683,8 +746,8 @@ object fmMain: TfmMain
             end
           end
         end
-        object TabSheet3: TTabSheet
-          Caption = #1051#1080#1096#1085#1077#1077
+        object TabSheetArhMail: TTabSheet
+          Caption = #1055#1072#1082#1077#1090#1099
           ImageIndex = 2
           object Panel7: TPanel
             Left = 3
@@ -694,7 +757,7 @@ object fmMain: TfmMain
             BorderStyle = bsSingle
             Caption = 'Panel2'
             TabOrder = 0
-            object CheckListBox3: TCheckListBox
+            object CheckListBoxArhivMail: TCheckListBox
               Left = 8
               Top = 32
               Width = 481
@@ -702,32 +765,32 @@ object fmMain: TfmMain
               ItemHeight = 13
               TabOrder = 0
             end
-            object Button8: TButton
+            object ButtonArhMailBild: TButton
               Left = 8
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1090#1087#1088#1072#1074#1080#1090#1100
               TabOrder = 1
-              OnClick = Button311InCriptSendClick
+              OnClick = ButtonArhMailBildClick
             end
-            object CheckBox3: TCheckBox
+            object CheckBoxArhMailCheckAll: TCheckBox
               Left = 170
               Top = 9
               Width = 97
               Height = 17
               Caption = #1042#1099#1076#1077#1083#1080#1090#1100' '#1074#1089#1077
               TabOrder = 2
-              OnClick = CheckBox311InSignCheckAllClick
+              OnClick = CheckBoxArhMailCheckAllClick
             end
-            object Button9: TButton
+            object ButtonArhMailRefresh: TButton
               Left = 89
               Top = 1
               Width = 75
               Height = 25
               Caption = #1054#1073#1085#1086#1074#1080#1090#1100
               TabOrder = 3
-              OnClick = Button311InSignRefreshClick
+              OnClick = ButtonArhMailRefreshClick
             end
           end
         end
@@ -788,5 +851,14 @@ object fmMain: TfmMain
     Height = 161
     ItemHeight = 13
     TabOrder = 1
+  end
+  object TrayIcon1: TTrayIcon
+    Visible = True
+    Left = 944
+  end
+  object Timer1: TTimer
+    Interval = 2000
+    OnTimer = Timer1Timer
+    Left = 920
   end
 end

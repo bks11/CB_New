@@ -30,11 +30,8 @@ object MainForm: TMainForm
     ActivePage = AllInfo
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 356
-    ExplicitWidth = 725
     object AllInfo: TTabSheet
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1087#1086#1088#1090#1092#1077#1083#1102
-      ExplicitWidth = 838
       object lbKredSumHeader: TLabel
         Left = 16
         Top = 5
@@ -239,7 +236,8 @@ object MainForm: TMainForm
     object LoansInfo: TTabSheet
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1088#1077#1076#1080#1090#1091
       ImageIndex = 1
-      ExplicitWidth = 838
+      ExplicitLeft = 3
+      ExplicitTop = 28
       object lbDebtInfoHeader: TLabel
         Left = 16
         Top = 3
@@ -258,7 +256,7 @@ object MainForm: TMainForm
         Left = 16
         Top = 22
         Width = 402
-        Height = 294
+        Height = 353
         BorderStyle = bsSingle
         TabOrder = 0
         object LoansInfoFIOLoaner: TLabel
@@ -355,15 +353,22 @@ object MainForm: TMainForm
         object LoansInfoPoruchitel: TLabel
           Left = 8
           Top = 180
-          Width = 95
-          Height = 13
+          Width = 111
+          Height = 16
           Caption = 'LoansInfoPoruchitel'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
         end
         object DBGrid1: TDBGrid
-          Left = 8
-          Top = 203
-          Width = 385
-          Height = 87
+          Left = 1
+          Top = 221
+          Width = 396
+          Height = 127
+          Align = alBottom
           DataSource = DMData.DataSourceLoanerInfoByLoans
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -457,12 +462,12 @@ object MainForm: TMainForm
         Left = 424
         Top = 19
         Width = 375
-        Height = 297
+        Height = 351
         BorderStyle = bsSingle
         TabOrder = 1
         object LoansInfoValLoans: TLabel
           Left = 8
-          Top = 57
+          Top = 71
           Width = 106
           Height = 16
           Caption = 'LoansInfoValLoans'
@@ -474,8 +479,8 @@ object MainForm: TMainForm
           ParentFont = False
         end
         object LoansInfoDateLoans: TLabel
-          Left = 8
-          Top = 8
+          Left = 10
+          Top = 10
           Width = 114
           Height = 16
           Caption = 'LoansInfoDateLoans'
@@ -488,7 +493,7 @@ object MainForm: TMainForm
         end
         object LoansInfoSumValLoans: TLabel
           Left = 8
-          Top = 32
+          Top = 40
           Width = 132
           Height = 16
           Caption = 'LoansInfoSumValLoans'
@@ -501,7 +506,7 @@ object MainForm: TMainForm
         end
         object LoansInfoDateEndLoans: TLabel
           Left = 8
-          Top = 82
+          Top = 101
           Width = 135
           Height = 16
           Caption = 'LoansInfoDateEndLoans'
@@ -514,7 +519,7 @@ object MainForm: TMainForm
         end
         object LoansInfoDebtLoans: TLabel
           Left = 8
-          Top = 107
+          Top = 132
           Width = 114
           Height = 16
           Caption = 'LoansInfoDebtLoans'
@@ -527,7 +532,7 @@ object MainForm: TMainForm
         end
         object LoansInfoDebtNacValLoans: TLabel
           Left = 8
-          Top = 134
+          Top = 163
           Width = 153
           Height = 16
           Caption = 'LoansInfoDebtNacValLoans'
@@ -540,7 +545,7 @@ object MainForm: TMainForm
         end
         object LoansInfoDEBTOUTOFDATE: TLabel
           Left = 8
-          Top = 156
+          Top = 193
           Width = 157
           Height = 16
           Caption = 'LoansInfoDEBTOUTOFDATE'
@@ -553,7 +558,7 @@ object MainForm: TMainForm
         end
         object LoansInfoDEBTOUTOFDATEEQ: TLabel
           Left = 8
-          Top = 181
+          Top = 224
           Width = 173
           Height = 16
           Caption = 'LoansInfoDEBTOUTOFDATEEQ'
@@ -566,7 +571,7 @@ object MainForm: TMainForm
         end
         object LoansInfoPERCENTOUTOFDATE: TLabel
           Left = 8
-          Top = 206
+          Top = 254
           Width = 180
           Height = 16
           Caption = 'LoansInfoPERCENTOUTOFDATE'
@@ -579,7 +584,7 @@ object MainForm: TMainForm
         end
         object LoansInfoPERCENTOUTOFDATEEQ: TLabel
           Left = 8
-          Top = 231
+          Top = 285
           Width = 196
           Height = 16
           Caption = 'LoansInfoPERCENTOUTOFDATEEQ'
@@ -592,7 +597,7 @@ object MainForm: TMainForm
         end
         object LoansInfoCOMMISSIONAMOUNT: TLabel
           Left = 8
-          Top = 256
+          Top = 316
           Width = 184
           Height = 16
           Caption = 'LoansInfoCOMMISSIONAMOUNT'
@@ -608,7 +613,6 @@ object MainForm: TMainForm
     object Dosudebka: TTabSheet
       Caption = #1044#1086#1089#1091#1076#1077#1073#1085#1099#1077' '#1084#1077#1088#1086#1087#1088#1080#1103#1090#1080#1103
       ImageIndex = 2
-      ExplicitWidth = 838
       object lbBeforeJudPeriodHeader: TLabel
         Left = 8
         Top = 0
@@ -633,7 +637,6 @@ object MainForm: TMainForm
         Align = alTop
         BorderStyle = bsSingle
         TabOrder = 0
-        ExplicitWidth = 838
         object DBGridDosudebkaList: TDBGrid
           Left = 1
           Top = 1
@@ -691,7 +694,6 @@ object MainForm: TMainForm
         Align = alClient
         BorderStyle = bsSingle
         TabOrder = 1
-        ExplicitWidth = 838
         object lbFullDescriptHeader: TLabel
           Left = 16
           Top = 16
@@ -721,7 +723,7 @@ object MainForm: TMainForm
           Top = 35
           Width = 191
           Height = 182
-          Date = 42229.578261608800000000
+          Date = 42229.753003449080000000
           TabOrder = 1
         end
         object ButtonDosudebkaAdd: TButton
@@ -758,7 +760,6 @@ object MainForm: TMainForm
     object Admins: TTabSheet
       Caption = #1040#1076#1084#1080#1085#1080#1089#1090#1088#1080#1088#1086#1074#1072#1085#1080#1077' '#1089#1080#1089#1090#1077#1084#1099
       ImageIndex = 3
-      ExplicitWidth = 838
       object EditBDSvazi: TPageControl
         Left = 3
         Top = 3
@@ -1100,7 +1101,7 @@ object MainForm: TMainForm
             Top = 3
             Width = 191
             Height = 182
-            Date = 42229.578261701390000000
+            Date = 42229.753003553240000000
             TabOrder = 0
             OnClick = MonthCalendarAdmCursesClick
           end
@@ -1458,7 +1459,6 @@ object MainForm: TMainForm
     object TabSheet1: TTabSheet
       Caption = #1054#1088#1075#1072#1085#1072#1081#1079#1077#1088
       ImageIndex = 4
-      ExplicitWidth = 838
       object DBGridOrganaizerFul: TDBGrid
         Left = 3
         Top = 191
@@ -1507,7 +1507,7 @@ object MainForm: TMainForm
         Top = 3
         Width = 191
         Height = 182
-        Date = 42229.578261770830000000
+        Date = 42229.753003657410000000
         TabOrder = 1
       end
       object ButtonOrganaizerComplit: TButton

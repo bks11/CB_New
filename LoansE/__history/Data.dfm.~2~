@@ -1,0 +1,25 @@
+object dmData: TdmData
+  OldCreateOrder = False
+  Height = 389
+  Width = 577
+  object conLoan: TADConnection
+    Params.Strings = (
+      'Database=CREDIT_DB'
+      'User_Name=postgres'
+      'Password=postgres'
+      'Server=10.3.0.219'
+      'DriverID=PG')
+    Connected = True
+    LoginPrompt = False
+    Left = 108
+    Top = 48
+  end
+  object ADGUIxWaitCursor1: TADGUIxWaitCursor
+    Left = 210
+    Top = 50
+  end
+  object ADPhysPgDriverLink1: TADPhysPgDriverLink
+    Left = 328
+    Top = 62
+  end
+end

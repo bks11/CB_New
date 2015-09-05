@@ -1,0 +1,28 @@
+unit Data;
+
+interface
+
+uses
+  SysUtils, Classes, uADStanIntf, uADStanOption, uADStanError, uADGUIxIntf, uADPhysIntf, uADStanDef,
+  uADStanPool, uADPhysManager, uADPhysPG, uADGUIxFormsWait, DB, uADCompClient;
+
+type
+  TdmData = class(TDataModule)
+    conLoan: TADConnection;
+    ADGUIxWaitCursor1: TADGUIxWaitCursor;
+    ADPhysPgDriverLink1: TADPhysPgDriverLink;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmData: TdmData;
+
+implementation
+
+{$R *.dfm}
+
+end.
+

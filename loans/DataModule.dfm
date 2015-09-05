@@ -3,13 +3,6 @@ object DMData: TDMData
   Height = 815
   Width = 1115
   object conCredittDB: TADConnection
-    Params.Strings = (
-      'Database=CREDIT_DB'
-      'User_Name=postgres'
-      'Password=postgres'
-      'Server=10.3.0.219'
-      'DriverID=PG')
-    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 8
@@ -215,7 +208,6 @@ object DMData: TDMData
       end>
   end
   object TableUsers: TADTable
-    Active = True
     Connection = conCredittDB
     UpdateOptions.UpdateTableName = '"TUSERS"'
     TableName = '"TUSERS"'
@@ -228,7 +220,6 @@ object DMData: TDMData
     Top = 266
   end
   object TableLoans: TADTable
-    Active = True
     Connection = conCredittDB
     UpdateOptions.UpdateTableName = '"TLOAN"'
     TableName = '"TLOAN"'
@@ -570,7 +561,6 @@ object DMData: TDMData
     Top = 214
   end
   object qrOrganaizerFul: TADQuery
-    Active = True
     Connection = conCredittDB
     SQL.Strings = (
       'SELECT '

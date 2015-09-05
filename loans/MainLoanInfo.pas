@@ -62,18 +62,56 @@ end;
 
 Procedure TMainLoanInfo.MainLoanInfoLoadData();
 {Загрузка данных}
+var
+   DebtEq         : Real;
+   OutDateEq      : Real;
+   PercentEq      : Real;
+   //ComEq          : Real;
+
+   CurrencyName : String;
+
 Begin
+  {Расчет эквивалента}
+  CurrencyName := DMData.qrLoanInfo.FieldByName('LOAN_CURRENCY').AsString;
+
+  if CurrencyName = '978' then begin
+     DebtEq := DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsFloat * MainForm.EURRate;
+     OutDateEq := DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsFloat * MainForm.EURRate;
+     PercentEq := DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsFloat * MainForm.EURRate;
+  end;
+
+  if CurrencyName = '840' then begin
+     DebtEq := DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsFloat * MainForm.USDRate;
+     OutDateEq := DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsFloat * MainForm.USDRate;
+     PercentEq := DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsFloat * MainForm.USDRate;
+  end;
+
+  if CurrencyName = '980' then begin
+     DebtEq := DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsFloat * MainForm.UAHRate;
+     OutDateEq := DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsFloat * MainForm.UAHRate;
+     PercentEq := DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsFloat * MainForm.UAHRate;
+  end;
+
+  if ((CurrencyName = '810') OR (CurrencyName = '643')) then begin
+     DebtEq := DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsFloat;
+     OutDateEq := DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsFloat;
+     PercentEq := DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsFloat;
+  end;
+
+
+
+
   {Загрузка данных по кредиту}
   MainForm.LoansInfoDateLoans.Caption:='Дата выдачи ' + DMData.qrLoanInfo.FieldByName('ISSUE_DATE').AsString;
   MainForm.LoansInfoSumValLoans.Caption:='Сумма ' + DMData.qrLoanInfo.FieldByName('LOAN_SUMM').AsString;
   MainForm.LoansInfoValLoans.Caption:='Валюта ' + DMData.qrLoanInfo.FieldByName('LOAN_CURRENCY').AsString;
   MainForm.LoansInfoDateEndLoans.Caption:='Дата окончания ' + DMData.qrLoanInfo.FieldByName('END_DATE').AsString;
   MainForm.LoansInfoDebtLoans.Caption:='Сумма задолженности ' + DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM').AsString;
-  MainForm.LoansInfoDebtNacValLoans.Caption:='Сумма задолженности (Н) ' + DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM_EQ').AsString;
+  MainForm.LoansInfoDebtNacValLoans.Caption:='Сумма задолженности (Н) ' +  FloatToStrF(DebtEq,ffGeneral,8,2); // DMData.qrLoanInfo.FieldByName('TOTAL_CREDIT_SUMM_EQ').AsString;
   MainForm.LoansInfoDEBTOUTOFDATE.Caption:='Сумма просрочки ' + DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE').AsString;
-  MainForm.LoansInfoDEBTOUTOFDATEEQ.Caption:='Сумма просрочки (Н) ' + DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE_EQ').AsString;
+  MainForm.LoansInfoDEBTOUTOFDATEEQ.Caption:='Сумма просрочки (Н) ' + FloatToStrF(OutDateEq,ffGeneral,8,2);//DMData.qrLoanInfo.FieldByName('DEBT_OUT_OF_DATE_EQ').AsString;
   MainForm.LoansInfoPERCENTOUTOFDATE.Caption:='Сумма просрочки % ' + DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE').AsString;
-  MainForm.LoansInfoPERCENTOUTOFDATEEQ.Caption:='Сумма просрочки % (Н) ' + DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE_EQ').AsString;
+  MainForm.LoansInfoPERCENTOUTOFDATEEQ.Caption:='Сумма просрочки % (Н) ' + FloatToStrF(PercentEq,ffGeneral,8,2);//DMData.qrLoanInfo.FieldByName('PERCENT_OUT_OF_DATE_EQ').AsString;
   MainForm.LoansInfoCOMMISSIONAMOUNT.Caption:='Сумма комиссии (Н) ' + DMData.qrLoanInfo.FieldByName('COMMISSION_AMOUNT').AsString;
   {Загрузка данных по Должнику}
 

@@ -11,6 +11,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := '«¿√–”« ¿ ƒ¿ÕÕ€’';
   Application.CreateForm(TdmData, dmData);
   Application.CreateForm(TfmMain, fmMain);
   Application.Run;

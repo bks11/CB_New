@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
-  Caption = 'MainForm'
+  Caption = #1050#1056#1045#1044#1048#1058#1067
   ClientHeight = 742
   ClientWidth = 1081
   Color = clBtnFace
@@ -12,6 +12,7 @@ object MainForm: TMainForm
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
@@ -32,202 +33,208 @@ object MainForm: TMainForm
     TabOrder = 0
     object AllInfo: TTabSheet
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1087#1086#1088#1090#1092#1077#1083#1102
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       object lbKredSumHeader: TLabel
-        Left = 16
+        Left = 2
         Top = 5
-        Width = 86
+        Width = 100
         Height = 13
         Caption = #1057#1091#1084#1084#1072' '#1082#1088#1077#1076#1080#1090#1086#1074' '
       end
       object lbDebtSumHeader: TLabel
-        Left = 223
+        Left = 211
         Top = 5
-        Width = 113
+        Width = 134
         Height = 13
         Caption = #1057#1091#1084#1084#1072' '#1079#1072#1076#1086#1083#1078#1077#1085#1085#1086#1089#1090#1080
       end
       object lbOutDateSumHeader: TLabel
-        Left = 430
+        Left = 423
         Top = 5
-        Width = 87
+        Width = 101
         Height = 13
         Caption = #1057#1091#1084#1084#1072' '#1087#1088#1086#1089#1088#1086#1095#1082#1080
       end
       object lbPercentSumHeader: TLabel
         Left = 637
         Top = 5
-        Width = 101
+        Width = 117
         Height = 13
         Caption = #1057#1091#1084#1084#1072' '#1087#1088#1086#1089#1088#1086#1095#1082#1080' %'
       end
       object pnlKredSum: TPanel
-        Left = 16
+        Left = -1
         Top = 24
-        Width = 205
+        Width = 212
         Height = 145
         BorderStyle = bsSingle
         TabOrder = 0
         object MainInfoPortfelSumRUR: TLabel
           Left = 8
           Top = 8
-          Width = 115
+          Width = 137
           Height = 13
           Caption = 'MainInfoPortfelSumRUR'
         end
         object MainInfoPortfelSumUSD: TLabel
           Left = 8
           Top = 34
-          Width = 114
+          Width = 136
           Height = 13
           Caption = 'MainInfoPortfelSumUSD'
         end
         object MainInfoPortfelSumEUR: TLabel
           Left = 8
           Top = 60
-          Width = 114
+          Width = 135
           Height = 13
           Caption = 'MainInfoPortfelSumEUR'
         end
         object MainInfoPortfelSumUAH: TLabel
           Left = 8
           Top = 86
-          Width = 115
+          Width = 137
           Height = 13
           Caption = 'MainInfoPortfelSumUAH'
         end
         object MainInfoSumLoansEcv: TLabel
           Left = 8
-          Top = 112
-          Width = 107
+          Top = 114
+          Width = 127
           Height = 13
           Caption = 'MainInfoSumLoansEcv'
         end
       end
       object pnlDebtSum: TPanel
-        Left = 221
+        Left = 211
         Top = 24
-        Width = 205
+        Width = 212
         Height = 145
         BorderStyle = bsSingle
         TabOrder = 1
         object MainInfoPortfelSumZRUR: TLabel
           Left = 8
           Top = 8
-          Width = 121
+          Width = 144
           Height = 13
           Caption = 'MainInfoPortfelSumZRUR'
         end
         object MainInfoPortfelSumZUSD: TLabel
           Left = 8
-          Top = 35
-          Width = 120
+          Top = 34
+          Width = 143
           Height = 13
           Caption = 'MainInfoPortfelSumZUSD'
         end
         object MainInfoPortfelSumZEUR: TLabel
           Left = 8
-          Top = 62
-          Width = 120
+          Top = 60
+          Width = 142
           Height = 13
           Caption = 'MainInfoPortfelSumZEUR'
         end
         object MainInfoPortfelSumZUAH: TLabel
           Left = 8
-          Top = 89
-          Width = 121
+          Top = 86
+          Width = 144
           Height = 13
           Caption = 'MainInfoPortfelSumZUAH'
         end
         object MainInfoSumZadEcv: TLabel
           Left = 8
-          Top = 112
-          Width = 97
+          Top = 114
+          Width = 115
           Height = 13
           Caption = 'MainInfoSumZadEcv'
         end
       end
       object pnlOutDateSum: TPanel
-        Left = 426
+        Left = 423
         Top = 24
-        Width = 205
+        Width = 212
         Height = 145
         BorderStyle = bsSingle
         TabOrder = 2
         object MainInfoPortfelSumTRUR: TLabel
           Left = 8
-          Top = 10
-          Width = 121
+          Top = 8
+          Width = 144
           Height = 13
           Caption = 'MainInfoPortfelSumZRUR'
         end
         object MainInfoPortfelSumTUSD: TLabel
           Left = 8
-          Top = 37
-          Width = 120
+          Top = 34
+          Width = 143
           Height = 13
           Caption = 'MainInfoPortfelSumZUSD'
         end
         object MainInfoPortfelSumTEUR: TLabel
           Left = 8
-          Top = 64
-          Width = 120
+          Top = 60
+          Width = 142
           Height = 13
           Caption = 'MainInfoPortfelSumZEUR'
         end
         object MainInfoPortfelSumTUAH: TLabel
           Left = 8
-          Top = 91
-          Width = 121
+          Top = 86
+          Width = 144
           Height = 13
           Caption = 'MainInfoPortfelSumZUAH'
         end
         object MainInfoSumprosEcv: TLabel
           Left = 8
-          Top = 112
-          Width = 100
+          Top = 114
+          Width = 119
           Height = 13
           Caption = 'MainInfoSumprosEcv'
         end
       end
       object pnlPercentSum: TPanel
-        Left = 631
+        Left = 635
         Top = 24
-        Width = 205
+        Width = 212
         Height = 145
         BorderStyle = bsSingle
         TabOrder = 3
         object MainInfoPortfelSumPRUR: TLabel
           Left = 8
-          Top = 7
-          Width = 121
+          Top = 8
+          Width = 144
           Height = 13
           Caption = 'MainInfoPortfelSumZRUR'
         end
         object MainInfoPortfelSumPUSD: TLabel
           Left = 8
           Top = 34
-          Width = 120
+          Width = 143
           Height = 13
           Caption = 'MainInfoPortfelSumZUSD'
         end
         object MainInfoPortfelSumPEUR: TLabel
           Left = 8
-          Top = 61
-          Width = 120
+          Top = 60
+          Width = 142
           Height = 13
           Caption = 'MainInfoPortfelSumZEUR'
         end
         object MainInfoPortfelSumPUAH: TLabel
           Left = 8
-          Top = 88
-          Width = 121
+          Top = 86
+          Width = 144
           Height = 13
           Caption = 'MainInfoPortfelSumZUAH'
         end
         object MainInfoSumProcEcv: TLabel
           Left = 8
-          Top = 112
-          Width = 100
+          Top = 114
+          Width = 119
           Height = 13
           Caption = 'MainInfoSumProcEcv'
         end
@@ -236,8 +243,6 @@ object MainForm: TMainForm
     object LoansInfo: TTabSheet
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1088#1077#1076#1080#1090#1091
       ImageIndex = 1
-      ExplicitLeft = 3
-      ExplicitTop = 28
       object lbDebtInfoHeader: TLabel
         Left = 16
         Top = 3
@@ -254,7 +259,7 @@ object MainForm: TMainForm
       end
       object pnlKredInfo: TPanel
         Left = 16
-        Top = 22
+        Top = 19
         Width = 402
         Height = 353
         BorderStyle = bsSingle
@@ -274,7 +279,7 @@ object MainForm: TMainForm
         end
         object LoansInfoAdres2Loader: TLabel
           Left = 8
-          Top = 130
+          Top = 140
           Width = 134
           Height = 16
           Caption = 'LoansInfoAdres2Loader'
@@ -287,7 +292,7 @@ object MainForm: TMainForm
         end
         object LoansInfoFoneLoader: TLabel
           Left = 8
-          Top = 155
+          Top = 167
           Width = 122
           Height = 16
           Caption = 'LoansInfoFoneLoader'
@@ -300,7 +305,7 @@ object MainForm: TMainForm
         end
         object LoansInfoAdres1Loader: TLabel
           Left = 8
-          Top = 105
+          Top = 113
           Width = 134
           Height = 16
           Caption = 'LoansInfoAdres1Loader'
@@ -313,7 +318,7 @@ object MainForm: TMainForm
         end
         object LoansInfoPasDat: TLabel
           Left = 8
-          Top = 80
+          Top = 86
           Width = 94
           Height = 16
           Caption = 'LoansInfoPasDat'
@@ -326,7 +331,7 @@ object MainForm: TMainForm
         end
         object LoansInfoPasNumoader: TLabel
           Left = 8
-          Top = 55
+          Top = 59
           Width = 134
           Height = 16
           Caption = 'LoansInfoPasNumoader'
@@ -339,7 +344,7 @@ object MainForm: TMainForm
         end
         object LoansInfoINNLoader: TLabel
           Left = 8
-          Top = 30
+          Top = 32
           Width = 114
           Height = 16
           Caption = 'LoansInfoINNLoader'
@@ -352,7 +357,7 @@ object MainForm: TMainForm
         end
         object LoansInfoPoruchitel: TLabel
           Left = 8
-          Top = 180
+          Top = 194
           Width = 111
           Height = 16
           Caption = 'LoansInfoPoruchitel'
@@ -385,19 +390,25 @@ object MainForm: TMainForm
             end
             item
               Expanded = False
-              FieldName = 'FIRSTNAME'
+              FieldName = 'LASTNAME'
+              Title.Caption = #1060#1040#1052#1048#1051#1048#1071
+              Title.Color = clSkyBlue
               Width = 130
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'LASTNAME'
+              FieldName = 'FIRSTNAME'
+              Title.Caption = #1048#1052#1071
+              Title.Color = clSkyBlue
               Width = 130
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'MIDDLENAME'
+              Title.Caption = #1054#1058#1063#1045#1057#1058#1042#1054
+              Title.Color = clSkyBlue
               Width = 130
               Visible = True
             end
@@ -668,7 +679,7 @@ object MainForm: TMainForm
               FieldName = 'ACTION_DATE'
               Title.Caption = #1044#1040#1058#1040' '#1057#1054#1041#1067#1058#1048#1071
               Title.Color = clSkyBlue
-              Width = 120
+              Width = 122
               Visible = True
             end
             item
@@ -723,7 +734,7 @@ object MainForm: TMainForm
           Top = 35
           Width = 191
           Height = 182
-          Date = 42229.753003449080000000
+          Date = 42229.405575046290000000
           TabOrder = 1
         end
         object ButtonDosudebkaAdd: TButton
@@ -1101,7 +1112,7 @@ object MainForm: TMainForm
             Top = 3
             Width = 191
             Height = 182
-            Date = 42229.753003553240000000
+            Date = 42229.405575150460000000
             TabOrder = 0
             OnClick = MonthCalendarAdmCursesClick
           end
@@ -1153,7 +1164,7 @@ object MainForm: TMainForm
         Top = 335
         Width = 796
         Height = 275
-        ActivePage = Loaner
+        ActivePage = Users
         TabOrder = 1
         object Users: TTabSheet
           Caption = #1057#1086#1090#1088#1091#1076#1085#1080#1082#1080
@@ -1173,9 +1184,17 @@ object MainForm: TMainForm
               item
                 Expanded = False
                 FieldName = 'ID_USER'
-                Title.Caption = 'ID'
+                Title.Caption = #8470' '#1055'.'#1055'.'
                 Title.Color = clMoneyGreen
                 Width = 50
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'LASTNAME'
+                Title.Caption = #1060#1040#1052#1048#1051#1048#1071
+                Title.Color = clMoneyGreen
+                Width = 185
                 Visible = True
               end
               item
@@ -1190,14 +1209,6 @@ object MainForm: TMainForm
                 Expanded = False
                 FieldName = 'MIDDLENAME'
                 Title.Caption = #1054#1058#1063#1045#1057#1058#1042#1054
-                Title.Color = clMoneyGreen
-                Width = 150
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'LASTNAME'
-                Title.Caption = #1060#1040#1052#1048#1051#1048#1071
                 Title.Color = clMoneyGreen
                 Width = 150
                 Visible = True
@@ -1242,8 +1253,9 @@ object MainForm: TMainForm
               item
                 Expanded = False
                 FieldName = 'ID_LOAN'
-                Title.Caption = #1064#1042
+                Title.Caption = #8470#1055'.'#1055'.'
                 Title.Color = clMoneyGreen
+                Width = 56
                 Visible = True
               end
               item
@@ -1259,6 +1271,7 @@ object MainForm: TMainForm
                 FieldName = 'ISSUE_DATE'
                 Title.Caption = #1044#1040#1058#1040' '#1042#1067#1044#1040#1063#1048
                 Title.Color = clMoneyGreen
+                Width = 111
                 Visible = True
               end
               item
@@ -1282,7 +1295,7 @@ object MainForm: TMainForm
                 FieldName = 'END_DATE'
                 Title.Caption = #1044#1040#1058#1040' '#1054#1050#1054#1053#1063#1040#1053#1048#1071
                 Title.Color = clMoneyGreen
-                Width = 105
+                Width = 118
                 Visible = True
               end
               item
@@ -1290,6 +1303,7 @@ object MainForm: TMainForm
                 FieldName = 'TOTAL_CREDIT_SUMM'
                 Title.Caption = #1054#1041#1065'. '#1057#1059#1052#1052#1040' '#1044#1054#1051#1043#1040
                 Title.Color = clMoneyGreen
+                Width = 125
                 Visible = True
               end
               item
@@ -1346,6 +1360,7 @@ object MainForm: TMainForm
             Width = 769
             Height = 236
             DataSource = DMData.DataSourceLoanser
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
@@ -1358,6 +1373,14 @@ object MainForm: TMainForm
                 FieldName = 'ID_LOANER'
                 Title.Caption = 'ID'
                 Title.Color = clMoneyGreen
+                Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'LASTNAME'
+                Title.Caption = #1060#1040#1052#1048#1051#1048#1071
+                Title.Color = clMoneyGreen
+                Width = 150
                 Visible = True
               end
               item
@@ -1370,15 +1393,8 @@ object MainForm: TMainForm
               end
               item
                 Expanded = False
-                FieldName = 'LASTNAME'
-                Title.Caption = #1060#1040#1052#1048#1051#1048#1071
-                Title.Color = clMoneyGreen
-                Width = 150
-                Visible = True
-              end
-              item
-                Expanded = False
                 FieldName = 'MIDDLENAME'
+                Title.Caption = #1054#1058#1063#1045#1057#1058#1042#1054
                 Title.Color = clMoneyGreen
                 Width = 150
                 Visible = True
@@ -1386,8 +1402,9 @@ object MainForm: TMainForm
               item
                 Expanded = False
                 FieldName = 'INN'
+                Title.Caption = #1048#1053#1053
                 Title.Color = clMoneyGreen
-                Width = 100
+                Width = 95
                 Visible = True
               end
               item
@@ -1419,13 +1436,14 @@ object MainForm: TMainForm
                 FieldName = 'ADDRESS1'
                 Title.Caption = #1040#1044#1056#1045#1057
                 Title.Color = clMoneyGreen
+                Width = 69
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'ADDRESS2'
                 Title.Color = clMoneyGreen
-                Visible = True
+                Visible = False
               end
               item
                 Expanded = False
@@ -1449,7 +1467,9 @@ object MainForm: TMainForm
               item
                 Expanded = False
                 FieldName = 'IS_GUARANTOR'
+                Title.Caption = #1055#1054#1056#1059#1063#1048#1058#1045#1051#1068
                 Title.Color = clMoneyGreen
+                Width = 70
                 Visible = True
               end>
           end
@@ -1480,19 +1500,23 @@ object MainForm: TMainForm
           item
             Expanded = False
             FieldName = 'ACTION_DATE'
-            Title.Caption = #1044#1072#1090#1072
+            Title.Caption = #1044#1040#1058#1040
+            Title.Color = clSkyBlue
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'LASTNAME'
-            Title.Caption = #1048#1089#1087#1086#1083#1085#1080#1090#1077#1083#1100
+            Title.Caption = #1048#1057#1055#1054#1051#1053#1048#1058#1045#1051#1068
+            Title.Color = clSkyBlue
             Width = 120
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'NOTE'
+            Title.Caption = #1055#1056#1048#1052#1045#1063#1040#1053#1048#1045
+            Title.Color = clSkyBlue
             Width = 600
             Visible = True
           end
@@ -1507,7 +1531,7 @@ object MainForm: TMainForm
         Top = 3
         Width = 191
         Height = 182
-        Date = 42229.753003657410000000
+        Date = 42229.405575231480000000
         TabOrder = 1
       end
       object ButtonOrganaizerComplit: TButton
@@ -1606,7 +1630,8 @@ object MainForm: TMainForm
       Width = 121
       Height = 21
       TabOrder = 1
-      Text = 'k'
+      Text = 'o.bondarenko'
+      OnKeyDown = edLoginKeyDown
     end
     object edPassword: TEdit
       Left = 851
@@ -1615,7 +1640,7 @@ object MainForm: TMainForm
       Height = 21
       PasswordChar = '*'
       TabOrder = 2
-      Text = '1'
+      OnKeyDown = edPasswordKeyDown
     end
     object btnLogin: TButton
       Left = 986
@@ -1643,12 +1668,22 @@ object MainForm: TMainForm
     Height = 610
     Align = alLeft
     TabOrder = 3
+    object lbSearch: TLabel
+      Left = 1
+      Top = 575
+      Width = 223
+      Height = 13
+      Align = alBottom
+      Caption = #1055#1086#1080#1089#1082':'
+      ExplicitWidth = 34
+    end
     object MainLoansList: TDBGrid
       Left = 1
       Top = 33
       Width = 223
-      Height = 576
+      Height = 542
       Align = alClient
+      Color = clWhite
       DataSource = DMData.dsqLoanInfo
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       PopupMenu = mnuFieldsSwitch
@@ -1664,7 +1699,9 @@ object MainForm: TMainForm
       Columns = <
         item
           Expanded = False
-          FieldName = 'fio'
+          FieldName = 'FULL_NAME'
+          Title.Caption = #1060#1048#1054
+          Title.Color = clSkyBlue
           Width = 220
           Visible = True
         end
@@ -1746,7 +1783,10 @@ object MainForm: TMainForm
       Width = 223
       Height = 32
       Align = alTop
+      BevelKind = bkFlat
       BevelOuter = bvNone
+      Color = clSkyBlue
+      ParentBackground = False
       TabOrder = 1
       object chbPaid: TCheckBox
         Left = 7
@@ -1758,10 +1798,19 @@ object MainForm: TMainForm
         OnClick = chbPaidClick
       end
     end
+    object edSearch: TEdit
+      Left = 1
+      Top = 588
+      Width = 223
+      Height = 21
+      Align = alBottom
+      TabOrder = 2
+      OnKeyPress = edSearchKeyPress
+    end
   end
   object mnuFieldsSwitch: TPopupMenu
-    Left = 278
-    Top = 248
+    Left = 1044
+    Top = 42
     object N1: TMenuItem
       Caption = #1060#1048#1054
       OnClick = N1Click

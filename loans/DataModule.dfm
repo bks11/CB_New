@@ -3,6 +3,12 @@ object DMData: TDMData
   Height = 815
   Width = 1115
   object conCredittDB: TADConnection
+    Params.Strings = (
+      'Database=CREDIT_DB'
+      'User_Name=postgres'
+      'Password=postgres'
+      'Server=10.3.0.219'
+      'DriverID=PG')
     LoginPrompt = False
     Left = 32
     Top = 8
@@ -34,7 +40,7 @@ object DMData: TDMData
       
         #9' lnr."LASTNAME" ||'#39'  '#39'||lnr."FIRSTNAME" ||'#39'  '#39'|| lnr."MIDDLENAM' +
         'E" AS FIO , '
-      '         l.*'
+      '         l.*,lnr."FULL_NAME"'
       'from '
       #9'"TLOANER" lnr '
       'inner join '
@@ -60,79 +66,14 @@ object DMData: TDMData
         Name = 'PAID1'
         DataType = ftBoolean
         ParamType = ptInput
-        Value = Null
+        Value = False
       end
       item
         Name = 'PAID2'
         DataType = ftBoolean
         ParamType = ptInput
-        Value = Null
+        Value = False
       end>
-    object qrLoanInfofio: TADWideMemoField
-      DisplayLabel = #1060#1048#1054
-      FieldName = 'fio'
-      Origin = 'fio'
-      BlobType = ftWideMemo
-    end
-    object qrLoanInfoID_LOAN: TLargeintField
-      FieldName = 'ID_LOAN'
-      Origin = '"ID_LOAN"'
-    end
-    object qrLoanInfoAGREEMENT_NUM: TWideStringField
-      FieldName = 'AGREEMENT_NUM'
-      Origin = '"AGREEMENT_NUM"'
-      Size = 75
-    end
-    object qrLoanInfoISSUE_DATE: TDateField
-      FieldName = 'ISSUE_DATE'
-      Origin = '"ISSUE_DATE"'
-    end
-    object qrLoanInfoLOAN_SUMM: TCurrencyField
-      FieldName = 'LOAN_SUMM'
-      Origin = '"LOAN_SUMM"'
-    end
-    object qrLoanInfoLOAN_CURRENCY: TWideStringField
-      FieldName = 'LOAN_CURRENCY'
-      Origin = '"LOAN_CURRENCY"'
-      Size = 3
-    end
-    object qrLoanInfoEND_DATE: TDateField
-      FieldName = 'END_DATE'
-      Origin = '"END_DATE"'
-    end
-    object qrLoanInfoTOTAL_CREDIT_SUMM: TCurrencyField
-      FieldName = 'TOTAL_CREDIT_SUMM'
-      Origin = '"TOTAL_CREDIT_SUMM"'
-    end
-    object qrLoanInfoTOTAL_CREDIT_SUMM_EQ: TCurrencyField
-      FieldName = 'TOTAL_CREDIT_SUMM_EQ'
-      Origin = '"TOTAL_CREDIT_SUMM_EQ"'
-    end
-    object qrLoanInfoDEBT_OUT_OF_DATE: TCurrencyField
-      FieldName = 'DEBT_OUT_OF_DATE'
-      Origin = '"DEBT_OUT_OF_DATE"'
-    end
-    object qrLoanInfoDEBT_OUT_OF_DATE_EQ: TCurrencyField
-      FieldName = 'DEBT_OUT_OF_DATE_EQ'
-      Origin = '"DEBT_OUT_OF_DATE_EQ"'
-    end
-    object qrLoanInfoPERCENT_OUT_OF_DATE: TCurrencyField
-      FieldName = 'PERCENT_OUT_OF_DATE'
-      Origin = '"PERCENT_OUT_OF_DATE"'
-    end
-    object qrLoanInfoPERCENT_OUT_OF_DATE_EQ: TCurrencyField
-      FieldName = 'PERCENT_OUT_OF_DATE_EQ'
-      Origin = '"PERCENT_OUT_OF_DATE_EQ"'
-    end
-    object qrLoanInfoCOMMISSION_AMOUNT: TCurrencyField
-      FieldName = 'COMMISSION_AMOUNT'
-      Origin = '"COMMISSION_AMOUNT"'
-    end
-    object qrLoanInfoFIRST_CREDITOR: TWideStringField
-      FieldName = 'FIRST_CREDITOR'
-      Origin = '"FIRST_CREDITOR"'
-      Size = 100
-    end
   end
   object dsqLoanInfo: TDataSource
     DataSet = qrLoanInfo

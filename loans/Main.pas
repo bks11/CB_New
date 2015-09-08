@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DBCtrls, DataModule, ComCtrls, Mask, MainLoanInfo, Grids, DBGrids,
-  ExtCtrls, MainPortfelInfo, CheckLst, Adminka, Dosudebka, IniFiles, Organaizer, Menus;
+  ExtCtrls, MainPortfelInfo, CheckLst, Adminka, Dosudebka, IniFiles, Organaizer, Menus,DB;
 
 type
   TUsersLogin = record
@@ -133,6 +133,8 @@ type
     Splitter1: TSplitter;
     pnlShowPayd: TPanel;
     chbPaid: TCheckBox;
+    edSearch: TEdit;
+    lbSearch: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure MainLoansListCellClick(Column: TColumn);
     procedure DBGridLoansLVSLCellClick(Column: TColumn);
@@ -158,6 +160,10 @@ type
     procedure N1Click(Sender: TObject);
     procedure N2Click(Sender: TObject);
     procedure chbPaidClick(Sender: TObject);
+    procedure edPasswordKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edLoginKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
+    procedure edSearchKeyPress(Sender: TObject; var Key: Char);
   private
     FUser_Name: String;
     FDriverId: String;
@@ -233,12 +239,27 @@ end;
 
 procedure TMainForm.MainLoansListDrawColumnCell(Sender: TObject; const Rect: TRect;
   DataCol: Integer; Column: TColumn; State: TGridDrawState);
+//const
+    //Color1: TColor = $00D5FFFF;        // темный цвет
+    //Color2: TColor = $CEF6F5;        // светлый цвет
+var
+  CurRecNo : Integer;
+
 begin
-   if Assigned(Column) then
-   begin
-        MainLoansList.Canvas.FillRect(Rect);
-        MainLoansList.Canvas.TextRect(Rect,Rect.Left,Rect.Top,' '+Column.Field.AsString);
-   end;
+    IF TDBGrid(Sender).DataSource.DataSet.RecNo mod 2 = 1
+	Then TDBGrid(Sender).Canvas.Brush.Color:= $AA9E2F3;
+
+	IF  gdSelected   IN State
+	Then Begin
+		TDBGrid(Sender).Canvas.Brush.Color:= clHighLight;
+		TDBGrid(Sender).Canvas.Font.Color := clHighLightText;
+	End;
+	TDBGrid(Sender).DefaultDrawColumnCell(Rect,DataCol,Column,State);
+   //if Assigned(Column) then
+   //begin
+        //MainLoansList.Canvas.FillRect(Rect);
+        //MainLoansList.Canvas.TextRect(Rect,Rect.Left,Rect.Top,' '+Column.Field.AsString);
+   //end;
 end;
 
 procedure TMainForm.MonthCalendarAdmCursesClick(Sender: TObject);
@@ -248,7 +269,7 @@ end;
 
 procedure TMainForm.N1Click(Sender: TObject);
 begin
-  MainLoansList.Columns[0].FieldName := 'fio';
+  MainLoansList.Columns[0].FieldName := 'FULL_NAME';
   MainLoansList.Columns[0].Title.Caption := 'ФАМИЛИЯ ИМЯ ОТЧЕСТВО';
   mnuFieldsSwitch.Items[0].Checked := True;
   mnuFieldsSwitch.Items[1].Checked := False;
@@ -544,9 +565,36 @@ begin
  Adminka.LoansVsLoanserButtonName;
 end;
 
+procedure TMainForm.edLoginKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+   if Key = VK_RETURN then  begin
+     if Trim(edLogin.Text) <> '' then edPassword.SetFocus();
+   end;
+end;
+
+procedure TMainForm.edPasswordKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+     if Key = VK_RETURN then begin
+        if edPassword.Text <> '' then LoginPO();
+     end;
+end;
+
+procedure TMainForm.edSearchKeyPress(Sender: TObject; var Key: Char);
+var
+  searchStr : String;
+  fieldName  : String;
+begin
+  fieldName := MainLoansList.Columns[0].FieldName;
+  if Key in ['a'..'z','A'..'Z','а'..'я','А'..'Я','0'..'9'] then begin
+    searchStr := edSearch.Text + Key;
+    dmData.qrLoanInfo.Locate(fieldName,searchStr,[loCaseInsensitive,loPartialKey]) ;
+  end;//if
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   //Устанавливаем  флаг   успешного логина в False Назначаем  кнопке надпись ВХОД
+  
   IsLoginSuccessful := False;
   btnLogin.Caption := 'Вход';
   btnChengePas.Enabled:=False;
@@ -591,6 +639,11 @@ begin
   //sl:= MainLoanInfo.GetLoanList();
   //LoansList.Items := sl;
   //DMData.MainRefreshLoansList;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+   edLogin.SetFocus;
 end;
 
 procedure TMainForm.GetConnectionInfo;

@@ -4,13 +4,23 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComObj, OleServer, StrUtils;
+  Dialogs, StdCtrls, ComObj, OleServer, StrUtils, Buttons, ComCtrls;
 
 type
   TfmMain = class(TForm)
-    Button1: TButton;
-    procedure Button1Click(Sender: TObject);
+    btnLoad: TButton;
+    edPath: TEdit;
+    btnOpenDialog: TSpeedButton;
+    dlgOpen: TOpenDialog;
+    memLog: TMemo;
+    edServer: TEdit;
+    lbServer: TLabel;
+    btnConnect: TButton;
+    sbInfo: TStatusBar;
+    procedure btnLoadClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnOpenDialogClick(Sender: TObject);
+    procedure btnConnectClick(Sender: TObject);
   private
     FiCols: integer;
     FiRows: integer;
@@ -32,6 +42,8 @@ type
                          out lastName: String;
                          out firstName : String;
                          out middleName: String):integer;
+    function IfLoanerExist(sINN: String): Boolean;
+    function FillLoanInfo(): integer;
   end;
 
 var
@@ -43,10 +55,45 @@ uses Excel_TLB,Office_TLB, Data;
 
 {$R *.dfm}
 
-procedure TfmMain.Button1Click(Sender: TObject);
+procedure TfmMain.btnOpenDialogClick(Sender: TObject);
 begin
-  ReadExcelFile('D:\Projects\LoansE\l.xls');
-  GenerateLoanQuery();
+ if dlgOpen.Execute then begin
+    edPath.Text := dlgOpen.FileName;
+ end;
+end;
+
+procedure TfmMain.btnConnectClick(Sender: TObject);
+begin
+  dmData.conLoan.Connected := False;
+  dmData.conLoan.Params.Clear;
+  dmData.conLoan.Params.Add('DriverID=PG');
+  dmData.conLoan.Params.Add('Database=CREDIT_DB');
+  dmData.conLoan.Params.Add('Server='+ edServer.Text);
+  dmData.conLoan.Params.Add('Password=postgres');
+  dmData.conLoan.Params.Add('User_Name=postgres');
+  dmData.conLoan.Params.Add('Port=5432');
+  try
+    dmData.conLoan.Connected := True;
+    sbInfo.Panels[0].Text := 'œŒƒ Àﬁ◊≈ÕŒ';
+  except on E: Exception do
+    begin
+         ShowMessage(E.Message);
+         sbInfo.Panels[0].Text := 'Õ≈“ —Œ≈ƒ»Õ≈Õ»ﬂ — ¡ƒ';
+    end;
+  end;
+end;
+
+procedure TfmMain.btnLoadClick(Sender: TObject);
+var
+   s: String;
+begin
+  s := edPath.Text;
+  if ((FileExists(s))AND(dmData.conLoan.Connected)) then begin
+     ReadExcelFile(s);
+     GenerateLoanQuery();
+     FillLoanInfo();
+     sbInfo.Panels[1].Text := '«¿√–”« ¿ «¿¬≈–ÿ≈Õ¿';
+  end;
 end;
 
 function TfmMain.DelimCount(sText: String; ch: Char): integer;
@@ -56,6 +103,49 @@ begin
    Result := 0;
    for i := Length(sText) downto 1 do
        if AnsiLowerCase (sText[i]) = AnsiLowerCase (Ch) then Inc (Result);
+end;
+
+function TfmMain.FillLoanInfo: integer;
+var
+   sINN       : String;
+   sAgreemN   : String;
+   iID_LOAN   : integer;
+   iID_LOANER : integer;
+   sNote      : String;
+   i          : integer;
+begin
+  i := 0;
+  dmData.qrLoans.Active := False;
+  try
+    dmData.qrLoans.Open();
+    dmData.qrLoans.First;
+    while NOT dmData.qrLoans.Eof do begin
+      sINN := dmData.qrLoans.FieldByName('INN').AsString;
+      iID_LOAN := dmData.qrLoans.FieldByName('ID_LOAN').AsInteger;
+      sAgreemN := dmData.qrLoans.FieldByName('AGREEMENT_NUM').AsString;
+
+      dmData.qrSearchLoaner.Active := False;
+      dmData.qrSearchLoaner.ParamByName('INN').Value := sINN;
+      dmData.qrSearchLoaner.Open();
+
+      iID_LOANER := dmData.qrSearchLoaner.FieldByName('ID_LOANER').AsInteger;
+      sNote := dmData.qrLoans.FieldByName('INN').AsString +' ; '+
+               dmData.qrSearchLoaner.FieldByName('FULL_NAME').AsString;
+
+      if iID_LOANER > 0 then  begin
+         dmData.qrInsertLoanInfo.ParamByName('ID_LOANER').Value := iID_LOANER;
+         dmData.qrInsertLoanInfo.ParamByName('ID_LOAN').Value := iID_LOAN;
+         dmData.qrInsertLoanInfo.ParamByName('NOTE').Value := sNote;
+         dmData.qrInsertLoanInfo.ExecSQL();
+         memLog.Lines.Add('—¬ﬂ«‹  –≈ƒ»“¿ '+ sAgreemN + ' — ƒŒÀ∆Õ» ŒÃ '+ sNote);
+         Inc(i);
+      end;
+      dmData.qrLoans.Next;
+    end;//while
+  except on E: Exception do
+    ShowMessage(E.Message);
+  end;
+  Result := i;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);
@@ -88,9 +178,6 @@ begin
      lastName := Trim(Copy(fullName,1,i));
      firstName := Trim(Copy(fullName,i,j-i));
      middleName := Trim(Copy(fullName,j,500));
-     //j := PosEx(';',sLine,i+1);
-     //Trim(Copy(Sline,j+1,i-j-1));
-
   end;
 end;
 
@@ -184,9 +271,11 @@ begin
           qrInsertLoan.ParamByName('PERCENT_OUT_OF_DATE_EQ').Value := PERCENT_OUT_OF_DATE_EQ;
           qrInsertLoan.ParamByName('COMMISSION_AMOUNT').Value      := COMMISSION_AMOUNT;
           qrInsertLoan.ParamByName('FIRST_CREDITOR').Value         := FIRST_CREDITOR;
+          qrInsertLoan.ParamByName('INN').Value                    := INN;
           try
              qrInsertLoan.Open;
              NEW_LOAN_ID := qrInsertLoan.FieldByName('ID_LOAN').AsInteger;
+             memLog.Lines.Add('¬ "TLOAN" ‰Ó·‡‚ÎÂÌ ÍÂ‰ËÚ ÔÓ ‰Ó„Ó‚ÓÛ - '+AGREEMENT_NUM);
           except on E: Exception do
              begin
                 Writeln(fLog,'INSERT LOAN - '+numLoan +' - '+FULL_NAME+' - '+INN+' - '+AGREEMENT_NUM);
@@ -204,13 +293,17 @@ begin
           qrInsertLoaner.ParamByName('FULL_PASSPORT').Value := FULL_PASSPORT;
 
           try
-            qrInsertLoaner.Open();
-            NEW_LOANER_ID :=   qrInsertLoaner.FieldByName('ID_LOANER').AsInteger;
+            if NOT IfLoanerExist(INN) then begin
+               qrInsertLoaner.Open();
+               NEW_LOANER_ID :=   qrInsertLoaner.FieldByName('ID_LOANER').AsInteger;
+               memLog.Lines.Add('¬ "TLOANER" ‰Ó·‡‚ÎÂÌ‡ Á‡ÔËÒ¸ Ó - '+ FULL_NAME +' ; '+ INN);
+            end;
           except on E: Exception do
              begin
                 Writeln(fLog,'INSERT LOANER - '+numLoan +' - '+FULL_NAME+' - '+INN+' - '+AGREEMENT_NUM);
              end;
           end;//try
+          {
           qrInsertLoanInfo.ParamByName('ID_LOANER').Value := NEW_LOANER_ID;
           qrInsertLoanInfo.ParamByName('ID_LOAN').Value := NEW_LOAN_ID;
           try
@@ -220,14 +313,29 @@ begin
                 Writeln(fLog,'INSERT LOANINFO - '+numLoan +' - '+FULL_NAME+' - '+INN+' - '+AGREEMENT_NUM);
              end;
           end;
+          }
         end;//with
      except on E:Exception do
        begin
+         memLog.Lines.Add('Œÿ»¡ ¿ ƒŒ¡¿¬À≈Õ»ﬂ »Õ‘. Œ - '+numLoan +' - '+FULL_NAME+' - '+INN+' - '+AGREEMENT_NUM);
          Writeln(fLog,'TYPE CONVERT - '+numLoan +' - '+FULL_NAME+' - '+INN+' - '+AGREEMENT_NUM);
        end;
      end;//try
    end;
    CloseFile(fLog);
+end;
+
+function TfmMain.IfLoanerExist(sINN: String): Boolean;
+begin
+  Result := False;
+  dmData.qrSearchLoaner.Active := False;
+  dmData.qrSearchLoaner.ParamByName('INN').Value := sINN;
+  try
+     dmData.qrSearchLoaner.Open();
+     if NOT dmData.qrSearchLoaner.Eof then Result := True;
+  except on E: Exception do
+     ShowMessage(E.Message);
+  end;
 end;
 
 function TfmMain.ReadExcelFile(sFileName: String): boolean;
@@ -247,6 +355,8 @@ begin
    finally
       vExcelApp.Quit;
    end;
+   memLog.Lines.Add('‘‡ÈÎ : '+ sFileName);
+   memLog.Lines.Add('—˜ËÚ‡ÌÓ : '+ IntToStr(iRows));
    //ShowMessage(IntToStr(VarArrayHighBound(ExcelData,1)));
 end;
 

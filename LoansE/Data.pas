@@ -17,6 +17,8 @@ type
     qrInsertLoaner: TADQuery;
     qrInsertLoanerID_LOANER: TLargeintField;
     qrInsertLoanInfo: TADQuery;
+    qrSearchLoaner: TADQuery;
+    qrLoans: TADQuery;
   private
     { Private declarations }
   public

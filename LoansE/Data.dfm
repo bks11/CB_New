@@ -9,7 +9,6 @@ object dmData: TdmData
       'Password=postgres'
       'Server=10.3.0.219'
       'DriverID=PG')
-    Connected = True
     LoginPrompt = False
     Left = 40
     Top = 20
@@ -38,7 +37,8 @@ object dmData: TdmData
       '            "PERCENT_OUT_OF_DATE", '
       '            "PERCENT_OUT_OF_DATE_EQ", '
       '            "COMMISSION_AMOUNT", '
-      '            "FIRST_CREDITOR")'
+      '            "FIRST_CREDITOR",'
+      '            "INN")'
       'VALUES     ( :AGREEMENT_NUM, '
       '             :ISSUE_DATE, '
       '             :LOAN_SUMM, '
@@ -49,7 +49,7 @@ object dmData: TdmData
       
         '             :DEBT_OUT_OF_DATE_EQ, :PERCENT_OUT_OF_DATE, :PERCEN' +
         'T_OUT_OF_DATE_EQ, '
-      '             :COMMISSION_AMOUNT, :FIRST_CREDITOR)'
+      '             :COMMISSION_AMOUNT, :FIRST_CREDITOR, :INN)'
       'RETURNING "ID_LOAN";')
     Left = 84
     Top = 168
@@ -128,6 +128,12 @@ object dmData: TdmData
       end
       item
         Name = 'FIRST_CREDITOR'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'INN'
         DataType = ftString
         ParamType = ptInput
         Value = Null
@@ -230,9 +236,11 @@ object dmData: TdmData
     SQL.Strings = (
       'INSERT INTO "TLOANINFO"('
       '            "ID_LOANER", '
-      '            "ID_LOAN")'
+      '            "ID_LOAN",'
+      '            "NOTE")'
       '    VALUES (:ID_LOANER, '
-      '            :ID_LOAN);')
+      '            :ID_LOAN,'
+      '            :NOTE);')
     Left = 82
     Top = 284
     ParamData = <
@@ -247,6 +255,35 @@ object dmData: TdmData
         DataType = ftInteger
         ParamType = ptInput
         Value = Null
+      end
+      item
+        Name = 'NOTE'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
       end>
+  end
+  object qrSearchLoaner: TADQuery
+    Connection = conLoan
+    SQL.Strings = (
+      
+        'SELECT "ID_LOANER","INN","FULL_NAME"  FROM "TLOANER"  WHERE "INN' +
+        '" = :INN')
+    Left = 206
+    Top = 169
+    ParamData = <
+      item
+        Name = 'INN'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object qrLoans: TADQuery
+    Connection = conLoan
+    SQL.Strings = (
+      'SELECT  "ID_LOAN","INN","AGREEMENT_NUM"  FROM  "TLOAN"')
+    Left = 204
+    Top = 224
   end
 end

@@ -208,22 +208,22 @@ Procedure TUser.LoadLogin;
 Begin
  UsersLogin.Login:=GetUserFromWindows;
 
- dmData.ADQueryLoadDostup.Active:=False;
- dmData.ADQueryLoadDostup.ParamByName('USER_LOGIN').Value := UsersLogin.Login;
- dmData.ADQueryLoadDostup.Active:=True;
- dmData.ADQueryLoadDostup.First;
- while NOT dmData.ADQueryLoadDostup.Eof do
+ dmData.qrLoadDostup.Active:=False;
+ dmData.qrLoadDostup.ParamByName('USER_LOGIN').Value := UsersLogin.Login;
+ dmData.qrLoadDostup.Active:=True;
+ dmData.qrLoadDostup.First;
+ while NOT dmData.qrLoadDostup.Eof do
  begin
-  UsersLogin.ID:=dmData.ADQueryLoadDostup.FieldByName('ID_USER').AsInteger;
-  If dmData.ADQueryLoadDostup.FieldByName('ID_REPORT').AsInteger=1 then UsersLogin.Dostup.PO:=True;
-  If dmData.ADQueryLoadDostup.FieldByName('ID_REPORT').AsInteger=2 then UsersLogin.Dostup.P311:=True;
-  If dmData.ADQueryLoadDostup.FieldByName('ID_REPORT').AsInteger=3 then UsersLogin.Dostup.VerbaKa:=True;
-  If dmData.ADQueryLoadDostup.FieldByName('ID_REPORT').AsInteger=4 then UsersLogin.Dostup.VerbaSign:=True;
-  If dmData.ADQueryLoadDostup.FieldByName('ID_REPORT').AsInteger=5 then UsersLogin.Dostup.VerbaMail:=True;
-  If dmData.ADQueryLoadDostup.FieldByName('ID_REPORT').AsInteger=6 then UsersLogin.Dostup.Arhiv:=True;
-  If dmData.ADQueryLoadDostup.FieldByName('ID_REPORT').AsInteger=7 then UsersLogin.Dostup.Krutilka:=True;
-  If dmData.ADQueryLoadDostup.FieldByName('ID_REPORT').AsInteger=8 then UsersLogin.Dostup.Hranilishe:=True;
-  dmData.ADQueryLoadDostup.Next;
+  UsersLogin.ID:=dmData.qrLoadDostup.FieldByName('ID_USER').AsInteger;
+  If dmData.qrLoadDostup.FieldByName('ID_REPORT').AsInteger=1 then UsersLogin.Dostup.PO:=True;
+  If dmData.qrLoadDostup.FieldByName('ID_REPORT').AsInteger=2 then UsersLogin.Dostup.P311:=True;
+  If dmData.qrLoadDostup.FieldByName('ID_REPORT').AsInteger=3 then UsersLogin.Dostup.VerbaKa:=True;
+  If dmData.qrLoadDostup.FieldByName('ID_REPORT').AsInteger=4 then UsersLogin.Dostup.VerbaSign:=True;
+  If dmData.qrLoadDostup.FieldByName('ID_REPORT').AsInteger=5 then UsersLogin.Dostup.VerbaMail:=True;
+  If dmData.qrLoadDostup.FieldByName('ID_REPORT').AsInteger=6 then UsersLogin.Dostup.Arhiv:=True;
+  If dmData.qrLoadDostup.FieldByName('ID_REPORT').AsInteger=7 then UsersLogin.Dostup.Krutilka:=True;
+  If dmData.qrLoadDostup.FieldByName('ID_REPORT').AsInteger=8 then UsersLogin.Dostup.Hranilishe:=True;
+  dmData.qrLoadDostup.Next;
  end;
  {тут возможно придется лочить тока подчиненные табы а не майн}
  if UsersLogin.Dostup.P311<>True then

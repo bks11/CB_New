@@ -235,7 +235,7 @@ Begin
    fmMain.ProgressBarKrutVerba.Step:=1;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step1.Name then {Step 1}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step1.PIn);
     dmData.qrKrutVerba311SignUpd.ParamByName('ID_USER_RS').Value:=UsersLogin.ID;
     dmData.qrKrutVerba311SignUpd.ExecSQL;
@@ -270,7 +270,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step2.Name then {Step 2}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step2.PIn);
     FindRes:=Findfirst(Path.Verba.step2.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -290,7 +290,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step3.Name then {Step 3}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step3.PIn);
     FindRes:=Findfirst(Path.Verba.step3.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -312,7 +312,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step4.Name then {Step 4}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step4.PIn);
     dmData.qrKrutVerba311CriptUpd.ParamByName('ID_USER_RC').Value:=UsersLogin.ID;
     dmData.qrKrutVerba311CriptUpd.ExecSQL;
@@ -347,7 +347,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step5.Name then {Step 5}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step5.PIn);
     FindRes:=Findfirst(Path.Verba.step5.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -367,7 +367,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step6.Name then {Step 6}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step6.PIn);
     FindRes:=Findfirst(Path.Verba.step6.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -387,7 +387,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step7.Name then {Step 7}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step7.PIn);
     FindRes:=Findfirst(Path.Verba.step7.PIn+'\*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -407,7 +407,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step8.Name then {Step 8}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step8.PIn);
     FindRes:=Findfirst(Path.Verba.step8.PIn+'\*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -427,7 +427,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutVerba.Items[I]=Path.Verba.step9.Name then {Step 9}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutVerba.Max:=ColFilesFromDir(Path.Verba.step9.PIn);
     FindRes:=Findfirst(Path.Verba.step9.PIn+'\*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -468,7 +468,7 @@ Begin
    fmMain.ProgressBarKrutHron.Step:=1;
    if fmMain.CheckListBoxKrutHron.Items[I]=Path.Hron.step1.Name then {Step 1}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutHron.Max:=ColFilesFromDir(Path.Hron.step1.PIn);
     FindRes:=Findfirst(Path.Hron.step1.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -500,7 +500,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutHron.Items[I]=Path.Hron.step2.Name then {Step2}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutHron.Max:=ColFilesFromDir(Path.Hron.step2.PIn);
     FindRes:=Findfirst(Path.Hron.step2.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -520,7 +520,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutHron.Items[I]=Path.Hron.step3.Name then {Step 3}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutHron.Max:=ColFilesFromDir(Path.Hron.step3.PIn);
     FindRes:=Findfirst(Path.Hron.step3.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -552,7 +552,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutHron.Items[I]=Path.Hron.step4.Name then {Step 4}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutHron.Max:=ColFilesFromDir(Path.Hron.step4.PIn);
     FindRes:=Findfirst(Path.Hron.step4.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -585,7 +585,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutHron.Items[I]=Path.Hron.step5.Name then {Step 5}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutHron.Max:=ColFilesFromDir(Path.Hron.step5.PIn);
     FindRes:=Findfirst(Path.Hron.step5.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -618,7 +618,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutHron.Items[I]=Path.Hron.step6.Name then {Step 6}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutHron.Max:=ColFilesFromDir(Path.Hron.step6.PIn);
     FindRes:=Findfirst(Path.Hron.step6.PIn+'\*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -649,7 +649,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutHron.Items[I]=Path.Hron.step7.Name then {Step 7}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutHron.Max:=ColFilesFromDir(Path.Hron.step7.PIn);
     FindRes:=Findfirst(Path.Hron.step7.PIn+'\*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -680,7 +680,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutHron.Items[I]=Path.Hron.step8.Name then {Step 8}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutHron.Max:=ColFilesFromDir(Path.Hron.step8.PIn);
     FindRes:=Findfirst(Path.Hron.step8.PIn+'\*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -732,7 +732,7 @@ Begin
    fmMain.ProgressBarKrut311.Step:=1;
    if fmMain.CheckListBoxKrut311Action.Items[I]=Path.P311.step1.Name then {Step 1}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrut311.Max:=ColFilesFromDir(Path.P311.step1.PIn);
     FindRes:=Findfirst(Path.P311.step1.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -752,7 +752,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrut311Action.Items[I]=Path.P311.Step2.Name then{Step2}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrut311.Max:=ColFilesFromDir(Path.P311.step2.PIn);
     FindRes:=Findfirst(Path.P311.step2.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -773,7 +773,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrut311Action.Items[I]=Path.P311.Step3.Name then {Step3}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrut311.Max:=ColFilesFromDir(Path.P311.step3.PIn);
     FindRes:=Findfirst(Path.P311.step3.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -1037,7 +1037,7 @@ Begin
    fmMain.ProgressBarKrutArhiv.Step:=1;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step1.Name then {Step 1}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step1.PIn);
     dmData.qrKrutVerba311ArhUpd.ParamByName('ID_USER_RA').Value:=UsersLogin.ID;
     dmData.qrKrutVerba311ArhUpd.ParamByName('SCHEME').Value:='1';
@@ -1073,7 +1073,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step2.Name then {Step 2}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step2.PIn);
     dmData.qrKrutVerba311ArhUpd.ParamByName('ID_USER_RA').Value:=UsersLogin.ID;
     dmData.qrKrutVerba311ArhUpd.ParamByName('SCHEME').Value:='2';
@@ -1109,7 +1109,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step3.Name then {Step 3}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step3.PIn);
     FindRes:=Findfirst(Path.Arhivator.step3.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -1129,7 +1129,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step4.Name then {Step 4}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step4.PIn);
     FindRes:=Findfirst(Path.Arhivator.step4.PIn+'\SBC*.xml',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -1149,7 +1149,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step5.Name then {Step 5}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step5.PIn);
     FindRes:=Findfirst(Path.Arhivator.step5.PIn+'\A*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -1169,7 +1169,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step6.Name then {Step 6}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step6.PIn);
     FindRes:=Findfirst(Path.Arhivator.step6.PIn+'\B*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -1189,7 +1189,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step7.Name then {Step 7}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step7.PIn);
     FindRes:=Findfirst(Path.Arhivator.step7.PIn+'\*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -1209,7 +1209,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step8.Name then {Step 8}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step8.PIn);
     FindRes:=Findfirst(Path.Arhivator.step8.PIn+'\*.ARJ',faAnyFile,SerchFile);
     While FindRes=0 do
@@ -1229,7 +1229,7 @@ Begin
    End;
    if fmMain.CheckListBoxKrutArhiv.Items[I]=Path.Arhivator.step9.Name then {Step 9}
    Begin
-    {узнать количество фаилов в папке}
+    {узнать количество файлов в папке}
     fmMain.ProgressBarKrutArhiv.Max:=ColFilesFromDir(Path.Arhivator.step9.PIn);
     FindRes:=Findfirst(Path.Arhivator.step9.PIn+'\*.010',faAnyFile,SerchFile);
     While FindRes=0 do

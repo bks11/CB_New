@@ -398,7 +398,7 @@ object fmMain: TfmMain
         Top = 3
         Width = 942
         Height = 550
-        ActivePage = TabSheet311Arh
+        ActivePage = TabSheetInCa
         TabOrder = 0
         object TabSheetSform: TTabSheet
           Caption = #1057#1092#1086#1088#1084#1080#1088#1086#1074#1072#1085#1085#1099#1077
@@ -641,7 +641,7 @@ object fmMain: TfmMain
         Top = 3
         Width = 942
         Height = 550
-        ActivePage = TabSheetArhMail
+        ActivePage = TabSheet4
         TabOrder = 0
         object TabSheetArhiv311PA: TTabSheet
           Caption = '311A'

@@ -11,6 +11,7 @@ object MainForm: TMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -28,7 +29,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 853
     Height = 610
-    ActivePage = AllInfo
+    ActivePage = Admins
     Align = alClient
     TabOrder = 0
     object AllInfo: TTabSheet
@@ -261,9 +262,10 @@ object MainForm: TMainForm
         Left = 16
         Top = 19
         Width = 402
-        Height = 353
+        Height = 222
         BorderStyle = bsSingle
         TabOrder = 0
+        Visible = False
         object LoansInfoFIOLoaner: TLabel
           Left = 8
           Top = 5
@@ -368,112 +370,12 @@ object MainForm: TMainForm
           Font.Style = []
           ParentFont = False
         end
-        object DBGrid1: TDBGrid
-          Left = 1
-          Top = 221
-          Width = 396
-          Height = 127
-          Align = alBottom
-          DataSource = DMData.DataSourceLoanerInfoByLoans
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          OnCellClick = DBGrid1CellClick
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'ID_LOANER'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'LASTNAME'
-              Title.Caption = #1060#1040#1052#1048#1051#1048#1071
-              Title.Color = clSkyBlue
-              Width = 130
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FIRSTNAME'
-              Title.Caption = #1048#1052#1071
-              Title.Color = clSkyBlue
-              Width = 130
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MIDDLENAME'
-              Title.Caption = #1054#1058#1063#1045#1057#1058#1042#1054
-              Title.Color = clSkyBlue
-              Width = 130
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'INN'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'PASSPORTSERIAL'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'PASSPORTNUM'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'PASSPORT_ISSUE_DATE'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'PASSPORT_ISSUE_ORG'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'ADDRESS1'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'ADDRESS2'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'PHONE1'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'PHONE2'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'NOTE'
-              Visible = False
-            end
-            item
-              Expanded = False
-              FieldName = 'IS_GUARANTOR'
-              Visible = False
-            end>
-        end
       end
       object pnlLoanInfo: TPanel
-        Left = 424
+        Left = 457
         Top = 19
-        Width = 375
-        Height = 351
+        Width = 385
+        Height = 392
         BorderStyle = bsSingle
         TabOrder = 1
         object LoansInfoValLoans: TLabel
@@ -619,6 +521,306 @@ object MainForm: TMainForm
           Font.Style = []
           ParentFont = False
         end
+        object btnPay: TButton
+          Left = 243
+          Top = 343
+          Width = 83
+          Height = 25
+          Caption = #1055#1086#1075#1072#1089#1080#1090#1100
+          TabOrder = 0
+          OnClick = btnPayClick
+        end
+        object CheckBoxPogashLoans: TCheckBox
+          Left = 10
+          Top = 347
+          Width = 114
+          Height = 17
+          Caption = #1050#1088#1077#1076#1080#1090' '#1087#1086#1075#1072#1096#1077#1085
+          Enabled = False
+          TabOrder = 1
+          OnClick = CheckBoxPogashLoansClick
+        end
+      end
+      object Panel1: TPanel
+        Left = 16
+        Top = 19
+        Width = 435
+        Height = 392
+        BorderStyle = bsSingle
+        TabOrder = 2
+        object Label4: TLabel
+          Left = 130
+          Top = 0
+          Width = 118
+          Height = 13
+          Caption = #1060#1072#1084#1080#1083#1080#1103' '#1048#1084#1103' '#1054#1090#1095#1077#1089#1090#1074#1086
+        end
+        object Label5: TLabel
+          Left = 130
+          Top = 38
+          Width = 151
+          Height = 13
+          Caption = #1048#1053#1053', '#1057#1077#1088#1080#1103' '#1080' '#1085#1086#1084#1077#1088' '#1087#1072#1089#1087#1086#1088#1090#1072
+        end
+        object Label6: TLabel
+          Left = 130
+          Top = 78
+          Width = 136
+          Height = 13
+          Caption = #1044#1072#1090#1072' '#1080' '#1082#1077#1084' '#1074#1099#1076#1072#1085' '#1087#1072#1089#1087#1086#1088#1090
+        end
+        object Label7: TLabel
+          Left = 130
+          Top = 118
+          Width = 81
+          Height = 13
+          Caption = #1040#1076#1088#1077#1089' '#1087#1088#1086#1087#1080#1089#1082#1080
+        end
+        object Label8: TLabel
+          Left = 24
+          Top = 207
+          Width = 52
+          Height = 13
+          Caption = #1058#1077#1083#1077#1092#1086#1085#1099
+        end
+        object Label9: TLabel
+          Left = 130
+          Top = 160
+          Width = 101
+          Height = 13
+          Caption = #1040#1076#1088#1077#1089' '#1092#1072#1082#1090#1080#1095#1077#1089#1082#1080#1081
+        end
+        object DBGridLoanInfoDebtors: TDBGrid
+          Left = 1
+          Top = 280
+          Width = 429
+          Height = 107
+          Align = alBottom
+          DataSource = DMData.DataSourceLoanerInfoByLoans
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Tahoma'
+          TitleFont.Style = []
+          OnCellClick = DBGridLoanInfoDebtorsCellClick
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_LOANER'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'LASTNAME'
+              Title.Caption = #1060#1040#1052#1048#1051#1048#1071
+              Title.Color = clSkyBlue
+              Width = 127
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FIRSTNAME'
+              Title.Caption = #1048#1052#1071
+              Title.Color = clSkyBlue
+              Width = 139
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MIDDLENAME'
+              Title.Caption = #1054#1058#1063#1045#1057#1058#1042#1054
+              Title.Color = clSkyBlue
+              Width = 149
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'INN'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'PASSPORTSERIAL'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'PASSPORTNUM'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'PASSPORT_ISSUE_DATE'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'PASSPORT_ISSUE_ORG'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'ADDRESS1'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'ADDRESS2'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'PHONE1'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'PHONE2'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'NOTE'
+              Visible = False
+            end
+            item
+              Expanded = False
+              FieldName = 'IS_GUARANTOR'
+              Visible = False
+            end>
+        end
+        object EditLoanInfoFam: TEdit
+          Left = 8
+          Top = 14
+          Width = 130
+          Height = 21
+          TabOrder = 1
+          Text = 'EditLoanInfoFam'
+        end
+        object EditLoanInfoNam: TEdit
+          Left = 148
+          Top = 14
+          Width = 130
+          Height = 21
+          TabOrder = 2
+          Text = 'Edit1'
+        end
+        object EditLoanInfoOtch: TEdit
+          Left = 289
+          Top = 14
+          Width = 130
+          Height = 21
+          TabOrder = 3
+          Text = 'Edit1'
+        end
+        object EditLoanInfoPSe: TEdit
+          Left = 152
+          Top = 57
+          Width = 120
+          Height = 21
+          TabOrder = 4
+          Text = 'Edit1'
+        end
+        object EditLoanInfoInn: TEdit
+          Left = 8
+          Top = 57
+          Width = 120
+          Height = 21
+          TabOrder = 5
+          Text = 'Edit1'
+        end
+        object EditLoanInfoPNo: TEdit
+          Left = 297
+          Top = 57
+          Width = 122
+          Height = 21
+          TabOrder = 6
+          Text = 'Edit1'
+        end
+        object EditLoanInfoDat: TEdit
+          Left = 8
+          Top = 97
+          Width = 121
+          Height = 21
+          TabOrder = 7
+          Text = 'Edit1'
+        end
+        object EditLoanInfoKem: TEdit
+          Left = 135
+          Top = 97
+          Width = 284
+          Height = 21
+          TabOrder = 8
+          Text = 'Edit1'
+        end
+        object EditLoanInfoAd2: TEdit
+          Left = 8
+          Top = 175
+          Width = 411
+          Height = 21
+          TabOrder = 9
+          Text = 'Edit1'
+        end
+        object EditLoanInfoAd1: TEdit
+          Left = 8
+          Top = 137
+          Width = 411
+          Height = 21
+          TabOrder = 10
+          Text = 'Edit1'
+        end
+        object EditLoanInfoTe1: TEdit
+          Left = 8
+          Top = 223
+          Width = 121
+          Height = 21
+          TabOrder = 11
+          Text = 'EditLoanInfoTe1'
+        end
+        object EditLoanInfoTe2: TEdit
+          Left = 8
+          Top = 250
+          Width = 121
+          Height = 21
+          TabOrder = 12
+          Text = 'Edit11'
+        end
+        object CheckBoxLoanInfoIsDebtor: TCheckBox
+          Left = 150
+          Top = 221
+          Width = 90
+          Height = 17
+          Caption = #1055#1086#1088#1091#1095#1080#1090#1077#1083#1100
+          TabOrder = 13
+        end
+        object ButtonLoanInfoDel: TButton
+          Left = 342
+          Top = 244
+          Width = 75
+          Height = 25
+          Caption = #1059#1076#1072#1083#1080#1090#1100
+          TabOrder = 14
+          OnClick = ButtonLoanInfoDelClick
+        end
+        object ButtonLoanInfoSave: TButton
+          Left = 246
+          Top = 244
+          Width = 75
+          Height = 25
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+          TabOrder = 15
+          OnClick = ButtonLoanInfoSaveClick
+        end
+        object ButtonLoanInfoAdd: TButton
+          Left = 150
+          Top = 244
+          Width = 75
+          Height = 25
+          Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+          TabOrder = 16
+          OnClick = ButtonLoanInfoAddClick
+        end
       end
     end
     object Dosudebka: TTabSheet
@@ -734,7 +936,7 @@ object MainForm: TMainForm
           Top = 35
           Width = 191
           Height = 182
-          Date = 42229.405575046290000000
+          Date = 42229.852216828700000000
           TabOrder = 1
         end
         object ButtonDosudebkaAdd: TButton
@@ -776,7 +978,7 @@ object MainForm: TMainForm
         Top = 3
         Width = 796
         Height = 326
-        ActivePage = TabSheetAdminkaKurses
+        ActivePage = tsSystemConfig
         TabOrder = 0
         object UsersVsLoans: TTabSheet
           Caption = #1057#1086#1090#1088#1091#1076#1085#1080#1082'-'#1050#1088#1077#1076#1080#1090
@@ -1112,7 +1314,7 @@ object MainForm: TMainForm
             Top = 3
             Width = 191
             Height = 182
-            Date = 42229.405575150460000000
+            Date = 42229.852216921300000000
             TabOrder = 0
             OnClick = MonthCalendarAdmCursesClick
           end
@@ -1156,6 +1358,183 @@ object MainForm: TMainForm
             Enabled = False
             TabOrder = 5
             OnClick = ButtonAdmCursSaveClick
+          end
+        end
+        object tsSystemConfig: TTabSheet
+          Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1089#1080#1089#1090#1077#1084#1099
+          ImageIndex = 3
+          OnShow = tsSystemConfigShow
+          object Label10: TLabel
+            Left = 24
+            Top = 20
+            Width = 97
+            Height = 13
+            Caption = #1042#1077#1088#1089#1080#1103' '#1087#1088#1086#1075#1088#1072#1084#1084#1099':'
+          end
+          object Label11: TLabel
+            Left = 24
+            Top = 52
+            Width = 76
+            Height = 13
+            Caption = #1055#1091#1090#1100' '#1082' '#1088#1077#1083#1080#1079#1091':'
+          end
+          object Label12: TLabel
+            Left = 24
+            Top = 83
+            Width = 110
+            Height = 13
+            Caption = #1055#1091#1090#1100' '#1076#1083#1103'  '#1091#1089#1090#1072#1085#1086#1074#1082#1080':'
+          end
+          object Label13: TLabel
+            Left = 382
+            Top = 20
+            Width = 68
+            Height = 13
+            Caption = #1044#1072#1090#1072' '#1088#1077#1083#1080#1079#1072':'
+          end
+          object Label14: TLabel
+            Left = 382
+            Top = 52
+            Width = 65
+            Height = 13
+            Caption = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077':'
+          end
+          object edVersion: TEdit
+            Left = 178
+            Top = 16
+            Width = 150
+            Height = 21
+            TabOrder = 0
+          end
+          object edPathRelease: TEdit
+            Left = 178
+            Top = 48
+            Width = 150
+            Height = 21
+            TabOrder = 1
+          end
+          object edPathInstall: TEdit
+            Left = 178
+            Top = 80
+            Width = 150
+            Height = 21
+            TabOrder = 2
+          end
+          object btnSaveAppInfo: TButton
+            Left = 564
+            Top = 98
+            Width = 65
+            Height = 25
+            Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+            TabOrder = 3
+            OnClick = btnSaveAppInfoClick
+          end
+          object Panel2: TPanel
+            Left = 0
+            Top = 134
+            Width = 788
+            Height = 164
+            Align = alBottom
+            TabOrder = 4
+            object DBGrid1: TDBGrid
+              Left = 1
+              Top = 1
+              Width = 786
+              Height = 162
+              Align = alClient
+              DataSource = DMData.dsqAppInfo
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              OnDblClick = DBGrid1DblClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'ID_CONFIG'
+                  Title.Caption = 'ID'
+                  Width = 44
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'APP_PATH'
+                  Width = 183
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'APP_RELEASE_PATH'
+                  Width = 164
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'APP_VERSION'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'IS_RELEASE'
+                  Width = 74
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'RELEASE_DATE'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'APP_NOTE'
+                  Width = 138
+                  Visible = True
+                end>
+            end
+          end
+          object edRelNote: TEdit
+            Left = 476
+            Top = 44
+            Width = 121
+            Height = 21
+            TabOrder = 5
+          end
+          object chbIsRelease: TCheckBox
+            Left = 382
+            Top = 83
+            Width = 97
+            Height = 17
+            Caption = #1056#1077#1083#1080#1079
+            TabOrder = 6
+          end
+          object btnAddAppInfo: TButton
+            Left = 642
+            Top = 98
+            Width = 65
+            Height = 25
+            Caption = #1044#1086#1073#1072#1074#1080#1090#1100
+            TabOrder = 7
+            OnClick = btnAddAppInfoClick
+          end
+          object dtpReleaseDate: TDateTimePicker
+            Left = 476
+            Top = 12
+            Width = 123
+            Height = 21
+            Date = 42260.920027662040000000
+            Time = 42260.920027662040000000
+            TabOrder = 8
+          end
+          object btnAppDel: TButton
+            Left = 720
+            Top = 98
+            Width = 65
+            Height = 25
+            Caption = #1059#1076#1072#1083#1080#1090#1100
+            TabOrder = 9
+            OnClick = btnAppDelClick
           end
         end
       end
@@ -1526,12 +1905,12 @@ object MainForm: TMainForm
             Visible = False
           end>
       end
-      object MonthCalendar1: TMonthCalendar
+      object MonthCalendarOrganaizer: TMonthCalendar
         Left = 644
         Top = 3
         Width = 191
         Height = 182
-        Date = 42229.405575231480000000
+        Date = 42229.852217037030000000
         TabOrder = 1
       end
       object ButtonOrganaizerComplit: TButton
@@ -1630,7 +2009,6 @@ object MainForm: TMainForm
       Width = 121
       Height = 21
       TabOrder = 1
-      Text = 'o.bondarenko'
       OnKeyDown = edLoginKeyDown
     end
     object edPassword: TEdit
@@ -1788,6 +2166,18 @@ object MainForm: TMainForm
       Color = clSkyBlue
       ParentBackground = False
       TabOrder = 1
+      object LabelLoansCount: TLabel
+        Left = 128
+        Top = 8
+        Width = 3
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object chbPaid: TCheckBox
         Left = 7
         Top = 4

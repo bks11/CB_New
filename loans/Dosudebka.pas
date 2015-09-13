@@ -34,12 +34,14 @@ Procedure TDosudebnoe.AddAction;
 Begin
  DMData.QRDosudebkaListAdd.Params.ParamValues['ID_LOAN']:= DMData.qrLoanInfo.FieldByName('ID_LOAN').AsInteger;
  DMData.QRDosudebkaListAdd.Params.ParamValues['ACTION_DATE']:=MainForm.MonthCalendarDosudebnoe.Date;
- DMData.QRDosudebkaListAdd.Params.ParamValues['ID_USER']:=1;
+ DMData.QRDosudebkaListAdd.Params.ParamValues['ID_USER']:=LoginUsers.ID;
  DMData.QRDosudebkaListAdd.Params.ParamValues['NOTE']:=MainForm.MemoDosudebka.Text;
  DMData.QRDosudebkaListAdd.ExecSQL;
  RefreshList;
  MainForm.ButtonDosudebkaEdit.Enabled:=False;
  MainForm.ButtonDosudebkaDel.Enabled:=False;
+ MainForm.RefreshOrganaizer;
+ Organaizer.ChengeComplited;
 End;
 
 Procedure TDosudebnoe.LoadSelectedItem;
@@ -57,18 +59,22 @@ Begin
  RefreshList;
  MainForm.ButtonDosudebkaEdit.Enabled:=False;
  MainForm.ButtonDosudebkaDel.Enabled:=False;
+ MainForm.RefreshOrganaizer;
+ Organaizer.ChengeComplited;
 End;
 
 Procedure TDosudebnoe.EditSelectedItem;
 Begin
  DMData.QRDosudebkaListEdit.Params.ParamValues['ID_JUDJORNAL']:=DMData.QRDosudebkaList.FieldByName('ID_JUDJORNAL').AsInteger;
  DMData.QRDosudebkaListEdit.Params.ParamValues['ACTION_DATE']:=MainForm.MonthCalendarDosudebnoe.Date;
- DMData.QRDosudebkaListEdit.Params.ParamValues['ID_USER']:=1;
+ DMData.QRDosudebkaListEdit.Params.ParamValues['ID_USER']:=LoginUsers.ID;;
  DMData.QRDosudebkaListEdit.Params.ParamValues['NOTE']:=MainForm.MemoDosudebka.Text;
  DMData.QRDosudebkaListEdit.ExecSQL;
  RefreshList;
  MainForm.ButtonDosudebkaEdit.Enabled:=False;
  MainForm.ButtonDosudebkaDel.Enabled:=False;
+ MainForm.RefreshOrganaizer;
+ Organaizer.ChengeComplited;
 End;
 
 end.

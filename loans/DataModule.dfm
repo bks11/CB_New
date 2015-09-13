@@ -9,6 +9,7 @@ object DMData: TDMData
       'Password=postgres'
       'Server=10.3.0.219'
       'DriverID=PG')
+    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 8
@@ -21,8 +22,8 @@ object DMData: TDMData
     Connection = conCredittDB
     SQL.Strings = (
       '')
-    Left = 39
-    Top = 110
+    Left = 29
+    Top = 78
   end
   object ADPhysPgDriverLink1: TADPhysPgDriverLink
     Left = 137
@@ -30,8 +31,8 @@ object DMData: TDMData
   end
   object dsqAny: TDataSource
     DataSet = qrAny
-    Left = 103
-    Top = 110
+    Left = 93
+    Top = 78
   end
   object qrLoanInfo: TADQuery
     Connection = conCredittDB
@@ -52,7 +53,8 @@ object DMData: TDMData
       'inner join '
       #9'"TUSERS" u on ul."ID_USER" = u."ID_USER"'
       'where u."ID_USER"=:ID_USER and lnr."IS_GUARANTOR"=False AND '
-      '("IS_PAID" = :PAID1 OR "IS_PAID" = :PAID2);')
+      '("IS_PAID" = :PAID1 OR "IS_PAID" = :PAID2) '
+      'order by lnr."LASTNAME";')
     Left = 39
     Top = 161
     ParamData = <
@@ -98,7 +100,8 @@ object DMData: TDMData
       '  "TLOANER"."PHONE1", '
       '  "TLOANER"."PHONE2", '
       '  "TLOANER"."NOTE", '
-      '  "TLOANER"."IS_GUARANTOR"'
+      '  "TLOANER"."IS_GUARANTOR",'
+      '  "TLOANER"."FULL_PASSPORT"'
       'FROM '
       '  public."TLOAN", '
       '  public."TLOANER", '
@@ -180,7 +183,7 @@ object DMData: TDMData
     Top = 317
   end
   object DataSourceLoanser: TDataSource
-    DataSet = TableLoanser
+    DataSet = ADQueryLoanser
     Left = 600
     Top = 369
   end
@@ -238,8 +241,8 @@ object DMData: TDMData
       '  FROM "TJUDJORNAL"'
       'Where'
       '"ID_LOAN"=:ID_LOAN;')
-    Left = 224
-    Top = 112
+    Left = 206
+    Top = 84
     ParamData = <
       item
         Name = 'ID_LOAN'
@@ -250,8 +253,8 @@ object DMData: TDMData
   end
   object DataSourceDosudebkaList: TDataSource
     DataSet = QRDosudebkaList
-    Left = 342
-    Top = 112
+    Left = 324
+    Top = 84
   end
   object QRDosudebkaListAdd: TADQuery
     Connection = conCredittDB
@@ -262,8 +265,8 @@ object DMData: TDMData
       '"ID_USER", '
       '"NOTE")'
       'VALUES (:ID_LOAN, :ACTION_DATE, :ID_USER, :NOTE);')
-    Left = 224
-    Top = 265
+    Left = 272
+    Top = 271
     ParamData = <
       item
         Name = 'ID_LOAN'
@@ -295,8 +298,8 @@ object DMData: TDMData
     SQL.Strings = (
       'DELETE FROM "TJUDJORNAL"'
       ' WHERE "ID_JUDJORNAL"=:ID_JUDJORNAL;')
-    Left = 224
-    Top = 214
+    Left = 272
+    Top = 220
     ParamData = <
       item
         Name = 'ID_JUDJORNAL'
@@ -312,8 +315,8 @@ object DMData: TDMData
       '   SET "ACTION_DATE"=:ACTION_DATE, "ID_USER"=:ID_USER, '
       '       "NOTE"=:NOTE'
       ' WHERE "ID_JUDJORNAL"=:ID_JUDJORNAL;')
-    Left = 224
-    Top = 163
+    Left = 272
+    Top = 169
     ParamData = <
       item
         Name = 'ACTION_DATE'
@@ -648,5 +651,571 @@ object DMData: TDMData
     DataSet = qrGetCurrency
     Left = 130
     Top = 450
+  end
+  object ADQueryLoansCount: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'select Count(l."ID_LOAN") as Col'
+      #9' '
+      'from '
+      #9'"TLOANER" lnr '
+      'inner join '
+      #9'"TLOANINFO" li on lnr."ID_LOANER" = li."ID_LOANER"'
+      'inner join '
+      #9'"TLOAN" l on li."ID_LOAN" = l."ID_LOAN"'
+      'inner join'
+      #9'"TUSERLOANS" ul on l."ID_LOAN" = ul."ID_LOAN"'
+      'inner join '
+      #9'"TUSERS" u on ul."ID_USER" = u."ID_USER"'
+      'where u."ID_USER"=:ID_USER and lnr."IS_GUARANTOR"=False AND '
+      '("IS_PAID" = :PAID1 OR "IS_PAID" = :PAID2);')
+    Left = 8
+    Top = 160
+    ParamData = <
+      item
+        Name = 'ID_USER'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PAID1'
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PAID2'
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object ADQueryLoansInfoPogashLoans: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'UPDATE "TLOAN"'
+      '   SET "IS_PAID"=:IS_PAID'
+      ' WHERE "ID_LOAN"=:ID_LOAN;')
+    Left = 416
+    Top = 112
+    ParamData = <
+      item
+        Name = 'IS_PAID'
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_LOAN'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object ADQueryLoansInfoUpdateLoaner: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'UPDATE "TLOANER"'
+      
+        '   SET "FIRSTNAME"=:FIRSTNAME, "LASTNAME"=:LASTNAME, "MIDDLENAME' +
+        '"=:MIDDLENAME, "INN"=:INN, '
+      
+        '       "PASSPORTSERIAL"=:PASSPORTSERIAL, "PASSPORTNUM"=:PASSPORT' +
+        'NUM, "PASSPORT_ISSUE_DATE"=:PASSPORT_ISSUE_DATE, '
+      
+        '       "PASSPORT_ISSUE_ORG"=:PASSPORT_ISSUE_ORG, "ADDRESS1"=:ADD' +
+        'RESS1, "ADDRESS2"=:ADDRESS2, "PHONE1"=:PHONE1, '
+      
+        '       "PHONE2"=:PHONE2,"IS_GUARANTOR"=:IS_GUARANTOR, "FULL_NAME' +
+        '"=:FULL_NAME'
+      ' WHERE "ID_LOANER"=:ID_LOANER;')
+    Left = 40
+    Top = 408
+    ParamData = <
+      item
+        Name = 'FIRSTNAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'LASTNAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'MIDDLENAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'INN'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PASSPORTSERIAL'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PASSPORTNUM'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PASSPORT_ISSUE_DATE'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PASSPORT_ISSUE_ORG'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ADDRESS1'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ADDRESS2'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PHONE1'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PHONE2'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'IS_GUARANTOR'
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'FULL_NAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_LOANER'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object ADQueryLoanInfoColDebtor: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'SELECT '
+      '  Count("TLOANER"."ID_LOANER") as Col  '
+      'FROM '
+      '  public."TLOAN", '
+      '  public."TLOANER", '
+      '  public."TLOANINFO"'
+      'WHERE '
+      
+        '  "TLOAN"."ID_LOAN"=:ID_Loans AND "TLOAN"."ID_LOAN" = "TLOANINFO' +
+        '"."ID_LOAN" AND'
+      '  "TLOANINFO"."ID_LOANER" = "TLOANER"."ID_LOANER" and'
+      '  "TLOANER"."IS_GUARANTOR"=False;')
+    Left = 8
+    Top = 208
+    ParamData = <
+      item
+        Name = 'ID_LOANS'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 3
+      end>
+  end
+  object ADQueryLoansInfoAddLoaner: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'INSERT INTO "TLOANER"('
+      '"FIRSTNAME",'
+      '"LASTNAME", '
+      '"MIDDLENAME", '
+      '"INN", '
+      '"PASSPORTSERIAL", '
+      '"PASSPORTNUM", '
+      '"PASSPORT_ISSUE_DATE", '
+      '"PASSPORT_ISSUE_ORG", '
+      '"ADDRESS1", '
+      '"ADDRESS2", '
+      '"PHONE1", '
+      '"PHONE2",'
+      '"IS_GUARANTOR", '
+      '"FULL_NAME")'
+      
+        '    VALUES (:FIRSTNAME, :LASTNAME, :MIDDLENAME, :INN, :PASSPORTS' +
+        'ERIAL, :PASSPORTNUM, '
+      
+        '            :PASSPORT_ISSUE_DATE, :PASSPORT_ISSUE_ORG, :ADDRESS1' +
+        ', :ADDRESS2, '
+      '            :PHONE1, :PHONE2, :"IS_GUARANTOR", :FULL_NAME);')
+    Left = 72
+    Top = 408
+    ParamData = <
+      item
+        Name = 'FIRSTNAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'LASTNAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'MIDDLENAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'INN'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PASSPORTSERIAL'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PASSPORTNUM'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PASSPORT_ISSUE_DATE'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PASSPORT_ISSUE_ORG'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ADDRESS1'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ADDRESS2'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PHONE1'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'PHONE2'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'IS_GUARANTOR'
+        IsCaseSensitive = True
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'FULL_NAME'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object ADQueryLoansInfoMaxIdDebtors: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'SELECT Max("ID_LOANER") '
+      '  FROM "TLOANER";')
+    Left = 104
+    Top = 408
+  end
+  object ADQueryLoanerInfoAdd: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'INSERT INTO "TLOANINFO"('
+      '"ID_LOANER", '
+      '"ID_LOAN")'
+      'VALUES (:ID_LOANER, :ID_LOAN);')
+    Left = 136
+    Top = 408
+    ParamData = <
+      item
+        Name = 'ID_LOANER'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_LOAN'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object ADQueryLoansInfoDelLoaner: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'DELETE FROM "TLOANINFO"'
+      ' WHERE "ID_LOANER"=:ID_LOANER and "ID_LOAN"=:ID_LOAN;'
+      '')
+    Left = 168
+    Top = 408
+    ParamData = <
+      item
+        Name = 'ID_LOANER'
+        ParamType = ptInput
+      end
+      item
+        Name = 'ID_LOAN'
+        ParamType = ptInput
+      end>
+  end
+  object ADQueryLoanser: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'SELECT T.* FROM "TLOANER" T order by "LASTNAME"')
+    Left = 536
+    Top = 368
+  end
+  object qrAppInfo: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'SELECT DISTINCT '
+      '  * '
+      'FROM '
+      '  "TCONFIG" '
+      'ORDER BY  '
+      ' "RELEASE_DATE" '
+      'ASC')
+    Left = 854
+    Top = 370
+    object qrAppInfoID_CONFIG: TLargeintField
+      FieldName = 'ID_CONFIG'
+      Origin = '"ID_CONFIG"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qrAppInfoAPP_PATH: TWideStringField
+      FieldName = 'APP_PATH'
+      Origin = '"APP_PATH"'
+      Size = 200
+    end
+    object qrAppInfoAPP_VERSION: TWideStringField
+      FieldName = 'APP_VERSION'
+      Origin = '"APP_VERSION"'
+      Size = 10
+    end
+    object qrAppInfoAPP_NOTE: TWideStringField
+      FieldName = 'APP_NOTE'
+      Origin = '"APP_NOTE"'
+      Size = 200
+    end
+    object qrAppInfoIS_RELEASE: TBooleanField
+      FieldName = 'IS_RELEASE'
+      Origin = '"IS_RELEASE"'
+    end
+    object qrAppInfoRELEASE_DATE: TDateField
+      FieldName = 'RELEASE_DATE'
+      Origin = '"RELEASE_DATE"'
+    end
+    object qrAppInfoAPP_RELEASE_PATH: TWideStringField
+      FieldName = 'APP_RELEASE_PATH'
+      Origin = '"APP_RELEASE_PATH"'
+      Size = 250
+    end
+  end
+  object qrUpdateAppInfo: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'UPDATE '
+      '   "TCONFIG"'
+      'SET  '
+      '    "APP_PATH"=:APP_PATH, '
+      '    "APP_VERSION"=:APP_VERSION, '
+      '    "APP_NOTE"=:APP_NOTE, '
+      '    "IS_RELEASE"=:IS_RELEASE, '
+      '    "RELEASE_DATE"= :RELEASE_DATE, '
+      '    "APP_RELEASE_PATH"=:APP_RELEASE_PATH'
+      ' WHERE '
+      '    "ID_CONFIG"= :ID_CONFIG')
+    Left = 854
+    Top = 422
+    ParamData = <
+      item
+        Name = 'APP_PATH'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'APP_VERSION'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'APP_NOTE'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'IS_RELEASE'
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'RELEASE_DATE'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'APP_RELEASE_PATH'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'ID_CONFIG'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object dsqAppInfo: TDataSource
+    DataSet = qrAppInfo
+    Left = 932
+    Top = 372
+  end
+  object qrInsertAppInfo: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'INSERT INTO "TCONFIG"('
+      
+        '            "APP_PATH", "APP_VERSION", "APP_NOTE", "IS_RELEASE",' +
+        ' '
+      '            "RELEASE_DATE", "APP_RELEASE_PATH")'
+      'VALUES ('
+      '            :APP_PATH, :APP_VERSION, :APP_NOTE, :IS_RELEASE, '
+      '            :RELEASE_DATE, :APP_RELEASE_PATH'
+      '       )'
+      'RETURNING "ID_CONFIG"')
+    Left = 854
+    Top = 468
+    ParamData = <
+      item
+        Name = 'APP_PATH'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'APP_VERSION'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'APP_NOTE'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'IS_RELEASE'
+        DataType = ftBoolean
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'RELEASE_DATE'
+        DataType = ftDate
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'APP_RELEASE_PATH'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qrInsertAppInfoID_CONFIG: TLargeintField
+      FieldName = 'ID_CONFIG'
+      Origin = '"ID_CONFIG"'
+    end
+  end
+  object qrUpdateRelease: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'UPDATE "TCONFIG"'
+      '   SET  "IS_RELEASE"=FALSE'
+      ' WHERE "ID_CONFIG" <> :ID_CONFIG;')
+    Left = 854
+    Top = 516
+    ParamData = <
+      item
+        Name = 'ID_CONFIG'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object qrDelApp: TADQuery
+    Connection = conCredittDB
+    SQL.Strings = (
+      'DELETE FROM "TCONFIG"'
+      ' WHERE "ID_CONFIG" = :ID_CONFIG')
+    Left = 856
+    Top = 564
+    ParamData = <
+      item
+        Name = 'ID_CONFIG'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
   end
 end

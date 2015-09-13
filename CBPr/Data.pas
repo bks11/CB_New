@@ -13,7 +13,7 @@ type
     ADPhysPgDriverLink1: TADPhysPgDriverLink;
     ADGUIxWaitCursor1: TADGUIxWaitCursor;
     ADConnection1: TADConnection;
-    ADQueryLoadDostup: TADQuery;
+    qrLoadDostup: TADQuery;
     qr311PLoadPath: TADQuery;
     qr311ProvOutFile: TADQuery;
     qr311LoadData: TADQuery;

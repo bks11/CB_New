@@ -66,6 +66,29 @@ type
     qrAdminQursEdit: TADQuery;
     qrGetCurrency: TADQuery;
     dsqGetCurrency: TDataSource;
+    ADQueryLoansCount: TADQuery;
+    ADQueryLoansInfoPogashLoans: TADQuery;
+    ADQueryLoansInfoUpdateLoaner: TADQuery;
+    ADQueryLoanInfoColDebtor: TADQuery;
+    ADQueryLoansInfoAddLoaner: TADQuery;
+    ADQueryLoansInfoMaxIdDebtors: TADQuery;
+    ADQueryLoanerInfoAdd: TADQuery;
+    ADQueryLoansInfoDelLoaner: TADQuery;
+    ADQueryLoanser: TADQuery;
+    qrAppInfo: TADQuery;
+    qrUpdateAppInfo: TADQuery;
+    dsqAppInfo: TDataSource;
+    qrAppInfoID_CONFIG: TLargeintField;
+    qrAppInfoAPP_PATH: TWideStringField;
+    qrAppInfoAPP_VERSION: TWideStringField;
+    qrAppInfoAPP_NOTE: TWideStringField;
+    qrAppInfoIS_RELEASE: TBooleanField;
+    qrAppInfoRELEASE_DATE: TDateField;
+    qrAppInfoAPP_RELEASE_PATH: TWideStringField;
+    qrInsertAppInfo: TADQuery;
+    qrUpdateRelease: TADQuery;
+    qrInsertAppInfoID_CONFIG: TLargeintField;
+    qrDelApp: TADQuery;
   private
 
     { Private declarations }

@@ -105,30 +105,30 @@ Begin
   EqvPercent :=  SummPRUR + SummPUSD*MainForm.USDRate + SummPEUR*MainForm.EURRate + SummPUAH*MainForm.UAHRate;
 
 
-  MainForm.MainInfoPortfelSumRUR.Caption:='Â RUR - ' + FloatToStrF(SummRUR,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumUSD.Caption:='Â USD - ' + FloatToStrF(SummUSD,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumEUR.Caption:='Â EUR - ' + FloatToStrF(SummEUR,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumUAH.Caption:='Â UAH - ' + FloatToStrF(SummUAH,ffGeneral,12,2);
-  MainForm.MainInfoSumLoansEcv.Caption := 'ÝÊÂ. - '+ FloatToStrF(EqvLoan,ffGeneral,12,2);
+  MainForm.MainInfoPortfelSumRUR.Caption:='Â RUR - ' + FloatToStrF(SummRUR,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumUSD.Caption:='Â USD - ' + FloatToStrF(SummUSD,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumEUR.Caption:='Â EUR - ' + FloatToStrF(SummEUR,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumUAH.Caption:='Â UAH - ' + FloatToStrF(SummUAH,ffNumber,12,2);
+  MainForm.MainInfoSumLoansEcv.Caption := 'ÝÊÂ. - '+ FloatToStrF(EqvLoan,ffNumber,12,2);
 
 
-  MainForm.MainInfoPortfelSumZRUR.Caption:='Â RUR - ' + FloatToStrF(SummZRUR,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumZUSD.Caption:='Â USD - ' + FloatToStrF(SummZUSD,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumZEUR.Caption:='Â EUR - ' + FloatToStrF(SummZEUR,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumZUAH.Caption:='Â UAH - ' + FloatToStrF(SummZUAH,ffGeneral,12,2);
-  MainForm.MainInfoSumZadEcv.Caption := 'ÝÊÂ. - '+ FloatToStrF(EqvZad,ffGeneral,12,2);
+  MainForm.MainInfoPortfelSumZRUR.Caption:='Â RUR - ' + FloatToStrF(SummZRUR,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumZUSD.Caption:='Â USD - ' + FloatToStrF(SummZUSD,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumZEUR.Caption:='Â EUR - ' + FloatToStrF(SummZEUR,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumZUAH.Caption:='Â UAH - ' + FloatToStrF(SummZUAH,ffNumber,12,2);
+  MainForm.MainInfoSumZadEcv.Caption := 'ÝÊÂ. - '+ FloatToStrF(EqvZad,ffNumber,12,2);
 
-  MainForm.MainInfoPortfelSumTRUR.Caption:='Â RUR - ' + FloatToStrF(SummTRUR,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumTUSD.Caption:='Â USD - ' + FloatToStrF(SummTUSD,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumTEUR.Caption:='Â EUR - ' + FloatToStrF(SummTEUR,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumTUAH.Caption:='Â UAH - ' + FloatToStrF(SummTUAH,ffGeneral,12,2);
-  MainForm.MainInfoSumprosEcv.Caption := 'ÝÊÂ. - '+ FloatToStrF(EqvProsroch,ffGeneral,12,2);
+  MainForm.MainInfoPortfelSumTRUR.Caption:='Â RUR - ' + FloatToStrF(SummTRUR,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumTUSD.Caption:='Â USD - ' + FloatToStrF(SummTUSD,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumTEUR.Caption:='Â EUR - ' + FloatToStrF(SummTEUR,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumTUAH.Caption:='Â UAH - ' + FloatToStrF(SummTUAH,ffNumber,12,2);
+  MainForm.MainInfoSumprosEcv.Caption := 'ÝÊÂ. - '+ FloatToStrF(EqvProsroch,ffNumber,12,2);
 
-  MainForm.MainInfoPortfelSumPRUR.Caption:='Â RUR - ' + FloatToStrF(SummPRUR,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumPUSD.Caption:='Â USD - ' + FloatToStrF(SummPUSD,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumPEUR.Caption:='Â EUR - ' + FloatToStrF(SummPEUR,ffGeneral,12,2);
-  MainForm.MainInfoPortfelSumPUAH.Caption:='Â UAH - ' + FloatToStrF(SummPUAH,ffGeneral,12,2);
-  MainForm.MainInfoSumProcEcv.Caption := 'ÝÊÂ. - '+ FloatToStrF(EqvPercent,ffGeneral,12,2);
+  MainForm.MainInfoPortfelSumPRUR.Caption:='Â RUR - ' + FloatToStrF(SummPRUR,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumPUSD.Caption:='Â USD - ' + FloatToStrF(SummPUSD,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumPEUR.Caption:='Â EUR - ' + FloatToStrF(SummPEUR,ffNumber,12,2);
+  MainForm.MainInfoPortfelSumPUAH.Caption:='Â UAH - ' + FloatToStrF(SummPUAH,ffNumber,12,2);
+  MainForm.MainInfoSumProcEcv.Caption := 'ÝÊÂ. - '+ FloatToStrF(EqvPercent,ffNumber,12,2);
 
 
 End;

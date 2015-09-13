@@ -22,20 +22,20 @@ object dmData: TdmData
     Left = 72
     Top = 8
   end
-  object ADQueryLoadDostup: TADQuery
+  object qrLoadDostup: TADQuery
     Connection = ADConnection1
     SQL.Strings = (
       'SELECT '
-      '  "USER_REPORTS"."ID_REPORT", '
-      '  "USERS"."ID_USER"'
+      '  ur."ID_REPORT", '
+      '  u."ID_USER"'
       'FROM '
-      '  public."USERS", '
-      '  public."USER_REPORTS"'
+      '  public."USERS" u'
+      'INNER JOIN  '
+      '  public."USER_REPORTS" ur on  ur."ID_USER" = u."ID_USER"    '
       'WHERE '
-      '  "USER_REPORTS"."ID_USER" = "USERS"."ID_USER" and '
-      ' "USERS"."USER_LOGIN"=:USER_LOGIN;')
-    Left = 8
-    Top = 56
+      '  u."USER_LOGIN"= :USER_LOGIN;')
+    Left = 170
+    Top = 142
     ParamData = <
       item
         Name = 'USER_LOGIN'
@@ -644,8 +644,8 @@ object dmData: TdmData
         'date) and'
       '"REP311"."ID_ARCHIVE"="ARCHIVE_INFO"."ID_ARCHIVE" and'
       '"ARCHIVE_INFO"."PACKET_NAME" Like :Packet')
-    Left = 168
-    Top = 8
+    Left = 170
+    Top = 34
     ParamData = <
       item
         Name = 'PACKET'
@@ -662,7 +662,7 @@ object dmData: TdmData
       ' WHERE "ARC_NAME"=:ARC_NAME and'
       ' "PACKET_NAME"='#39' '#39';')
     Left = 170
-    Top = 56
+    Top = 87
     ParamData = <
       item
         Name = 'PACKET_NAME'

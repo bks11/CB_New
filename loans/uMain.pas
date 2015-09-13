@@ -188,7 +188,8 @@ var
   fINI : TIniFile;
   sIniName : String;
 begin
-  sIniName := ExtractFilePath(ParamStr(0))+'\cred.ini';
+  //sIniName := ExtractFilePath(ParamStr(0))+'\cred.ini';
+  sIniName := 'D:\Temp\LOAN\cred.ini';
   btnSave.Enabled := False;
   //ShowMessage(sIniName);
   fINI := TIniFile.Create(sIniName);

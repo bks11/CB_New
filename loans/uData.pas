@@ -13,8 +13,6 @@ type
     conLoan: TADConnection;
     ADGUIxWaitCursor1: TADGUIxWaitCursor;
     ADPhysPgDriverLink1: TADPhysPgDriverLink;
-    ADQueryLoadVersion: TADQuery;
-    ADQueryLoadPath: TADQuery;
     qrGetVersion: TADQuery;
   private
     { Private declarations }

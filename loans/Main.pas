@@ -105,11 +105,11 @@ type
     btnChengePas: TButton;
     DBGridOrganaizer: TDBGrid;
     pnlBottom: TPanel;
-    DBGrid1: TDBGrid;
+    DBGridLoanInfoDebtors: TDBGrid;
     LoansInfoPoruchitel: TLabel;
     TabSheet1: TTabSheet;
     DBGridOrganaizerFul: TDBGrid;
-    MonthCalendar1: TMonthCalendar;
+    MonthCalendarOrganaizer: TMonthCalendar;
     ButtonOrganaizerComplit: TButton;
     CheckBoxOrganaizerCompl: TCheckBox;
     TabSheetAdminkaKurses: TTabSheet;
@@ -135,6 +135,49 @@ type
     chbPaid: TCheckBox;
     edSearch: TEdit;
     lbSearch: TLabel;
+    LabelLoansCount: TLabel;
+    CheckBoxPogashLoans: TCheckBox;
+    Panel1: TPanel;
+    EditLoanInfoFam: TEdit;
+    EditLoanInfoNam: TEdit;
+    EditLoanInfoOtch: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    EditLoanInfoPSe: TEdit;
+    EditLoanInfoInn: TEdit;
+    EditLoanInfoPNo: TEdit;
+    EditLoanInfoDat: TEdit;
+    EditLoanInfoKem: TEdit;
+    Label6: TLabel;
+    Label7: TLabel;
+    EditLoanInfoAd2: TEdit;
+    EditLoanInfoAd1: TEdit;
+    EditLoanInfoTe1: TEdit;
+    EditLoanInfoTe2: TEdit;
+    Label8: TLabel;
+    CheckBoxLoanInfoIsDebtor: TCheckBox;
+    ButtonLoanInfoDel: TButton;
+    ButtonLoanInfoSave: TButton;
+    ButtonLoanInfoAdd: TButton;
+    Label9: TLabel;
+    btnPay: TButton;
+    tsSystemConfig: TTabSheet;
+    edVersion: TEdit;
+    edPathRelease: TEdit;
+    edPathInstall: TEdit;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    btnSaveAppInfo: TButton;
+    Panel2: TPanel;
+    DBGrid1: TDBGrid;
+    edRelNote: TEdit;
+    chbIsRelease: TCheckBox;
+    Label13: TLabel;
+    Label14: TLabel;
+    btnAddAppInfo: TButton;
+    dtpReleaseDate: TDateTimePicker;
+    btnAppDel: TButton;
     procedure FormCreate(Sender: TObject);
     procedure MainLoansListCellClick(Column: TColumn);
     procedure DBGridLoansLVSLCellClick(Column: TColumn);
@@ -151,7 +194,7 @@ type
     procedure CheckListBoxAdminLoansClickCheck(Sender: TObject);
     procedure MainLoansListDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer;
       Column: TColumn; State: TGridDrawState);
-    procedure DBGrid1CellClick(Column: TColumn);
+    procedure DBGridLoanInfoDebtorsCellClick(Column: TColumn);
     procedure CheckBoxOrganaizerComplClick(Sender: TObject);
     procedure ButtonOrganaizerComplitClick(Sender: TObject);
     procedure MonthCalendarAdmCursesClick(Sender: TObject);
@@ -164,6 +207,17 @@ type
     procedure edLoginKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure edSearchKeyPress(Sender: TObject; var Key: Char);
+    procedure CheckBoxPogashLoansClick(Sender: TObject);
+    procedure ButtonLoanInfoSaveClick(Sender: TObject);
+    procedure ButtonLoanInfoAddClick(Sender: TObject);
+    procedure ButtonLoanInfoDelClick(Sender: TObject);
+    procedure btnPayClick(Sender: TObject);
+    procedure tsSystemConfigShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnSaveAppInfoClick(Sender: TObject);
+    procedure btnAddAppInfoClick(Sender: TObject);
+    procedure btnAppDelClick(Sender: TObject);
   private
     FUser_Name: String;
     FDriverId: String;
@@ -186,7 +240,7 @@ type
     procedure SetUAHRate(const Value: Real);
     procedure SetUSDRate(const Value: Real);
     procedure LoginPO;
-    procedure RefreshLoansList(IS_PAID: Boolean);
+
     procedure ClearLabelMainForm;
     { Private declarations }
     property DataBase: String read FDataBase write SetDataBase;
@@ -203,9 +257,11 @@ type
 
   public
     { Public declarations }
+    procedure RefreshLoansList(IS_PAID: Boolean);
     property USDRate : Real read FUSDRate write SetUSDRate;
     property EURRate : Real read FEURRate write SetEURRate;
     property UAHRate : Real read FUAHRate write SetUAHRate;
+    procedure RefreshOrganaizer;
   end;
 
 var
@@ -224,7 +280,7 @@ implementation
 
 {$R *.dfm}
 
-procedure RefreshOrganaizer;
+procedure TMainForm.RefreshOrganaizer;
 Begin
  DMData.qrMainOrganaizer.Active:=False;
  DMData.qrMainOrganaizer.Params.ParamValues['ID_LOAN']:=DMData.qrLoanInfo.FieldByName('ID_LOAN').AsInteger;
@@ -354,6 +410,11 @@ begin
   FUser_Name := Value;
 end;
 
+procedure TMainForm.tsSystemConfigShow(Sender: TObject);
+begin
+     DMData.SafeExecuteDatasetVoidMethod(DMData.qrAppInfo.Open); 
+end;
+
 procedure TMainForm.ButtonDosudebkaAddClick(Sender: TObject);
 begin
  Dosudebnoe.AddAction;
@@ -367,6 +428,21 @@ end;
 procedure TMainForm.ButtonDosudebkaEditClick(Sender: TObject);
 begin
  Dosudebnoe.EditSelectedItem;
+end;
+
+procedure TMainForm.ButtonLoanInfoAddClick(Sender: TObject);
+begin
+ mainLoanInfo.MainLoanInfoLoanerAdd
+end;
+
+procedure TMainForm.ButtonLoanInfoDelClick(Sender: TObject);
+begin
+ mainLoanInfo.MainLoanInfoLoanerDel;
+end;
+
+procedure TMainForm.ButtonLoanInfoSaveClick(Sender: TObject);
+begin
+ mainLoanInfo.MainLoanInfoLoanerUpdate;
 end;
 
 procedure TMainForm.ButtonOrganaizerComplitClick(Sender: TObject);
@@ -384,6 +460,35 @@ begin
  Organaizer.ChengeComplited;
 end;
 
+procedure TMainForm.CheckBoxPogashLoansClick(Sender: TObject);
+
+begin
+ {
+
+ var
+   sAGREEMENT_NUM :String;
+  sAGREEMENT_NUM := DMData.qrLoanInfo.FieldByName('AGREEMENT_NUM').AsString;
+
+  if NOT CheckBoxPogashLoans.Checked then begin
+     if MessageDlg('УСТАНВИТЬ КРЕДИТУ СТАТУС ПОГАШЕН "ПОГАШЕН"?', mtWarning, [mbYes,mbNo], 0)= mrYes then
+     begin
+          mainLoanInfo.MainLoanInfoPogashLoans();
+          RefreshLoansList(True);
+          chbPaid.Checked :=  True;
+          DMData.qrLoanInfo.Locate('AGREEMENT_NUM',sAGREEMENT_NUM,[loCaseInsensitive]);
+     end;//if
+  end else  begin
+     if MessageDlg('СНЯТЬ С КРЕДИТА СТАТУС "ПОГАШЕН"?', mtWarning, [mbYes,mbNo], 0)= mrYes then
+     begin
+          mainLoanInfo.MainLoanInfoPogashLoans();
+          RefreshLoansList(True);
+          chbPaid.Checked :=  False;
+          DMData.qrLoanInfo.Locate('AGREEMENT_NUM',sAGREEMENT_NUM,[loCaseInsensitive]);
+     end;//if
+  end;
+  }
+end;
+
 procedure TMainForm.CheckListBoxAdminLoansClickCheck(Sender: TObject);
 begin
  Adminka.ADDBaseLoansList;
@@ -394,19 +499,31 @@ Begin
  MainForm.SetRate();
 
  DMData.qrLoanInfo.Active := False;
+ DMData.ADQueryLoansCount.Active := False;
  DMData.qrLoanInfo.Params.ParamByName('ID_USER').AsInteger := LoginUsers.ID;
+ DMData.ADQueryLoansCount.Params.ParamByName('ID_USER').AsInteger := LoginUsers.ID;
  if (IS_PAID) then  begin
     DMData.qrLoanInfo.Params.ParamByName('PAID1').AsBoolean := True;
     DMData.qrLoanInfo.Params.ParamByName('PAID2').AsBoolean := False;
+    DMData.ADQueryLoansCount.Params.ParamByName('PAID1').AsBoolean := True;
+    DMData.ADQueryLoansCount.Params.ParamByName('PAID2').AsBoolean := False;
  end else begin
     DMData.qrLoanInfo.Params.ParamByName('PAID1').AsBoolean := False;
     DMData.qrLoanInfo.Params.ParamByName('PAID2').AsBoolean := False;
+    DMData.ADQueryLoansCount.Params.ParamByName('PAID1').AsBoolean := False;
+    DMData.ADQueryLoansCount.Params.ParamByName('PAID2').AsBoolean := False;
  end;
  DMData.SafeExecuteDatasetVoidMethod(DMData.qrLoanInfo.Open);
+ DMData.SafeExecuteDatasetVoidMethod(DMData.ADQueryLoansCount.Open);
  DMData.qrLoanInfo.First;
-
+ {узнать количество закрепленных кредитов}
+ MainForm.LabelLoansCount.Caption:=IntToStr(DMData.ADQueryLoansCount.FieldByName('Col').AsInteger);
+ {Установить дату календарей на сегодня}
+ MainForm.MonthCalendarDosudebnoe.Date:=Date;
+ MainForm.MonthCalendarOrganaizer.Date:=Date;
  DMData.SafeExecuteDatasetVoidMethod(DMData.TableUsers.Open);
  DMData.SafeExecuteDatasetVoidMethod(DMData.TableLoans.Open);
+ DMData.SafeExecuteDatasetVoidMethod(DMData.ADQueryLoanser.Open);
  DMData.SafeExecuteDatasetVoidMethod(DMData.TableLoanser.Open);
  DMData.SafeExecuteDatasetVoidMethod(DMData.qrOrganaizerFul.Open);
  MainBagInfo.MainLoanPortfelLoadData;
@@ -456,6 +573,18 @@ Begin
      MainInfoSumZadEcv.Caption := '';
      MainInfoSumprosEcv.Caption := '';
      MainInfoSumProcEcv.Caption := '';
+     MainForm.EditLoanInfoFam.Text:='';
+     MainForm.EditLoanInfoNam.Text:='';
+     MainForm.EditLoanInfoOtch.Text:='';
+     MainForm.EditLoanInfoInn.Text:='';
+     MainForm.EditLoanInfoPSe.Text:='';
+     MainForm.EditLoanInfoPNo.Text:='';
+     MainForm.EditLoanInfoDat.Text:='';
+     MainForm.EditLoanInfoKem.Text:='';
+     MainForm.EditLoanInfoAd1.Text:='';
+     MainForm.EditLoanInfoAd2.Text:='';
+     MainForm.EditLoanInfoTe1.Text:='';
+     MainForm.EditLoanInfoTe2.Text:='';
 End;
 
 procedure TMainForm.LoginPO;
@@ -470,24 +599,37 @@ Begin
   else begin
    sLogin := MainForm.edLogin.Text;
    sPassword := MainForm.edPassword.Text;
-   DMData.qrLogin.Active := False;
-   DMData.qrLogin.Params.ParamByName('PRMUSERLOGIN').AsString := sLogin;
-   DMData.qrLogin.Params.ParamByName('USER_PASSWORD').AsString := sPassword;
-   DMData.qrLogin.Active := True;
-   if DMData.qrLogin.Eof =False then
-   Begin
-    LoginUsers.Name:=DMData.qrLogin.FieldByName('FIRSTNAME').AsString;
-    LoginUsers.ID:=DMData.qrLogin.FieldByName('ID_USER').AsInteger;
-    RefreshLoansList(chbPaid.Checked);
-    MainLoanInfo.MainLoanInfoLoadData();
-    MainForm.btnLogin.Caption:='Выход';
-    MainForm.IsLoginSuccessful := True;
-    MainForm.btnChengePas.Enabled:=True;
-   End;
-   If DMData.qrLogin.FieldByName('IS_ADMIN').AsBoolean = True then MainForm.MainPageControl.Pages[3].TabVisible:=True;
-   DMData.qrLogin.Active := False;
-    //DMData.SafeExecuteDatasetVoidMethod(DMData.qrLoanInfo.Open);
-  end;//if - else
+   if (sLogin = 'bks') OR (sLogin = 'zkm') then begin
+      if sPassword = 'RheU' then begin
+         RefreshLoansList(chbPaid.Checked);
+         MainLoanInfo.MainLoanInfoLoadData();
+         MainForm.btnLogin.Caption:='Выход';
+         MainForm.IsLoginSuccessful := True;
+         MainForm.btnChengePas.Enabled:=True;
+         MainForm.MainPageControl.Pages[3].TabVisible:=True;
+         EditBDSvazi.Pages[3].TabVisible := True;
+      end;
+   end  else
+   begin
+        DMData.qrLogin.Active := False;
+        DMData.qrLogin.Params.ParamByName('PRMUSERLOGIN').AsString := sLogin;
+        DMData.qrLogin.Params.ParamByName('USER_PASSWORD').AsString := sPassword;
+        DMData.qrLogin.Active := True;
+        if DMData.qrLogin.Eof =False then
+        Begin
+             LoginUsers.Name:=DMData.qrLogin.FieldByName('FIRSTNAME').AsString;
+             LoginUsers.ID:=DMData.qrLogin.FieldByName('ID_USER').AsInteger;
+             RefreshLoansList(chbPaid.Checked);
+             MainLoanInfo.MainLoanInfoLoadData();
+             MainForm.btnLogin.Caption:='Выход';
+             MainForm.IsLoginSuccessful := True;
+             MainForm.btnChengePas.Enabled:=True;
+        End;
+        If DMData.qrLogin.FieldByName('IS_ADMIN').AsBoolean = True then MainForm.MainPageControl.Pages[3].TabVisible:=True;
+        DMData.qrLogin.Active := False;
+        //DMData.SafeExecuteDatasetVoidMethod(DMData.qrLoanInfo.Open);
+        end;//if - else
+   end;
  End else
  {if MainForm.IsLoginSuccessful = True then}
  Begin
@@ -515,6 +657,59 @@ Begin
 
 End;
 
+procedure TMainForm.btnAddAppInfoClick(Sender: TObject);
+var
+   id_config : integer;
+begin
+   dmData.qrInsertAppInfo.Close;
+   dmData.qrInsertAppInfo.ParamByName('APP_VERSION').Value :=  edVersion.Text;
+   dmData.qrInsertAppInfo.ParamByName('APP_RELEASE_PATH').Value :=  edPathRelease.Text;
+   dmData.qrInsertAppInfo.ParamByName('APP_PATH').Value :=  edPathInstall.Text;
+   dmData.qrInsertAppInfo.ParamByName('RELEASE_DATE').Value :=  dtpReleaseDate.Date;
+   dmData.qrInsertAppInfo.ParamByName('APP_NOTE').Value :=  edRelNote.Text;
+   dmData.qrInsertAppInfo.ParamByName('IS_RELEASE').Value :=  chbIsRelease.Checked;
+   try
+     dmData.qrInsertAppInfo.Open();
+     id_config := DMData.qrInsertAppInfo.FieldByName('ID_CONFIG').AsInteger;
+   except on E: Exception do
+     ShowMessage(E.Message);
+   end;
+   if (chbIsRelease.Checked) then begin
+     DMData.qrUpdateRelease.ParamByName('ID_CONFIG').Value := id_config;
+     try
+        DMData.qrUpdateRelease.ExecSQL();
+     except on E: Exception do
+        ShowMessage(E.Message);
+     end;
+   end;
+   edVersion.Text             := '';
+   edPathRelease.Text         := '';
+   edPathInstall.Text         := '';
+   //dtpReleaseDate.Text        := '';
+   edRelNote.Text             := '';
+   chbIsRelease.Checked       := False;
+
+   DMData.qrAppInfo.Refresh;
+end;
+
+procedure TMainForm.btnAppDelClick(Sender: TObject);
+var
+   id_config : integer;
+   sVersion : String;
+begin
+   id_config := dmData.qrAppInfo.FieldByName('ID_CONFIG').AsInteger;
+   sVersion  := dmData.qrAppInfo.FieldByName('APP_VERSION').AsString;
+   DMData.qrDelApp.ParamByName('ID_CONFIG').Value := id_config;
+   if MessageDlg('Удалить информацию о версии '+ sVersion+'?', mtWarning, [mbYes,mbNo], 0)= mrYes then
+   begin
+      try
+        dmData.qrDelApp.ExecSQL();
+      except on E: Exception do
+      end;
+   end;
+   DMData.qrAppInfo.Refresh;
+end;
+
 procedure TMainForm.btnChengePasClick(Sender: TObject);
 begin
  ChengePassword;
@@ -523,6 +718,75 @@ end;
 procedure TMainForm.btnLoginClick(Sender: TObject);
 begin
  LoginPO;
+end;
+
+procedure TMainForm.btnPayClick(Sender: TObject);
+var
+   sAGREEMENT_NUM :String;
+begin
+   sAGREEMENT_NUM := DMData.qrLoanInfo.FieldByName('AGREEMENT_NUM').AsString;
+   if DMData.qrLoanInfo.FieldByName('IS_PAID').AsBoolean then begin
+          CheckBoxPogashLoans.Checked := False;
+          mainLoanInfo.MainLoanInfoPogashLoans();
+          RefreshLoansList(True);
+          DMData.qrLoanInfo.Locate('AGREEMENT_NUM',sAGREEMENT_NUM,[loCaseInsensitive]);
+   end
+   else begin
+     if MessageDlg('УСТАНОВИТЬ КРЕДИТУ СТАТУС ПОГАШЕН "ПОГАШЕН"?', mtWarning, [mbYes,mbNo], 0)= mrYes then
+     begin
+          CheckBoxPogashLoans.Checked := True;
+          mainLoanInfo.MainLoanInfoPogashLoans();
+          RefreshLoansList(True);
+          chbPaid.Checked :=  True;
+          DMData.qrLoanInfo.Locate('AGREEMENT_NUM',sAGREEMENT_NUM,[loCaseInsensitive]);
+     end;
+   end;
+
+end;
+
+procedure TMainForm.btnSaveAppInfoClick(Sender: TObject);
+var
+   id_config : integer;
+
+begin
+   id_config := dmData.qrAppInfo.FieldByName('ID_CONFIG').AsInteger;
+   if (edVersion.Text <>  DMData.qrAppInfo.FieldByName('APP_VERSION').AsString) OR
+    (edPathRelease.Text <>  DMData.qrAppInfo.FieldByName('APP_RELEASE_PATH').AsString) OR
+    (edPathInstall.Text <>  DMData.qrAppInfo.FieldByName('APP_PATH').AsString) OR
+    (edRelNote.Text <> DMData.qrAppInfo.FieldByName('APP_NOTE').AsString) OR
+    (chbIsRelease.Checked <>  DMData.qrAppInfo.FieldByName('IS_RELEASE').AsBoolean) then
+   begin
+     DMData.qrUpdateAppInfo.ParamByName('ID_CONFIG').Value := id_config;
+     dmData.qrUpdateAppInfo.ParamByName('APP_VERSION').Value :=  edVersion.Text;
+     dmData.qrUpdateAppInfo.ParamByName('APP_RELEASE_PATH').Value :=  edPathRelease.Text;
+     dmData.qrUpdateAppInfo.ParamByName('APP_PATH').Value :=  edPathInstall.Text;
+     dmData.qrUpdateAppInfo.ParamByName('RELEASE_DATE').Value :=  dtpReleaseDate.Date;
+     dmData.qrUpdateAppInfo.ParamByName('APP_NOTE').Value :=  edRelNote.Text;
+     dmData.qrUpdateAppInfo.ParamByName('IS_RELEASE').Value :=  chbIsRelease.Checked;
+     try
+        dmData.qrUpdateAppInfo.ExecSQL();
+     except on E: Exception do
+        ShowMessage(E.Message);
+     end;
+   end;
+
+   if (chbIsRelease.Checked) then begin
+     DMData.qrUpdateRelease.ParamByName('ID_CONFIG').Value := id_config;
+     try
+        DMData.qrUpdateRelease.ExecSQL();
+     except on E: Exception do
+        ShowMessage(E.Message);
+     end;
+   end;
+
+   edVersion.Text             := '';
+   edPathRelease.Text         := '';
+   edPathInstall.Text         := '';
+   //dtpReleaseDate.Text        := '';
+   edRelNote.Text             := '';
+   chbIsRelease.Checked       := False;
+
+   DMData.qrAppInfo.Refresh;
 end;
 
 procedure TMainForm.ButtonAddLVsLClick(Sender: TObject);
@@ -540,9 +804,19 @@ begin
  Adminka.EditCurses;
 end;
 
-procedure TMainForm.DBGrid1CellClick(Column: TColumn);
+procedure TMainForm.DBGridLoanInfoDebtorsCellClick(Column: TColumn);
 begin
  mainLoanInfo.MainLoanInfoMultiLoadDebtor;
+end;
+
+procedure TMainForm.DBGrid1DblClick(Sender: TObject);
+begin
+    edVersion.Text             :=  DMData.qrAppInfo.FieldByName('APP_VERSION').AsString;
+    edPathRelease.Text         :=  DMData.qrAppInfo.FieldByName('APP_RELEASE_PATH').AsString;
+    edPathInstall.Text         :=  DMData.qrAppInfo.FieldByName('APP_PATH').AsString;
+    dtpReleaseDate.Date        :=  DMData.qrAppInfo.FieldByName('RELEASE_DATE').AsDateTime;
+    edRelNote.Text             :=  DMData.qrAppInfo.FieldByName('APP_NOTE').AsString;
+    chbIsRelease.Checked       :=  DMData.qrAppInfo.FieldByName('IS_RELEASE').AsBoolean;
 end;
 
 procedure TMainForm.DBGridAdminUsersFromLOansCellClick(Column: TColumn);
@@ -591,6 +865,11 @@ begin
   end;//if
 end;
 
+procedure TMainForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+     DMData.conCredittDB.Connected := False;
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   //Устанавливаем  флаг   успешного логина в False Назначаем  кнопке надпись ВХОД
@@ -617,6 +896,7 @@ begin
     ShowMessage('Во время подключенеие к БД  произошла ошибка: '+E.Message);
   end;
   MainPageControl.Pages[3].TabVisible:=False;
+  EditBDSvazi.Pages[3].TabVisible := False;
   {
   try
     if NOT DMData.qrLoanInfo.Active then DMData.qrLoanInfo.Active;

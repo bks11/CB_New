@@ -321,7 +321,9 @@ Begin
      end;
      if IfError=True then {Если ошибка то уведомить об этом}
      Begin
-      fmMain.ListBoxActivLog.Items.Add('311 Уведомление '+fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex]+' уже отправлялось');
+      fmMain.ListBoxActivLog.Items.Add('311 Уведомление '+
+                          fmMain.CheckListBox311Sform.Items[fmMain.CheckListBox311Sform.ItemIndex]+
+                          ' уже отправлялось');
      End;
     End;
     if IfError = False then
@@ -359,8 +361,15 @@ Begin
   dmData.qr311PLoadPath.First;
   while NOT dmData.qr311PLoadPath.Eof do
   begin
-   If dmData.qr311PLoadPath.FieldByName('NOTE').AsString='Сформированные' then Path.Sformirovanie:=dmData.qr311PLoadPath.FieldByName('REPORT_PATH').AsString;
-   If dmData.qr311PLoadPath.FieldByName('NOTE').AsString='На ключевание' then Path.InKa:=dmData.qr311PLoadPath.FieldByName('REPORT_PATH').AsString;
+   If dmData.qr311PLoadPath.FieldByName('NOTE').AsString='Сформированные' then begin
+      Path.Sformirovanie:=dmData.qr311PLoadPath.FieldByName('REPORT_PATH').AsString;
+      ShowMessage(Path.Sformirovanie);
+   end;
+   If dmData.qr311PLoadPath.FieldByName('NOTE').AsString='На ключевание' then begin
+      Path.InKa:=dmData.qr311PLoadPath.FieldByName('REPORT_PATH').AsString;
+      ShowMessage(Path.InKa);
+   end;
+
    dmData.qr311PLoadPath.Next;
    {Архивировать}
   end;

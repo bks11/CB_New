@@ -78,12 +78,12 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=D:\Projects\CB\loans\uMain.pas
-CursorX=22
-CursorY=13
-TopLine=31
+CursorX=1
+CursorY=226
+TopLine=206
 LeftCol=1
-Elisions={{115,38},{183,3},{''}}{{272,51},{275,3},{''}}{{277,51},{280,3},{''}}{{282,51},{285,3},{''}}{{287,47},{290,3},{''}}{{292,54},{295,3},{''}}{{297,49},{300,3},{''}}{{302,52},{305,3},{''}}{{307,50},{310,3},{''}}
-Bookmarks=
+Elisions={{115,38},{183,3},{''}}{{273,51},{276,3},{''}}{{278,51},{281,3},{''}}{{283,51},{286,3},{''}}{{288,47},{291,3},{''}}{{293,54},{296,3},{''}}{{298,49},{301,3},{''}}{{303,52},{306,3},{''}}{{308,50},{311,3},{''}}
+Bookmarks={2,100,19}{3,252,3}
 EditViewName=D:\Projects\CB\loans\uMain.pas
 
 [View2]
@@ -133,9 +133,12 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=2
-Breakpoint0='D:\Projects\CB\loans\uMain.pas',225,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint1='D:\Projects\CB\loans\uMain.pas',232,'',0,1,'',1,0,0,'',1,'','','',0
+Count=5
+Breakpoint0='D:\Projects\CB\loans\uMain.pas',226,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint1='D:\Projects\CB\loans\uMain.pas',233,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint2='D:\Projects\CB\loans\uMain.pas',223,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint3='D:\Projects\CB\loans\uMain.pas',260,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint4='D:\Projects\CB\loans\uMain.pas',192,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
